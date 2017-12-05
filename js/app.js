@@ -90,6 +90,13 @@ boogybookApp.config(function ($routeProvider, $locationProvider, $translateProvi
     $stateProvider.state(accountState);
     $stateProvider.state(faqState);
 
+    $('.menu-toggle, .overlay, .menu-list li a').click(function (e) { 
+        e.preventDefault();
+        $('.overlay').fadeToggle();
+        $('.menu-toggle').toggleClass('active');
+        $('.side-menu').toggleClass('active');
+    });
+
 });
 
 boogybookApp.controller('indexCtrl', function ($scope, CordovaService, $location, $rootScope, $translate, $http, $q) {
