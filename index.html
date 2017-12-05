@@ -75,13 +75,16 @@
                             </select>
                         </div>
                     </nav>
-                    <div class="products-list" ui-view>
-                      <a ui-sref="product">
-                        <div data-ng-repeat="(key, product) in products" class="single-product" style="background-image:url(img/product-{{key}}.jpg);">
-                            <div class="price">{{product.price}} €</div>
-                        </div>
-                      </a>
+                    <div ui-view>
+                      <div class="products-list">
+                        <a ui-sref="product">
+                          <div data-ng-repeat="(key, product) in products" class="single-product" style="background-image:url(img/product-{{key}}.jpg);">
+                              <div class="price">{{product.price}} €</div>
+                          </div>
+                        </a>
+                      </div>
                     </div>
+
                     <button class="shopping-cart" ui-sref="cart">
                         <img src="img/cart-icon.png" alt="">
                         <div class="counter">0</div>
