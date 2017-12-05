@@ -41,6 +41,7 @@
         <script type="text/javascript" src="js/lib/angular.min.js"></script>
         <script type="text/javascript" src="js/lib/angular-route.js"></script>
         <script type="text/javascript" src="js/lib/angular-translate.min.js"></script>
+        <script type="text/javascript" src="js/lib/angular-ui-router.js"></script>
         <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
         <title>Hello World</title>
     </head>
@@ -49,21 +50,21 @@
                 <header>
                         <div class="container">
                             <button class="menu-toggle"><img src="img/menu-toggle.png" alt="Menu Toggle"></button>
-                            <div class="logo"><img src="img/logo.png" alt=""></div>
+                            <div class="logo" ui-sref="home"><img src="img/logo.png" alt=""></div>
                         </div>
                     </header>
                     <nav class="side-menu">
-                        <div class="nav-logo">
-                            <img src="img/logo.png" alt="">
+                        <div class="nav-logo" ui-sref="home">
+                            <img src="img/logo.png" alt="" ui-sref="home">
                         </div>
                         <ul class="menu-list">
-                            <li id="mon-compte"><a href="#">Mon compte</a></li>
-                            <li id="panier"><a href="#">Panier</a></li>
+                            <li id="mon-compte"><a ui-sref="myAccount">Mon compte</a></li>
+                            <li id="panier"><a ui-sref="cart">Panier</a></li>
                         </ul>
 
                         <ul class="menu-list bottom">
-                            <li id="faq"><a href="#">FAQ</a></li>
-                            <li id="contact"><a href="#">Contact</a></li>
+                            <li id="faq"><a ui-sref="faq">FAQ</a></li>
+                            <li id="contact"><a ui-sref="contact">Contact</a></li>
                         </ul>
 
                         <div class="langue-select-box">
@@ -74,15 +75,14 @@
                             </select>
                         </div>
                     </nav>
-                    <div class="products-list">
-                        <div class="single-product" style="background-image:url(img/boogybook.jpg);"></div>
-                        <div class="single-product" style="background-image:url(img/boogynote.jpg);"></div>
-                        <div class="single-product" style="background-image:url(img/boogyduo.jpg);"></div>
-                        <div class="single-product" style="background-image:url(img/boogyprime.jpg);"></div>
-                        <div class="single-product" style="background-image:url(img/boogybaby.jpg);"></div>
-                        <div class="single-product" style="background-image:url(img/boogybabyxl.jpg);"></div>
+                    <div class="products-list" ui-view>
+                      <a ui-sref="product">
+                        <div data-ng-repeat="(key, product) in products" class="single-product" style="background-image:url(img/product-{{key}}.jpg);">
+                            <div class="price">{{product.price}} €</div>
+                        </div>
+                      </a>
                     </div>
-                    <button class="shopping-cart">
+                    <button class="shopping-cart" ui-sref="cart">
                         <img src="img/cart-icon.png" alt="">
                         <div class="counter">0</div>
                     </button>
@@ -93,5 +93,10 @@
         <script type="text/javascript" src="js/global.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/controllers/ProductCtrl.js"></script>
+        <script type="text/javascript" src="js/controllers/CartCtrl.js"></script>
+        <script type="text/javascript" src="js/controllers/MyAccountCtrl.js"></script>
+        <script type="text/javascript" src="js/controllers/ContactCtrl.js"></script>
+        <script type="text/javascript" src="js/controllers/FaqCtrl.js"></script>
     </body>
 </html>

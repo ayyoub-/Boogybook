@@ -21,9 +21,10 @@ angular.module('fsCordova', ['pascalprecht.translate'])
   }]);
 
 
-var boogybookApp = angular.module('boogybookApp', ['fsCordova', 'ngRoute']);
+var boogybookApp = angular.module('boogybookApp', ['fsCordova', 'ngRoute', 'ui.router']);
 
-boogybookApp.config(function ($routeProvider, $locationProvider, $translateProvider) {
+boogybookApp.config(function ($routeProvider, $locationProvider, $translateProvider, $stateProvider) {
+    // Translation config
     $translateProvider.translations('en', {
       TITLE: 'Hello',
       FOO: 'This is a paragraph.',
@@ -45,18 +46,56 @@ boogybookApp.config(function ($routeProvider, $locationProvider, $translateProvi
         }
         $translateProvider.preferredLanguage('en');
     }
-    $routeProvider
-        .when('/Home', {
-            templateUrl: 'app/views/sections.html',
-            //controller: 'HomeCtrl'
-            controller: 'sectionsCtrl'
-        })
-    .otherwise({
-        redirectTo: '/Home'
-    });
+    // Routes
+    var homeState = {
+      name: 'home',
+      url: '/',
+      templateUrl: 'views/home.html',
+      controller: 'indexCtrl'
+    }
+    var productState = {
+      name: 'product',
+      url: '/product',
+      templateUrl: 'views/product.html',
+      controller: 'ProductCtrl'
+    }
+    var carttState = {
+      name: 'cart',
+      url: '/cart',
+      templateUrl: 'views/cart.html',
+      controller: 'CartCtrl'
+    }
+    var contactState = {
+      name: 'contact',
+      url: '/contact',
+      templateUrl: 'views/contact.html',
+      controller: 'ContactCtrl'
+    }
+    var accountState = {
+      name: 'myAccount',
+      url: '/myAccount',
+      templateUrl: 'views/myAccount.html',
+      controller: 'MyAccountCtrl'
+    }
+    var faqState = {
+      name: 'faq',
+      url: '/faq',
+      templateUrl: 'views/faq.html',
+      controller: 'FaqCtrl'
+    }
+    $stateProvider.state(homeState);
+    $stateProvider.state(productState);
+    $stateProvider.state(carttState);
+    $stateProvider.state(contactState);
+    $stateProvider.state(accountState);
+    $stateProvider.state(faqState);
+
 });
 
 boogybookApp.controller('indexCtrl', function ($scope, CordovaService, $location, $rootScope, $translate, $http, $q) {
+  // Products list
+  $scope.products = new Array();
+  // Server Remote Service
   $scope.PSExecute = function(remote_function, extra_params) {
           var d = $q.defer();
           var params = {
@@ -139,7 +178,8 @@ boogybookApp.controller('indexCtrl', function ($scope, CordovaService, $location
                 'id_category': 24,
             }).then(function(r) {
                 if(r.OK){
-                    console.log(r);
+                    $scope.products = r.covers;
+                    console.log($scope.products);
                 }
             });
 });
