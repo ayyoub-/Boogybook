@@ -1,51 +1,51 @@
 <div class="details-produit">
-    <div class="produit-img">
-        <div class="price">14,95 €</div>    
-        <img src="img/detail-produit-img.jpg" alt="">
-    </div>
-    <div class="container">
-        <button class="btn-details">DETAILS</button>
-        <button class="btn-creer">Je crée mon Boogybook</button>
-    </div>
-    
+  <div class="produit-img">
+    <div class="price">14,95 €</div>
+    <img src="img/detail-produit-img.jpg" alt="">
+  </div>
+  <div class="container">
+    <button class="btn-details" ng-click="showDetails()">DETAILS</button>
+    <button class="btn-creer">Je crée mon Boogybook</button>
+  </div>
+
 </div>
 <div class="details-popup">
-    <div class="container">
-        <div class="go-back">Revenir</div>
-        <div class="product-title">BoogyBook Classic</div>
-        <div class="product-description">
-                Téléchargez vos 60 photos, appliquez des effets et recadrages dans le module de personnalisation et recevez-le dans votre boîte aux lettres.<br />
-                Profitez de vos photos : détachez-les, offrez-les, encadrez-les ou décorez votre intérieur.
-        </div>
-        <div class="fiche-title">
-            Fiche technique
-        </div>
-        <div class="fiche-description">
-            <p><b>Dimensions de chaque feuille :</b> 10,5 x 15 cm : un format qui tient dans la poche</p>
-            <p><b>Aspect brillant :</b> vos photos sont magnifiées <br /></p>
-            <p><b>Microperforation sur chaque feuille :</b> idéale pour offrir, encadrer ou magnétiser sur le frigo !</p>
-        </div>
-        <table class="table-data-sheet">
-                <tbody>
-                    <tr class="odd">
-                        <td>Longueur</td>
-                        <td>16 cm</td>
-                    </tr>
-                    <tr class="even">
-                        <td>Largeur</td>
-                        <td>10,5 cm</td>
-                    </tr>
-                    <tr class="odd">
-                        <td>Poids</td>
-                        <td>240 g</td>
-                    </tr>
-                    <tr class="even">
-                        <td>Composition</td>
-                        <td>Couverture : 350 g/m2 - Couché moderne brillant Intérieur : 200 g/m2 - Couché moderne brillant</td>
-                    </tr>
-                </tbody>
-        </table>
-        <button class="btn-creer">Je crée mon Boogybook</button>
+  <div class="container">
+    <div class="go-back" ng-click="goBack()">Revenir</div>
+    <div class="product-title">{{product.name}}</div>
+    <div class="product-description" ng-bind-html="product.description">
     </div>
-    
+    <div class="product-description" ng-bind-html="product.description_short">
+    </div>
+    <div class="fiche-title">
+      Fiche technique
+    </div>
+    <div class="fiche-description">
+      <p><b>Dimensions de chaque feuille :</b> {{product.features[1].value}} x {{product.features[0].value}} cm : un format qui tient dans la poche</p>
+      <p><b>Aspect brillant :</b> vos photos sont magnifiées <br /></p>
+      <p><b>Microperforation sur chaque feuille :</b> idéale pour offrir, encadrer ou magnétiser sur le frigo !</p>
+    </div>
+    <table class="table-data-sheet">
+      <tbody>
+        <tr class="odd">
+          <td>Longueur</td>
+          <td>{{product.features[1].value}} cm</td>
+        </tr>
+        <tr class="even">
+          <td>Largeur</td>
+          <td>{{product.features[0].value}} cm</td>
+        </tr>
+        <tr class="odd">
+          <td>Poids</td>
+          <td>{{product.features[2].value}} g</td>
+        </tr>
+        <tr class="even">
+          <td>Composition</td>
+          <td>{{product.features[3].value}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn-creer">Je crée mon Boogybook</button>
+  </div>
+
 </div>

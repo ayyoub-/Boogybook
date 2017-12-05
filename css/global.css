@@ -1,7 +1,7 @@
 body{
     position: relative;
-    font-family: 'Roboto', sans-serif; 
-    font-size: 14px;   
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
 }
 .container{
     width: 90%;
@@ -13,7 +13,7 @@ header{
     width: 100%;
     background: #ffffff;
     -webkit-box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);  
+            box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
             z-index: 999999;
 }
 .menu-toggle{
@@ -41,8 +41,8 @@ header{
 .logo{
     position: absolute;
     top: 50%;
-    left: 50%;    
-    -webkit-transform: translate(-50%,-50%);    
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
             transform: translate(-50%,-50%);
     cursor: pointer;
 }
@@ -91,7 +91,7 @@ header{
     background-color: #f8f8f8;
     height: 70px;
     margin-bottom: 1px;
-    
+
 }
 .langue-select-box {
     float: left;
@@ -133,28 +133,29 @@ header{
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 70px;
-    height: 70px;
+    width: 57px;
+    height: 57px;
     border: 0;
     background-color: #3cc8df;
     border-radius: 100px;
     z-index: 99999;
     padding: 0;
     margin: 0;
+    box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.45);
 }
 
 .shopping-cart img{
-   width: 39px;
-   height: 50px;
+   width: 29px;
+   height: 40px;
 }
 .shopping-cart .counter{
     text-align: center;
     line-height: 90px;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 300;
     position: absolute;
-    top: -8px;
+    top: -14px;
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -170,5 +171,5 @@ header{
     z-index: 99999;
 }
 @media only screen and (min-width : 992px) {
-    
+
 }
