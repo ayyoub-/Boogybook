@@ -1,6 +1,7 @@
 body{
     position: relative;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; 
+    font-size: 14px;   
 }
 .container{
     width: 90%;
@@ -12,7 +13,8 @@ header{
     width: 100%;
     background: #ffffff;
     -webkit-box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
+            box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);  
+            z-index: 999999;
 }
 .menu-toggle{
     position: absolute;
@@ -26,6 +28,10 @@ header{
     cursor: pointer;
     float: left;
 }
+.menu-toggle img{
+    width: 40px;
+    height: 33px;
+}
 .menu-toggle.active{
     position: fixed;
     float: right;
@@ -35,8 +41,8 @@ header{
 .logo{
     position: absolute;
     top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%,-50%);
+    left: 50%;    
+    -webkit-transform: translate(-50%,-50%);    
             transform: translate(-50%,-50%);
     cursor: pointer;
 }
@@ -85,7 +91,7 @@ header{
     background-color: #f8f8f8;
     height: 70px;
     margin-bottom: 1px;
-
+    
 }
 .langue-select-box {
     float: left;
@@ -138,15 +144,17 @@ header{
 }
 
 .shopping-cart img{
-    max-width: 100%;
+   width: 39px;
+   height: 50px;
 }
 .shopping-cart .counter{
     text-align: center;
     line-height: 90px;
     color: #ffffff;
-    font-size: 26px;
+    font-size: 16px;
+    font-weight: 300;
     position: absolute;
-    top: -5px;
+    top: -8px;
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -162,5 +170,5 @@ header{
     z-index: 99999;
 }
 @media only screen and (min-width : 992px) {
-
+    
 }
