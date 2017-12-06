@@ -11,49 +11,22 @@
         <table style="width: 100%;" cellspacing="0" cellpadding="0" class="table-data-sheet">
             <tbody>
                 <tr>
-                    <td>Produit</td>
+                    <td>Référence</td>
                     <td>Date</td>
                     <td>Prix total</td>
                     <td>État</td>
                 </tr>
-                <tr>
-                    <td> BoogyBook Classic
-                        <div class="reference">KJ27402</div>
+                <tr ng-repeat="item in userInfos.ordersHistory">
+                    <td> {{item.reference}}
+                        <!-- <div class="reference">KJ27402</div> -->
                     </td>
-                    <td> 29/11/2017 </td>
-                    <td> 0,00 € </td>
+                    <td> {{item.date_add}} </td>
+                    <td> {{item.total_paid}} € </td>
                     <td>
-                        <div class="succes">Paiement accepté</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td> BoogyBook Classic
-                        <div class="reference">KJ27402</div>
-                    </td>
-                    <td> 29/11/2017 </td>
-                    <td> 0,00 € </td>
-                    <td>
-                        <div class="error">Paiement refusé</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td> BoogyBook Classic
-                        <div class="reference">KJ27402</div>
-                    </td>
-                    <td> 29/11/2017 </td>
-                    <td> 0,00 € </td>
-                    <td>
-                        <div class="succes">Paiement accepté</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td> BoogyBook Classic
-                        <div class="reference">KJ27402</div>
-                    </td>
-                    <td> 29/11/2017 </td>
-                    <td> 0,00 € </td>
-                    <td>
-                        <div class="succes">Paiement accepté</div>
+                        <div ng-if="item.current_state == 18" class="info">	en cours d'impression</div>
+                        <div ng-if="item.current_state == 3" class="info">En cours de préparation</div>
+                        <div ng-if="item.current_state == 6" class="error">Canceled</div>
+                        <div ng-if="item.current_state == 2" class="success">Paiement accepté</div>
                     </td>
                 </tr>
             </tbody>

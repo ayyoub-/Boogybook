@@ -13,7 +13,6 @@ boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stat
   }
   // Get product by ID
   $scope.getProductById = function(id) {
-    console.log(id)
     for (var i = 0; i < $rootScope.products.length; i++) {
       if ($rootScope.products[i].id_product == id)
         return $rootScope.products[i];
