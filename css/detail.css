@@ -1,29 +1,32 @@
-.details-produit{
+.details-produit {
     transition: .6s all;
 }
-.details-produit.blur{
+
+.details-produit.blur {
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
     filter: blur(5px);
 }
-.produit-img{
+
+.produit-img {
     position: relative;
     width: 100%;
 }
 
-.produit-img img{
+.produit-img img {
     display: block;
     margin: 0 auto;
     max-width: 100%;
 }
-.produit-img .price{
+
+.produit-img .price {
     background-color: #ffffff;
     width: 110px;
     height: 50px;
     -webkit-box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
     text-align: center;
     line-height: 50px;
     color: #3cc8df;
@@ -34,7 +37,7 @@
     bottom: 30px;
 }
 
-.btn-details{
+.btn-details {
     cursor: pointer;
     display: block;
     font-size: 20px;
@@ -53,7 +56,8 @@
     margin-top: 30px;
     line-height: 55px;
 }
-.btn-creer{
+
+.btn-creer {
     cursor: pointer;
     display: block;
     font-size: 20px;
@@ -74,7 +78,7 @@
     line-height: 55px;
 }
 
-.details-popup{
+.details-popup {
     display: none;
     background-color: rgba(29, 110, 123, 0.71);
     position: fixed;
@@ -83,10 +87,9 @@
     top: 0;
     left: 0;
     z-index: 99999;
-    
 }
-   
-.go-back{
+
+.go-back {
     cursor: pointer;
     background-image: url(../img/white-arrow.png);
     background-size: contain;
@@ -99,38 +102,40 @@
     padding-left: 25px;
 }
 
-.product-title{
+.product-title {
     color: #ffffff;
     font-weight: bold;
     font-size: 26px;
     margin-top: 20px;
 }
 
-.product-description{
+.product-description {
     color: #ffffff;
     margin-top: 20px;
 }
 
-.fiche-title{
+.fiche-title {
     color: #ffffff;
     font-weight: bold;
     font-size: 26px;
     text-transform: uppercase;
     text-align: center;
     margin-top: 30px;
-    padding-bottom: 10px;    
+    padding-bottom: 10px;
 }
-.fiche-description{
+
+.fiche-description {
     color: #ffffff;
 }
 
 .table-data-sheet {
-   width: 100%;
-   border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
-  
-.table-data-sheet td, .table-data-sheet th {
-   padding: 10px;
-   border: 1px solid #ffffff;
-   color: #ffffff;
+
+.table-data-sheet td,
+.table-data-sheet th {
+    padding: 10px;
+    border: 1px solid #ffffff;
+    color: #ffffff;
 }
