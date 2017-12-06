@@ -8,7 +8,7 @@ $(document).ready(function() {
     $('.btn-remove').click(function(e) {
         e.preventDefault();
         var qte = parseInt($(this).parent().find('.qte-input').val());
-        qte--
+        qte--;
         $(this).parent().find('.qte-input').val(qte);
     });
 
