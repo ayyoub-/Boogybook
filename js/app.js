@@ -60,10 +60,40 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/product.html',
     controller: 'ProductCtrl'
   }
-  var carttState = {
-    name: 'cart',
-    url: '/cart',
-    templateUrl: 'views/cart.html',
+  var cartRecapState = {
+    name: 'cart_recap',
+    url: '/cart_recap',
+    templateUrl: 'views/cart/cart_recap.html',
+    controller: 'CartCtrl'
+  }
+  var cartLoginState = {
+    name: 'cart_login',
+    url: '/cart_login',
+    templateUrl: 'views/cart/cart_login.html',
+    controller: 'CartCtrl'
+  }
+  var cartAccountState = {
+    name: 'cart_add_account',
+    url: '/cart_add_account',
+    templateUrl: 'views/cart/cart_add_account.html',
+    controller: 'CartCtrl'
+  }
+  var cartAddressState = {
+    name: 'cart_add_address',
+    url: '/cart_add_address',
+    templateUrl: 'views/cart/cart_add_address.html',
+    controller: 'CartCtrl'
+  }
+  var cartShippingState = {
+    name: 'cart_shipping',
+    url: '/cart_shipping',
+    templateUrl: 'views/cart/cart_shipping.html',
+    controller: 'CartCtrl'
+  }
+  var cartOgoneState = {
+    name: 'cart_ogone',
+    url: '/cart_ogone',
+    templateUrl: 'views/cart/cart_ogone.html',
     controller: 'CartCtrl'
   }
   var contactState = {
@@ -86,7 +116,12 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   }
   $stateProvider.state(homeState);
   $stateProvider.state(productState);
-  $stateProvider.state(carttState);
+  $stateProvider.state(cartRecapState);
+  $stateProvider.state(cartLoginState);
+  $stateProvider.state(cartAddressState);
+  $stateProvider.state(cartAccountState);
+  $stateProvider.state(cartShippingState);
+  $stateProvider.state(cartOgoneState);
   $stateProvider.state(contactState);
   $stateProvider.state(accountState);
   $stateProvider.state(faqState);
