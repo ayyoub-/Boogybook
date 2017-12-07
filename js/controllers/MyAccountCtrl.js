@@ -4,16 +4,19 @@ boogybookApp.controller("MyAccountCtrl", function(PSAPI, $scope) {
   $scope.userInfos = {
     email: 'test@souf.biz',
     password: 'mamaka',
-    ordersHistory : null
+    ordersHistory: null
   };
   // functions
-  $scope.getCustomerOrder = function(userInfos){
-    PSAPI.PSExecute('getOrders',{
+  $scope.getCustomerOrder = function(userInfos) {
+    PSAPI.PSExecute('getOrders', {
       'authInfos': userInfos
-        }).then(function(r) {
-          console.log(r);
-          $scope.userInfos.ordersHistory = r.orders;
+    }).then(function(r) {
+      console.log(r);
+      $scope.userInfos.ordersHistory = r.orders;
     });
+  }
+  $scope.setStorage = function() {
+    sessionStorage.setItem("userInfos", JSON.stringify($scope.userInfos));
   }
   $scope.login = function(email, password) {
     PSAPI.get('auth', {
@@ -23,6 +26,7 @@ boogybookApp.controller("MyAccountCtrl", function(PSAPI, $scope) {
     }, 'full', 0).then(function(res) {
       console.log(res);
       $scope.userInfos = res;
+      $scope.setStorage();
       $scope.getCustomerOrder($scope.userInfos);
     }, function(err) {
       console.log(err);

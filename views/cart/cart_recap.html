@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/cart.css">
 <div class="cart-block">
-    <div class="container">
-        <div class="go-back">Continuer mes achats</div>
+    <div class="container" ng-if="cart.products.length > 0">
+        <div class="go-back" ui-sref="home">Continuer mes achats</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
                 <div class="cart-steps">
@@ -92,5 +92,8 @@
             </div>
 
         </div>
+    </div>
+    <div class="container" ng-if="cart.products.length == 0">
+      Empty cart
     </div>
 </div>
