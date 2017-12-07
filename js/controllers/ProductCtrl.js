@@ -1,6 +1,7 @@
 boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stateParams, $sce) {
   // vars
   $scope.product = null;
+  // functions
   // Show product details
   $scope.showDetails = function() {
     $('.details-produit').toggleClass('blur');
@@ -18,6 +19,9 @@ boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stat
         return $rootScope.products[i];
     }
   }
+  $scope.setStorage = function(){
+    sessionStorage.setItem("selected_product", JSON.stringify($scope.product));
+  }
   // Check if products are loaded
   if (typeof $rootScope.products == 'undefined' || $rootScope.products.length == 0)
     PSAPI.PSExecute('listBBCaseProductsByCategory', {
@@ -26,9 +30,11 @@ boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stat
       if (r.OK) {
         $rootScope.products = r.covers;
         $scope.product = $scope.getProductById($stateParams.id);
+        $scope.setStorage();
       }
     });
   else{
     $scope.product = $scope.getProductById($stateParams.id);
+    $scope.setStorage();
   }
 });

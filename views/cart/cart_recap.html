@@ -1,1 +1,99 @@
-<h1>Cart</h1>
+<link rel="stylesheet" href="css/cart.css">
+<div class="cart-block">
+    <div class="container" ng-if="cart.products.length > 0">
+        <div class="go-back" ui-sref="home">Continuer mes achats</div>
+        <div class="cart-inner-block">
+            <div class="cart-steps-block">
+                <div class="cart-steps">
+                    <div class="step active">1</div>
+                    <div class="step">2</div>
+                    <div class="step">3</div>
+                    <div class="step">4</div>
+                    <div class="step">5</div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="cart-step-text">01. Récapitulatif</div>
+            </div>
+            <div class="cart-items-block">
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="img/product1.jpg" alt="">
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="top">
+                            <div class="cart-item-name">BoogyBook Classic</div>
+                            <div class="cart-item-reference">Référence: i2qe168e</div>
+                        </div>
+                        <div class="bottom">
+                            <div class="cart-item-price"><b>Prix :</b> 14,95 €</div>
+                            <div class="cart-item-shipping"><b>Frais de port:</b> 10€</div>
+                            <div class="cart-item-quantity">
+                                <b>Quantité :</b><br />
+                                <div class="qte-box">
+                                    <div class="btn-remove">-</div>
+                                    <input type="text" class="qte-input" name="qte-input" value="1">
+                                    <div class="btn-add">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="remove-item">
+                            <img src="img/delete.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!-- SINGLE ITEM -->
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="img/product1.jpg" alt="">
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="top">
+                            <div class="cart-item-name">BoogyBook Classic</div>
+                            <div class="cart-item-reference">Référence: i2qe168e</div>
+                        </div>
+                        <div class="bottom">
+                            <div class="cart-item-price"><b>Prix :</b> 14,95 €</div>
+                            <div class="cart-item-shipping"><b>Frais de port:</b> 10€</div>
+                            <div class="cart-item-quantity">
+                                <b>Quantité :</b><br />
+                                <div class="qte-box">
+                                    <div class="btn-remove">-</div>
+                                    <input type="text" class="qte-input" name="qte-input" value="1">
+                                    <div class="btn-add">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="remove-item">
+                            <img src="img/delete.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!-- SINGLE ITEM -->
+
+            </div>
+
+            <div class="coupon-code-block">
+                <div class="title">Bons de réduction :</div>
+                <div class="coupon-code-input">
+                    <input type="text" name="coupon-code" class="coupon-code">
+                    <button type="submit" class="btn-validate">OK</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="total-block">
+                <div class="total-txt">TOTAL :</div>
+                <div class="total-price">24,95 €</div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="btn-commander">
+                Commander
+            </div>
+
+        </div>
+    </div>
+    <div class="container" ng-if="cart.products.length == 0">
+      Empty cart
+    </div>
+</div>
