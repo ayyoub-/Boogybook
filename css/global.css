@@ -1,26 +1,38 @@
-body{
+body {
     position: relative;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
-.container{
+
+.container {
     width: 90%;
     margin: 0 auto;
 }
-header{
+
+.clearfix {
+    clear: both;
+}
+
+input {
+    border-radius: 0;
+    border: 1px solid #ececec;
+}
+
+header {
     position: relative;
     height: 70px;
     width: 100%;
     background: #ffffff;
     -webkit-box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
-            z-index: 999999;
+    box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
+    z-index: 999999;
 }
-.menu-toggle{
+
+.menu-toggle {
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
     padding: 0;
     margin: 0;
     background: none;
@@ -28,28 +40,31 @@ header{
     cursor: pointer;
     float: left;
 }
-.menu-toggle img{
+
+.menu-toggle img {
     width: 40px;
     height: 33px;
 }
-.menu-toggle.active{
+
+.menu-toggle.active {
     position: fixed;
     float: right;
     top: 38px;
     right: 5%;
 }
-.logo{
+
+.logo {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     cursor: pointer;
 }
 
-.side-menu{
+.side-menu {
     -webkit-box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
     width: 80%;
     left: -85%;
     height: 100%;
@@ -60,39 +75,45 @@ header{
     -webkit-transition: .6s all;
     transition: .6s all;
 }
-.side-menu.active{
+
+.side-menu.active {
     left: 0;
 }
-.nav-logo{
+
+.nav-logo {
     position: relative;
     margin: 0 auto;
     width: 164px;
     height: 79px;
 }
-.nav-logo img{
+
+.nav-logo img {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
-.menu-list{
+
+.menu-list {
     padding: 0;
     margin: 0;
     list-style: none;
     width: 100%;
 }
-.menu-list.bottom{
+
+.menu-list.bottom {
     position: absolute;
     bottom: 140px;
 }
-.menu-list li{
+
+.menu-list li {
     position: relative;
     background-color: #f8f8f8;
     height: 70px;
     margin-bottom: 1px;
-
 }
+
 .langue-select-box {
     float: left;
     position: absolute;
@@ -101,7 +122,8 @@ header{
     transform: translateX(-50%);
     bottom: 50px;
 }
-.menu-list li a{
+
+.menu-list li a {
     display: block;
     height: 100%;
     text-decoration: none;
@@ -111,56 +133,61 @@ header{
     text-transform: uppercase;
     padding-left: 70px;
 }
-.menu-list.bottom li a{
+
+.menu-list.bottom li a {
     padding-left: 30px;
 }
-#mon-compte{
+
+#mon-compte {
     background-image: url(../img/mon-compte-icon.png);
     background-size: 26px 23px;
     background-repeat: no-repeat;
     background-position-x: 32px;
     background-position-y: 23px;
 }
-#panier{
+
+#panier {
     background-image: url(../img/panier-icon.png);
     background-repeat: no-repeat;
     background-size: 25px 32px;
     background-position-x: 32px;
     background-position-y: 17px;
 }
-.shopping-cart{
+
+.shopping-cart {
     cursor: pointer;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 57px;
-    height: 57px;
+    width: 70px;
+    height: 70px;
     border: 0;
     background-color: #3cc8df;
     border-radius: 100px;
     z-index: 99999;
     padding: 0;
     margin: 0;
-    box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.45);
 }
 
-.shopping-cart img{
-   width: 29px;
-   height: 40px;
+.shopping-cart img {
+    width: 39px;
+    height: 50px;
 }
-.shopping-cart .counter{
+
+.shopping-cart .counter {
     text-align: center;
     line-height: 90px;
     color: #ffffff;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 300;
     position: absolute;
-    top: -14px;
+    top: -8px;
     left: 50%;
     -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    transform: translateX(-50%);
 }
-.overlay{
+
+.overlay {
     display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.35);
@@ -170,6 +197,5 @@ header{
     height: 100%;
     z-index: 99999;
 }
-@media only screen and (min-width : 992px) {
 
-}
+@media only screen and (min-width: 992px) {}

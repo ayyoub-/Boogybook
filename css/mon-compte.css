@@ -1,0 +1,77 @@
+.go-back {
+    cursor: pointer;
+    background-image: url(../img/blue-arrow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center left;
+    color: #3cc8df;
+    font-size: 14px;
+    margin-top: 22px;
+    text-transform: uppercase;
+    padding-left: 25px;
+}
+
+.page-title {
+    color: #000000;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 44px;
+}
+
+.page-description {
+    font-size: 18px;
+    color: #535353;
+    font-weight: bold;
+    margin-top: 18px;
+}
+
+.table-data-sheet {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #eaeaea;
+    margin-top: 20px;
+}
+
+.table-data-sheet td,
+.table-data-sheet th {
+    padding: 10px 0;
+    border: 1px solid #ffffff;
+    color: #2c2c2c;
+    font-weight: bold;
+    text-align: center;
+    font-size: 9px;
+}
+
+.reference {
+    font-weight: 100;
+}
+
+.succes {
+    float: left;
+    position: relative;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    left: 50%;
+    padding: 2px 5px;
+    background-color: #66bf67;
+    color: #ffffff;
+}
+
+.error {
+    float: left;
+    position: relative;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    left: 50%;
+    padding: 2px 5px;
+    background-color: #e74c3c;
+    color: #ffffff;
+}
+
+@media only screen and (min-width: 768px) {
+    .table-data-sheet td,
+    .table-data-sheet th {
+        font-size: 16px;
+    }
+}
