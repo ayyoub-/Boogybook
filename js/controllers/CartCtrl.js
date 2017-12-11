@@ -97,7 +97,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   };
   // MAin scripting
   $scope.getStorage();
-  console.log($scope.cart.products.length);
+  console.log($scope.cart);
   console.log($scope.userInfos);
   if (typeof $scope.userInfos.addresses == 'undefined')
     $scope.getAddresses();

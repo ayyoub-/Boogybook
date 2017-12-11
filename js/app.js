@@ -81,7 +81,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   var cartSelectAddressState = {
     name: 'cart_select_address',
     url: '/cart_select_address',
-    templateUrl: 'views/cart/cart_add_address.html',
+    templateUrl: 'views/cart/cart_select_address.html',
     controller: 'CartCtrl'
   }
   var cartAddressState = {
