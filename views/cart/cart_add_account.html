@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/cart.css">
 <div class="cart-block">
     <div class="container">
         <div class="go-back">Continuer mes achats</div>
@@ -14,33 +15,38 @@
                 <div class="cart-step-text">02. INSCRIPTION</div>
             </div>
             <div class="inscription-block">
-                <form action="#" method="POST" id="inscription-form" novalidate>
+                <form name="add_account" id="inscription-form" ng-submit="addAccountSubmitForm(add_account.$valid)" novalidate>
                     <div class="form-group2 civilite">
                         <label for="">Titre</label>
                         <div class="clearfix"></div>
                         <div class="radio" id="homme">
-                            <input id="radio-1" name="radio" type="radio" value="m" required>
+                            <input id="radio-1" name="radio" type="radio" value="m" ng-model="newAccount.gender" required>
                             <label for="radio-1" class="radio-label">M</label>
                         </div>
                         <div class="radio" id="femme">
-                            <input id="radio-2" name="radio" type="radio" value="mme" required>
+                            <input id="radio-2" name="radio" type="radio" ng-model="newAccount.gender" value="mme" required>
                             <label for="radio-2" class="radio-label">Mme</label>
                         </div>
                     </div>
                     <div class="form-group2 nom">
-                        <input type="text" class="input-text2 lettersonly" placeholder="Nom" required>
+                        <input type="text" name="last_name" ng-model="newAccount.last_name" ng-minlength="3" ng-maxlength="15" class="input-text2 lettersonly" placeholder="Nom" required>
+                        <p ng-show="add_account.last_name.$invalid && !add_account.last_name.$pristine" class="help-block">Votre nom est obligatoire.</p>
                     </div>
                     <div class="form-group2 prenom">
-                        <input type="text" class="input-text2 lettersonly" placeholder="Prenom" required>
+                        <input type="text" class="input-text2 lettersonly" ng-minlength="3" name="first_name" ng-maxlength="15" ng-model="newAccount.first_name" placeholder="Prenom" required>
+                        <p ng-show="add_account.first_name.$invalid && !add_account.first_name.$pristine" class="help-block">Votre prénom est obligatoire.</p>
                     </div>
                     <div class="form-group2 email">
-                        <input type="text" class="input-text2" placeholder="Adresse e-mail" required>
+                        <input type="email" ng-pattern="pattern.email" class="input-text2" name="email" ng-model="newAccount.email" placeholder="Adresse e-mail" required>
+                        <p ng-show="add_account.email.$invalid && !add_account.email.$pristine" class="help-block">Votre adresse email est obligatoire.</p>
                     </div>
                     <div class="form-group2 password">
-                        <input type="password" class="input-text2" placeholder="Mot de passe" required>
+                        <input type="password" class="input-text2" ng-model="newAccount.password" name="password" placeholder="Mot de passe" required>
+                        <p ng-show="add_account.password.$invalid && !add_account.password.$pristine" class="help-block">Un mot de passe est obligatoire.</p>
                     </div>
                     <div class="form-group2 date-naissance">
-                        <input type="date" class="input-text2 numbersonly" placeholder="Date de naissance" required>
+                        <input type="date" name="date" class="input-text2 numbersonly" ng-model="newAccount.date" placeholder="Date de naissance" required>
+                        <p ng-show="add_account.date.$invalid && !add_account.date.$pristine" class="help-block">Votre date de naissance est obligatoire.</p>
                     </div>
                     <div class="form-group2 newsletter-checkbox">
                         <input id="newsletter" type="checkbox" name="newsletter" value="newsletter">
@@ -52,11 +58,9 @@
                         <label for="offres">Recevez les offres spéciales de nos partenaires  </label>
                         <div class="clearfix"></div>
                     </div>
-                    <button type="submit" class="btn-inscription">S'inscrire</button>
+                    <button type="submit" ng-if="!add_account.$invalid" class="btn-inscription">S'inscrire</button>
                 </form>
             </div>
-
-
         </div>
     </div>
 </div>

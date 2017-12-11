@@ -1,7 +1,9 @@
 /*************************
     01.Récapitulatif
 *************************/
-
+.shopping-cart{
+  display: none;
+}
 .go-back {
     cursor: pointer;
     background-image: url(../img/blue-arrow.png);

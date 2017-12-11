@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/cart.css">
 <div class="cart-block">
     <div class="container">
         <div class="go-back">Continuer mes achats</div>
@@ -31,43 +32,23 @@
                 </div>
 
                 <div class="current-addresses">
-                    <div class="shipping-adresse">
+                    <div class="shipping-adresse" ng-repeat="item in userInfos.addresses">
                         <div class="title">
                             Adresse de livraison
                         </div>
                         <ul class="adress-infos">
-                            <li>Ismail Sanni</li>
-                            <li>Societé</li>
-                            <li>Adresse</li>
-                            <li>Adresse (2)</li>
-                            <li>Code postal</li>
-                            <li>Ville</li>
-                            <li>Pays</li>
-                            <li>Téléphone fixe</li>
-                            <li>Téléphone mobile</li>
+                            <li>{{item.first_name}} {{item.last_name}}</li>
+                            <li>{{item.company}}</li>
+                            <li>{{item.address1}}</li>
+                            <li>{{item.address2}}</li>
+                            <li>{{item.postcode}}</li>
+                            <li>{{item.city}}</li>
+                            <li>{{item.phone}}</li>
+                            <li>{{item.phone_mobile}}</li>
                         </ul>
                         <button class="update-adress">
                             Mettre à jour
                         </button>
-                    </div>
-                    <div class="payment-adresse">
-                        <div class="title">
-                            Adresse de facturation
-                        </div>
-                        <ul class="adress-infos">
-                            <li>Ismail Sanni</li>
-                            <li>Societé</li>
-                            <li>Adresse</li>
-                            <li>Adresse (2)</li>
-                            <li>Code postal</li>
-                            <li>Ville</li>
-                            <li>Pays</li>
-                            <li>Téléphone fixe</li>
-                            <li>Téléphone mobile</li>
-                        </ul>
-                        <button class="update-adress">
-                                Mettre à jour
-                            </button>
                     </div>
                     <div class="clearfix"></div>
                     <button class="add-adress">Ajouter une nouvelle adresse</button>
