@@ -78,6 +78,12 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/cart/cart_add_account.html',
     controller: 'CartCtrl'
   }
+  var cartSelectAddressState = {
+    name: 'cart_select_address',
+    url: '/cart_select_address',
+    templateUrl: 'views/cart/cart_add_address.html',
+    controller: 'CartCtrl'
+  }
   var cartAddressState = {
     name: 'cart_add_address',
     url: '/cart_add_address',
@@ -119,6 +125,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   $stateProvider.state(cartRecapState);
   $stateProvider.state(cartLoginState);
   $stateProvider.state(cartAddressState);
+  $stateProvider.state(cartSelectAddressState);
   $stateProvider.state(cartAccountState);
   $stateProvider.state(cartShippingState);
   $stateProvider.state(cartOgoneState);
