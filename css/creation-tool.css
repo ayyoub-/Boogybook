@@ -50,6 +50,11 @@
     overflow: scroll;
 }
 
+.creation-tool-body.crop-tool .container {
+    position: relative;
+    height: 100%;
+}
+
 .creation-tool-nav {
     position: fixed;
     bottom: 0;
@@ -398,4 +403,45 @@
         text-transform: uppercase;
         cursor: pointer;
     }
+}
+
+
+/*******************
+    CROP TOOL
+********************/
+
+.btn-group-left {
+    float: left;
+}
+
+.btn-group-right {
+    float: right;
+}
+
+.btn {
+    padding: 0;
+    margin: 0;
+    width: 60px;
+    height: 60px;
+    background-color: #3498db;
+    border: 0;
+    color: #fff;
+    font-size: 18px;
+}
+
+.btn-left {
+    float: left;
+    background-color: #2ecc71;
+}
+
+.btn-right {
+    float: right;
+    background-color: #e74c3c;
+}
+
+.btn-group-bottom {
+    margin-bottom: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
