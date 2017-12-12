@@ -1,0 +1,2 @@
+<button type="button" name="button" ng-click="triggerInputFile()">Upload</button>
+<input type="file" style="display:none;" multiple accept="image/*" name="images[]" id="images" onchange="angular.element(this).scope().loadLocalImages(this)"/>

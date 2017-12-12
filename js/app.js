@@ -120,6 +120,13 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/faq.html',
     controller: 'FaqCtrl'
   }
+  var UploadPicsState = {
+    name: 'upload',
+    url: '/upload',
+    templateUrl: 'views/creation_tool/upload.html',
+    controller: 'ToolCtrl'
+  }
+  $stateProvider.state(UploadPicsState);
   $stateProvider.state(homeState);
   $stateProvider.state(productState);
   $stateProvider.state(cartRecapState);
@@ -186,11 +193,11 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $rootScope, Cordova
   // check if he has an old existing card
   if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
     params.id_cart = $scope.cart.id;
-  PSAPI.PSExecute('getCartId', params).then(function(res) {
-    if (typeof res.id != 'undefined') {
-      id_cart = res.id;
-      $scope.cart = res;
-      $scope.setStorage();
-    }
-  });
+  // PSAPI.PSExecute('getCartId', params).then(function(res) {
+  //   if (typeof res.id != 'undefined') {
+  //     id_cart = res.id;
+  //     $scope.cart = res;
+  //     $scope.setStorage();
+  //   }
+  // });
 });

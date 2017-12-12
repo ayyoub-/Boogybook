@@ -21,9 +21,7 @@
                 </div>
                 <div class="select-adress">
                     <select name="" id="" class="dropdown">
-                        <option value="">Adresse 1</option>
-                        <option value="">Adresse 2</option>
-                        <option value="">Adresse 3</option>
+                        <option ng-repeat="item in userInfos.addresses" value="{{item.id}}">{{item.address1}}</option>
                     </select>
                 </div>
 

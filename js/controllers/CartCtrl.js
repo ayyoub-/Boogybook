@@ -14,6 +14,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     email: '',
     date: ''
   };
+  $scope.newAddress = null;
   $scope.pattern = {
     email: /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/,
   }
@@ -73,7 +74,23 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   }
   // Add new address
   $scope.addAddress = function() {
-    PSAPI.add('addresses', address, 1).then(function(res1) {}, function(err) {});
+    PSAPI.PSExecute('addNewAddress', {
+      'id_customer': $scope.userInfos.id,
+      'lastname': $scope.newAddress.lastname,
+      'firstname': $scope.newAddress.firstname,
+      'address1': $scope.newAddress.address1,
+      'address2': $scope.newAddress.address2,
+      'postcode': $scope.newAddress.postcode,
+      'id_country': $scope.newAddress.id_country,
+      'city': $scope.newAddress.city,
+      'phone': $scope.newAddress.phone,
+      'alias': $scope.newAddress.alias
+    }).then(function(r) {
+      console.log(r);
+      if (r.OK){
+        alert("OK");
+      }
+    });
   }
   // Get customer addresses
   $scope.getAddresses = function() {
@@ -102,4 +119,19 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   if (typeof $scope.userInfos.addresses == 'undefined')
     $scope.getAddresses();
   console.log($scope.userInfos.addresses);
+  // test add address
+  $scope.newAddress = {
+    lastname: 'Ayyoub',
+    firstname: 'Ayyoub',
+    address1: 'Casa',
+    address2: 'Casa',
+    postcode: '12345',
+    id_country: 6,
+    city: 'Casa',
+    phone: '0988776655',
+    alias: 'ayyoub'
+  }
+  //$scope.addAddress();
+  //$scope.getAddresses();
+  //console.log($scope.userInfos.addresses);
 });
