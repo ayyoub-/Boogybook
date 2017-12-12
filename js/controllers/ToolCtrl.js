@@ -1,4 +1,4 @@
-boogybookApp.controller("ToolCtrl", function($scope) {
+boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams) {
   // Vars
   $scope.config = {
     limit: 60,
@@ -20,11 +20,11 @@ boogybookApp.controller("ToolCtrl", function($scope) {
   /*
   Error messages
    */
-  $scope.errors =  {
-      upload_limit: {
-          message: "can not upload more than 60 pictures",
-          enable: false
-      },
+  $scope.errors = {
+    upload_limit: {
+      message: "can not upload more than 60 pictures",
+      enable: false
+    },
   }
   $scope.tool = {
     /*
@@ -45,9 +45,25 @@ boogybookApp.controller("ToolCtrl", function($scope) {
      Global Object
       */
     myLibrary: new Array(),
-    myLibraryTexts: new Array()
+    myLibraryTexts: new Array(),
+    cropIndex: 0
   }
+  $scope.userInfos = null;
+  $scope.cart = null;
   // Functions
+  // Set local storage
+  $scope.setStorage = function() {
+    sessionStorage.setItem("myLibrary", JSON.stringify($scope.tool.myLibrary));
+  }
+  // Get local Storage
+  $scope.getStorage = function() {
+    if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null)
+      $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
+    if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
+      $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
+    if (typeof sessionStorage.getItem("myLibrary") != undefined && sessionStorage.getItem("myLibrary") != null)
+      $scope.tool.myLibrary = JSON.parse(sessionStorage.getItem("myLibrary"));
+  }
   // get url parameters
   $scope.getUrlParameter = function(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -90,48 +106,48 @@ boogybookApp.controller("ToolCtrl", function($scope) {
    * Upload images to server, create images links
    */
   $scope.createImages = function(files) {
+    /*
+     * Load image from tmp & setup arrays (cout, order, crop, crop urls)
+     */
+    var reader = new FileReader();
+    for (var i = 0; i < files.length; i++) {
+      var reader_ = new FileReader();
+      $scope.config.total++;
+      reader_.onload = (e, cropArray) => {
+        $scope.tool.localImagesArray.push(e.target.result);
+      };
+      reader_.readAsDataURL(files[i]);
+    }
+    /*
+     * build formdata from input file
+     */
+    var formData = new FormData();
+    var len = this.checkDataAjaxLength();
+    if ($scope.errors.upload_limit.enable)
+      alert("Limit error");
+    else {
+      console.log(len);
+      for (var i = 0; i < len; i++)
+        formData.append("" + i + "", document.getElementById('images').files[i]);
+      formData.append('cart', $scope.config.cart);
       /*
-       * Load image from tmp & setup arrays (cout, order, crop, crop urls)
+       * Ajax request to upload images
        */
-      var reader = new FileReader();
-      for (var i = 0; i < files.length; i++) {
-          var reader_ = new FileReader();
-          $scope.config.total++;
-          reader_.onload = (e, cropArray) => {
-              $scope.tool.localImagesArray.push(e.target.result);
-          };
-          reader_.readAsDataURL(files[i]);
-      }
-      /*
-       * build formdata from input file
-       */
-      var formData = new FormData();
-      var len = this.checkDataAjaxLength();
-      if ($scope.errors.upload_limit.enable)
-          alert("Limit error");
-      else {
-          console.log(len);
-          for (var i = 0; i < len; i++)
-              formData.append("" + i + "", document.getElementById('images').files[i]);
-          formData.append('cart', $scope.config.cart);
-          /*
-           * Ajax request to upload images
-           */
-          $scope.uploadRequest(formData);
-      }
+      $scope.uploadRequest(formData);
+    }
   }
   /*
   Check the length of ajax upload result
    */
   $scope.checkDataAjaxLength = function() {
-      var len = document.getElementById('images').files.length;
-      if (len > $scope.tool.size) {
-          $scope.errors.upload_limit.enable = true;
-          return $scope.tools.size;
-      } else {
-          $scope.errors.upload_limit.enable = false;
-          return len;
-      }
+    var len = document.getElementById('images').files.length;
+    if (len > $scope.tool.size) {
+      $scope.errors.upload_limit.enable = true;
+      return $scope.tools.size;
+    } else {
+      $scope.errors.upload_limit.enable = false;
+      return len;
+    }
   }
   /*
   upload images via ajax to server
@@ -139,69 +155,115 @@ boogybookApp.controller("ToolCtrl", function($scope) {
   $scope.uploadRequest = function(formData) {
     console.log($scope.config.urls.upload);
     console.log(formData);
-      $.ajax({
-          url: $scope.config.urls.upload,
-          type: 'post',
-          data: formData,
-          dataType: 'json',
-          async: true,
-          processData: false,
-          contentType: false,
-          xhr: function() {
-          },
-          success: function(data) {
-              /*
-              Build items
-               */
-              $scope.tool.progress = 0;
-              var from = $scope.getFirstEmptyItem();
-              $scope.addItemsToLibrary(data, from);
-          },
-          error: function(request) {
-              console.error("Error : ");
-              console.log(request);
-          }
-      });
+    $.ajax({
+      url: $scope.config.urls.upload,
+      type: 'post',
+      data: formData,
+      dataType: 'json',
+      contentType: false,
+      processData: false,
+      cache: false,
+      success: function(data) {
+        /*
+        Build items
+         */
+        $scope.tool.progress = 0;
+        var from = $scope.getFirstEmptyItem();
+        $scope.addItemsToLibrary(data, from);
+        $scope.setStorage();
+        $state.go('mySelection', {}, {
+          location: 'replace'
+        });
+      },
+      error: function(request) {
+        console.error("Error : ");
+        console.log(request);
+      }
+    });
   }
   // Get first empty item
   $scope.getFirstEmptyItem = function() {
-      for (var i = 0; i < $scope.config.limit; i++) {
-          if (typeof $scope.tool.myLibrary[i].uid == "undefined")
-              return i;
-      }
+    for (var i = 0; i < $scope.config.limit; i++) {
+      if (typeof $scope.tool.myLibrary[i] == "undefined")
+        return i;
+      else if (typeof $scope.tool.myLibrary[i].uid == "undefined")
+        return i;
+    }
   }
   // Add items to my library
   $scope.addItemsToLibrary = function(data, from) {
-      /*
-       * Get & save Id & url of loaded images
-       */
-      for (j = 0; j < data.urls.length; j++) {
-          $scope.addItemToLibrary(data.urls[j], from, data.uids[j], 'computer');
-          from = $scope.getFirstEmptyItem();
-      }
+    /*
+     * Get & save Id & url of loaded images
+     */
+    for (j = 0; j < data.urls.length; j++) {
+      $scope.addItemToLibrary(data.urls[j], from, data.uids[j], 'computer');
+      from = $scope.getFirstEmptyItem();
+    }
   }
   $scope.addItemToLibrary = function(link, from, uid, source) {
-      var item = new Object();
-      item.source = source;
-      item.ratio_link = this.urls.improve + "" + link;
-      item.server_link = link;
-      item.cropObject = new Object();
-      item.uid = uid;
-      // Calculate position
-      item.position = 0;
-      /*
-       Note book params
-       */
-      item.cropUrl = '';
-      item.text = '';
-      item.textSize = 20;
-      item.effect = 0;
-      item.font = '';
-      item.index = from + 1;
-      this.tools.size--;
-      /*
-       Add element to library
-       */
-      $scope.tool.myLibrary[from] = item;
+    var item = new Object();
+    item.source = source;
+    item.ratio_link = $scope.config.urls.improve + "" + link;
+    item.server_link = link;
+    item.cropObject = new Object();
+    item.uid = uid;
+    // Calculate position
+    item.position = 0;
+    /*
+     Note book params
+     */
+    item.cropUrl = '';
+    item.text = '';
+    item.textSize = 20;
+    item.effect = 0;
+    item.font = '';
+    item.index = from + 1;
+    $scope.tool.size--;
+    /*
+     Add element to library
+     */
+    $scope.tool.myLibrary[from] = item;
   }
+  // Duplicate item
+  $scope.duplicateItem = function(index) {
+    if (typeof $scope.tool.myLibrary[index + 1] == "undefined") {
+      var item = new Object();
+      item = $scope.tool.myLibrary[index];
+      $scope.tool.myLibrary[index + 1] = new Object();
+      $scope.tool.myLibrary[index + 1] = item;
+      $scope.tool.size--;
+    } else {
+      var from = $scope.getFirstEmptyItem();
+      while (from != index) {
+        $scope.tool.myLibrary[from] = $scope.tool.myLibrary[from - 1];
+        from--;
+      }
+      $scope.tool.size--;
+    }
+    $scope.setStorage();
+  }
+  // Delete item
+  $scope.deleteItem = function(index) {
+    var item = new Object();
+    item.index = index;
+    $scope.tool.myLibrary[index] = item;
+    $scope.tool.size++;
+    $scope.setStorage();
+  }
+  // Edit picture
+  $scope.editItem = function(index) {
+    $state.go('edit', {
+      "index": index
+    }, {
+      location: 'replace'
+    });
+  }
+  $scope.getStorage();
+  // check if he has an old existing card
+  if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
+    $scope.config.cart = $scope.cart.id;
+  console.log($scope.tool.myLibrary);
+  if (typeof $stateParams.index != 'undefined')
+    $scope.tool.cropIndex = $stateParams.index;
+  console.log($scope.tool.cropIndex);
 });

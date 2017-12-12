@@ -1,60 +1,27 @@
 <link rel="stylesheet" href="css/creation-tool.css">
-
 <div class="creation-tool-block">
     <div class="container">
         <div class="controls">
             <button class="btn-retour">Retour</button>
             <div class="selected-img">
                 <div class="text">Images séléctionnées</div>
-                <div class="numbers">4 / 60</div>
+                <div class="numbers">{{tool.myLibrary.length}} / 60</div>
             </div>
             <button class="btn-continuer" disabled>Continuer</button>
         </div>
-
         <div class="creation-tool-body">
             <ul class="list-img">
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
+                <li class="single-img" ng-repeat="(index, item) in tool.myLibrary track by $index">
+                    <img src="{{item.server_link}}" alt="">
                     <div class="control-block">
                         <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
-                        </div>
-                    </div>
-                </li>
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
-                    <div class="control-block">
-                        <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
-                        </div>
-                    </div>
-                </li>
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
-                    <div class="control-block">
-                        <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
-                        </div>
-                    </div>
-                </li>
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
-                    <div class="control-block">
-                        <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
+                            <div ng-click="deleteItem(index)" class="delete"></div>
+                            <div ng-click="editItem(index)" class="edit"></div>
+                            <div ng-click="duplicateItem(index)" class="duplicate"></div>
                         </div>
                     </div>
                 </li>
             </ul>
-
         </div>
     </div>
 </div>
@@ -62,7 +29,7 @@
 <div class="creation-tool-nav">
     <ul>
         <li class="active">Ma sélection</li>
-        <li>Ajouter des photos</li>
+        <li ui-sref="upload">Ajouter des photos</li>
         <li>Importer des photos depuis Facebook</li>
         <li>Importer des photos depuis Instagram</li>
     </ul>

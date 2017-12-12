@@ -5,17 +5,17 @@
             <button class="btn-retour">Retour</button>
             <div class="selected-img">
                 <div class="text">Images séléctionnées</div>
-                <div class="numbers">0 / 60</div>
+                <div class="numbers">{{tool.myLibrary.length}} / 60</div>
             </div>
             <button class="btn-continuer" disabled>Continuer</button>
         </div>
 
         <div class="creation-tool-body">
             <div class="upload-btn-wrapper">
-                <button class="btn-upload">
+                <button class="btn-upload" ng-click="triggerInputFile()">
                     <span>télécharger depuis mobile<br />
-                      (60/60)</span></button>
-                <input type="file" name="myfiles" accept="image/*" multiple/>
+                      ({{config.limit - tool.myLibrary.length}}/60)</span></button>
+                      <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)"/>
             </div>
             <ul class="list-img hidden">
                 <li class="single-img">
@@ -66,7 +66,7 @@
 
 <div class="creation-tool-nav">
     <ul>
-        <li>Ma sélection</li>
+        <li ui-sref="mySelection">Ma sélection</li>
         <li class="active">Ajouter des photos</li>
         <li>Importer des photos depuis Facebook</li>
         <li>Importer des photos depuis Instagram</li>

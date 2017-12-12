@@ -342,7 +342,7 @@
 .upload-btn-wrapper {
     position: relative;
     overflow: hidden;
-    display: inline-block;
+    display: table;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);

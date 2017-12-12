@@ -3,7 +3,9 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
-
+button{
+  border-radius: 0;
+}
 .container {
     width: 90%;
     margin: 0 auto;

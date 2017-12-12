@@ -47,6 +47,12 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     }
     $translateProvider.preferredLanguage('en');
   }
+  $('.menu-toggle, .overlay, .menu-list li a').click(function(e) {
+    e.preventDefault();
+    $('.overlay').fadeToggle();
+    $('.menu-toggle').toggleClass('active');
+    $('.side-menu').toggleClass('active');
+  });
   // Routes
   var homeState = {
     name: 'home',
@@ -126,7 +132,21 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/creation_tool/upload.html',
     controller: 'ToolCtrl'
   }
+  var mySelectionState = {
+    name: 'mySelection',
+    url: '/mySelection',
+    templateUrl: 'views/creation_tool/my_selection.html',
+    controller: 'ToolCtrl'
+  }
+  var cropState = {
+    name: 'edit',
+    url: '/edit?index',
+    templateUrl: 'views/creation_tool/crop.html',
+    controller: 'ToolCtrl'
+  }
   $stateProvider.state(UploadPicsState);
+  $stateProvider.state(mySelectionState);
+  $stateProvider.state(cropState);
   $stateProvider.state(homeState);
   $stateProvider.state(productState);
   $stateProvider.state(cartRecapState);
@@ -139,14 +159,6 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   $stateProvider.state(contactState);
   $stateProvider.state(accountState);
   $stateProvider.state(faqState);
-
-  $('.menu-toggle, .overlay, .menu-list li a').click(function(e) {
-    e.preventDefault();
-    $('.overlay').fadeToggle();
-    $('.menu-toggle').toggleClass('active');
-    $('.side-menu').toggleClass('active');
-  });
-
 });
 
 boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q) {
@@ -188,16 +200,19 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $rootScope, Cordova
   // Get Cart
   params = {};
   // check if user is connected
-  if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null)
+  if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null){
     params.authInfos = $scope.userInfos;
+    params.authInfos.addresses = [];
+  }
   // check if he has an old existing card
   if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
     params.id_cart = $scope.cart.id;
-  // PSAPI.PSExecute('getCartId', params).then(function(res) {
-  //   if (typeof res.id != 'undefined') {
-  //     id_cart = res.id;
-  //     $scope.cart = res;
-  //     $scope.setStorage();
-  //   }
-  // });
+  PSAPI.PSExecute('getCartId', params).then(function(res) {
+    if (typeof res.id != 'undefined') {
+      id_cart = res.id;
+      $scope.cart = res;
+      $scope.setStorage();
+      console.log($scope.cart);
+    }
+  });
 });
