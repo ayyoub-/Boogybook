@@ -1,0 +1,103 @@
+.shopping-cart {
+    display: none;
+}
+
+.container {
+    padding: 2em 0 2em 0;
+}
+
+.contact-txt-1 {
+    font-size: 16px;
+    color: #535353;
+    margin-bottom: 20px;
+}
+
+.form-group2 {
+    color: #414141;
+    margin-bottom: 10px;
+}
+
+.form-group2>label {
+    float: left;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.input-text2 {
+    width: 96%;
+    padding-left: 4%;
+    height: 60px;
+    background-color: #ececec;
+    font-weight: bold;
+}
+
+.dropdown {
+    width: 100%;
+    padding: 16px 1px 16px;
+    border-radius: 0;
+    background-color: #ececec;
+}
+
+.dropdown div {
+    background-color: #ececec;
+}
+
+.dropdown .selected::after {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown:hover,
+.dropdown.focus {
+    background: #ececec;
+}
+
+.dropdown .selected,
+.dropdown li {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 8px 4%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.dropdown .selected {
+    color: #6E6E6E;
+    text-transform: capitalize !important;
+}
+
+.form-group2 textarea {
+    width: 96%;
+    padding-left: 4%;
+    padding-top: 20px;
+    height: 200px;
+    resize: none;
+    outline: 0;
+    background-color: #ececec;
+    border: 0;
+    color: #6E6E6E;
+}
+
+.btn-envoyer {
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 0;
+    background-color: #3cc8df;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 55px;
+}
