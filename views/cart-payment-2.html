@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boogybook</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/easydropdown.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <button class="menu-toggle"><img src="img/menu-toggle.png" alt="Menu Toggle"></button>
+            <div class="logo"><img src="img/logo.png" alt=""></div>
+        </div>
+    </header>
+    <nav class="side-menu">
+        <div class="nav-logo">
+            <img src="img/logo.png" alt="">
+        </div>
+        <ul class="menu-list">
+            <li id="mon-compte"><a href="#">Mon compte</a></li>
+            <li id="panier"><a href="#">Panier</a></li>
+        </ul>
+
+        <ul class="menu-list bottom">
+            <li id="faq"><a href="#">FAQ</a></li>
+            <li id="contact"><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="langue-select-box">
+            <select name="langue-select" id="langue-select" class="dropdown">
+                <option value="fr">Français</option>
+                <option value="eng">English</option>
+                <option value="spa">Spanish</option>
+            </select>
+        </div>
+    </nav>
+    <div class="payment-block">
+        <div class="container">
+            <div class="go-back">ACCUEIL</div>
+
+
+            <div class="checked-icon">
+                <img src="img/checked.svg" alt=""> <br /><span>Paiement accepté</span>
+            </div>
+            <div class="page-description">
+                Historique de vos commandes :
+            </div>
+            <table style="width: 100%;" cellspacing="0" cellpadding="0" class="table-data-sheet">
+                <tbody>
+                    <tr>
+                        <td>Produit</td>
+                        <td>Date</td>
+                        <td>Prix total</td>
+                        <td>État</td>
+                    </tr>
+                    <tr>
+                        <td> BoogyBook Classic
+                            <div class="reference">KJ27402</div>
+                        </td>
+                        <td> 29/11/2017 </td>
+                        <td> 0,00 € </td>
+                        <td>
+                            <div class="succes">Paiement accepté</div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="btn-group-bottom">
+                <button class="btn-retour">
+                    Retour à votre compte                    
+                </button>
+                <button class="btn-home">
+                    ACCUEIL                   
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+    <button class="shopping-cart">
+        <img src="img/shopping-bag.svg" alt="">
+        <div class="counter">0</div>
+    </button>
+
+    <div class="overlay"></div>
+
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/jquery.easydropdown.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/mon-compte.js"></script>
+</body>
+
+</html
