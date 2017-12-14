@@ -1,4 +1,4 @@
-boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams) {
+boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $window) {
   // Vars
   $scope.config = {
     limit: 60,
@@ -47,6 +47,13 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams) {
     myLibrary: new Array(),
     myLibraryTexts: new Array(),
     cropIndex: 0
+  }
+  $scope.cropDetails = {
+    cropper: null,
+    cropImgPrefix: 'http://medias.boogybook.com/a/',
+    zoomParam: 0,
+    zoomSize: 0,
+    rotateParam: 0,
   }
   $scope.userInfos = null;
   $scope.cart = null;
@@ -258,12 +265,115 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams) {
       location: 'replace'
     });
   }
+  // back
+  $scope.backToDetails = function() {
+    console.log("back function");
+    $window.history.back();
+  }
+  // Save croped picture
+  $scope.saveCrop = function() {
+    $.ajax({
+      url: "https://boogybook.com/web_medias/preview_refonte.php",
+      type: 'post',
+      data: {
+        'img': $scope.tool.myLibrary[$scope.tool.cropIndex].server_link,
+        'crop': JSON.stringify($scope.cropDetails.cropper.getData()),
+        'cart': $scope.config.cart
+      },
+      success: function(data) {
+        var result = JSON.parse(data);
+
+        /*
+         * Store croped img link
+         */
+        $scope.tool.myLibrary[$scope.tool.cropIndex].cropUrl = "https://boogybook.com/web_medias/preview_refonte_preview.php?img=" + $scope.cropDetails.cropImgPrefix + "" + result.link + "?cart=" + $scope.config.cart;
+        /*
+         * Back to @source page
+         */
+        $scope.setStorage();
+        $state.go('mySelection', {}, {
+          location: 'replace'
+        });
+      },
+      error: function(request) {
+        console.error("Error");
+      }
+    });
+  }
+  // Save croped picture
+  $scope.resetCrop = function() {
+    /*
+     * Reset zoom
+     */
+    var zoom = $scope.cropDetails.zoomParam / 100;
+    $scope.cropDetails.cropper.zoom(-$scope.cropDetails.zoomSize);
+    $scope.cropDetails.zoomSize = 0;
+    $scope.cropDetails.zoomParam = 0;
+    /*
+     * Reset scale
+     */
+    var cropInfo = $scope.cropDetails.cropper.getData();
+    $scope.cropDetails.cropper.scale(1, 1);
+    /*
+     * Reset rotation
+     */
+    $scope.cropDetails.cropper.rotate($scope.cropDetails.rotateParam);
+    $scope.cropDetails.rotateParam = 0;
+  }
+  // Crop functions
+  $scope.rotate = function(param) {
+    $scope.cropDetails.cropper.rotate(param);
+    $scope.cropDetails.rotateParam = $scope.cropDetails.rotateParam - param;
+  }
+  $scope.scalex = function(x, y) {
+    var cropInfo = $scope.cropDetails.cropper.getData();
+    if (cropInfo.scaleX == 1)
+      $scope.cropDetails.cropper.scale(-1, 1);
+    else
+      $scope.cropDetails.cropper.scale(1, 1);
+  }
+  $scope.scaley = function(x, y) {
+    var cropInfo = $scope.cropDetails.cropper.getData();
+    if (cropInfo.scaleY == 1)
+      $scope.cropDetails.cropper.scale(1, -1);
+    else
+      $scope.cropDetails.cropper.scale(1, 1);
+  }
+  // MAIN CODE
   $scope.getStorage();
+  angular.element(document).ready(function() {
+    /*
+     * Set up cropper area
+     */
+    if (typeof $stateParams.index != 'undefined') {
+      var image = document.getElementById('image');
+      $scope.cropDetails.cropper = new Cropper(image, {
+        aspectRatio: 9 / 9,
+        autoCropArea: 1,
+        viewMode: 1,
+        data: $scope.tool.myLibrary[$scope.tool.cropIndex].cropObject,
+        strict: true,
+        guides: true,
+        highlight: false,
+        dragCrop: true,
+        cropBoxMovable: true,
+        cropBoxResizable: true,
+        zoomable: true,
+        movable: true,
+        dragMode: 'move',
+        minContainerWidth: 350,
+        minContainerHeight: 350,
+        crop: function(e) {}
+      });
+    }
+  });
   // check if he has an old existing card
   if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
     $scope.config.cart = $scope.cart.id;
   console.log($scope.tool.myLibrary);
-  if (typeof $stateParams.index != 'undefined')
+  if (typeof $stateParams.index != 'undefined') {
     $scope.tool.cropIndex = $stateParams.index;
-  console.log($scope.tool.cropIndex);
+    console.log($scope.tool.cropIndex);
+  }
+
 });

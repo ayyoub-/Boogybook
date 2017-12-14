@@ -18,17 +18,22 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   $scope.pattern = {
     email: /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/,
   }
+  $scope.countries = null;
   // functions
   // get local storage
   $scope.getStorage = function() {
     if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null)
       $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
+    if (typeof sessionStorage.getItem("countries") != 'undefined' && sessionStorage.getItem("countries") != null)
+      $scope.countries = JSON.parse(sessionStorage.getItem("countries"));
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
+    console.log($scope.countries);
   }
   // Save and update local storage
   $scope.setStorage = function() {
     sessionStorage.setItem("userInfos", JSON.stringify($scope.userInfos));
+    sessionStorage.setItem("countries", JSON.stringify($scope.countries));
   }
   // Get customer orders
   $scope.getCustomerOrder = function(userInfos) {
@@ -36,6 +41,22 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       'authInfos': userInfos
     }).then(function(r) {
       $scope.userInfos.ordersHistory = r.orders;
+    });
+  }
+  // Get countries
+  $scope.getCountries = function() {
+    PSAPI.get('countries', {
+      'active': 1
+    }, 'full').then(function(res) {
+      var r = [];
+      for (p = 0; p < res.length; p++) {
+        r.push(res[p]);
+      }
+      $scope.countries = r;
+      console.log($scope.countries);
+      $scope.setStorage();
+    }, function(res) {
+      console.log('errors countries');
     });
   }
   // login
@@ -87,7 +108,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       'alias': $scope.newAddress.alias
     }).then(function(r) {
       console.log(r);
-      if (r.OK){
+      if (r.OK) {
         alert("OK");
       }
     });
@@ -112,6 +133,15 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       $scope.addAccount();
     }
   };
+  // Check add address form and send
+  $scope.addAddressSubmitForm = function(isValid) {
+    // check to make sure the form is completely valid
+    console.log(isValid);
+    if (isValid) {
+      console.log($scope.newAddress);
+      $scope.addAddress();
+    }
+  };
   // MAin scripting
   $scope.getStorage();
   console.log($scope.cart);
@@ -126,11 +156,15 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     address1: 'Casa',
     address2: 'Casa',
     postcode: '12345',
-    id_country: 6,
+    company : 'ShareConseil',
+    id_country: [],
     city: 'Casa',
     phone: '0988776655',
+    phone_mobile:'0988776655',
     alias: 'ayyoub'
   }
+  if ($scope.countries == null)
+    $scope.getCountries();
   //$scope.addAddress();
   //$scope.getAddresses();
   //console.log($scope.userInfos.addresses);
