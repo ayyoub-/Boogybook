@@ -98,8 +98,8 @@
 
 .creation-tool-nav ul li:nth-child(2) {
     background: #2ecc71 url(../img/add-pictures.png);
-    /*background-size: 98px 47px;*/
-    background-size: 90%;
+    background-size: 98px 47px;
+    /* background-size: 90%; */
     background-position: center;
     background-repeat: no-repeat;
     width: 50%;
@@ -108,8 +108,8 @@
 .creation-tool-nav ul li.active:nth-child(2),
 .creation-tool-nav ul li:nth-child(2):hover {
     background: #2ecc71 url(../img/add-pictures-active.png);
-    /*background-size: 98px 47px;*/
-    background-size: 90%;
+    background-size: 98px 47px;
+    /* background-size: 90%; */
     background-position: center;
     background-repeat: no-repeat;
 }
