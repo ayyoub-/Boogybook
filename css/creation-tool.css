@@ -84,6 +84,7 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 62px;
+    width: 50%;
 }
 
 .creation-tool-nav ul li.active:nth-child(1),
@@ -101,6 +102,7 @@
     background-size: 90%;
     background-position: center;
     background-repeat: no-repeat;
+    width: 50%;
 }
 
 .creation-tool-nav ul li.active:nth-child(2),
@@ -118,6 +120,7 @@
     background-size: 90%;
     background-position: center;
     background-repeat: no-repeat;
+    display: none;
 }
 
 .creation-tool-nav ul li.active:nth-child(3),
@@ -135,6 +138,7 @@
     background-size: 90%;
     background-position: center;
     background-repeat: no-repeat;
+    display: none;
 }
 
 .creation-tool-nav ul li.active:nth-child(4),
