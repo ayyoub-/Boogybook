@@ -126,6 +126,7 @@ header.sticky {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     bottom: 50px;
+    width: 80%;
 }
 
 .menu-list li a {
