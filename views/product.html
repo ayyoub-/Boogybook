@@ -2,21 +2,18 @@
 <div class="details-produit">
     <div class="produit-img">
         <div class="price">{{product.price}} €</div>
-        <img src="img/products/product-{{product.id_product}}.jpg" alt="">
+        <img src="img/products/{{product.id_product}}.jpg" alt="">
     </div>
     <div class="container">
         <button class="btn-details" ng-click="showDetails()">DETAILS</button>
         <button class="btn-creer" ui-sref="upload">Je crée mon Boogybook</button>
     </div>
-
 </div>
 <div class="details-popup">
     <div class="container">
-        <div class="go-back" ng-click="goBack()">Revenir</div>
+        <div class="go-back" ng-click="goBack()">Retour</div>
         <div class="details-popup-inner">
             <div class="product-title">{{product.name}}</div>
-            <div class="product-description" ng-bind-html="product.description">
-            </div>
             <div class="product-description" ng-bind-html="product.description_short">
             </div>
             <div class="fiche-title">

@@ -201,6 +201,7 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $window, $rootScope
   }).then(function(r) {
     if (r.OK) {
       $scope.products = r.covers;
+      console.log($scope.products);
       $scope.setStorage();
     }
   });
