@@ -5,17 +5,17 @@
             <button class="btn-retour" ng-click="backToDetails()">Retour</button>
             <div class="selected-img">
                 <div class="text">Images séléctionnées</div>
-                <div class="numbers">{{tool.myLibrary.length}} / 60</div>
+                <div class="numbers">{{tool.size}} / 60</div>
             </div>
-            <button ng-if="tool.myLibrary.length < 60" class="btn-continuer" disabled>Continuer</button>
-            <button ng-if="tool.myLibrary.length == 60" class="btn-continuer">Continuer</button>
+            <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
+            <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
         </div>
 
         <div class="creation-tool-body">
             <div class="upload-btn-wrapper">
                 <button class="btn-upload" ng-click="triggerInputFile()">
                     <span>télécharger depuis mobile<br />
-                      ({{config.limit - tool.myLibrary.length}}/60)</span></button>
+                      ({{config.limit - tool.size}}/{{config.limit}})</span></button>
                       <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)"/>
             </div>
             <ul class="list-img hidden">

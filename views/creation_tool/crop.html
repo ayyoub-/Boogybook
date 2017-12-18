@@ -9,7 +9,7 @@
         <div class="creation-tool-body crop-tool">
             <div class="container">
                 <div class="img-container">
-                    <img id="image" src="{{tool.myLibrary[tool.cropIndex].server_link}}" alt="Picture">
+                    <img id="image" style="display: none;" src="{{tool.myLibrary[tool.cropIndex].server_link}}" alt="Picture">
                 </div>
                 <div class="docs-buttons">
                     <div class="btn-group-left">
@@ -48,15 +48,16 @@
                             </span>
                         </button>
                     </div>
+
+
                 </div>
             </div>
         </div>
-    </div>
-    <div class="creation-tool-nav">
-        <ul>
-            <li class="active">Ma sélection</li>
-            <li>Ajouter des photos</li>
-            <li>Importer des photos depuis Facebook</li>
-            <li>Importer des photos depuis Instagram</li>
-        </ul>
-    </div>
+        <div class="creation-tool-nav">
+            <ul>
+                <li class="active">Ma sélection</li>
+                <li>Ajouter des photos</li>
+                <li>Importer des photos depuis Facebook</li>
+                <li>Importer des photos depuis Instagram</li>
+            </ul>
+        </div>

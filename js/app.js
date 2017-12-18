@@ -144,7 +144,14 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/creation_tool/crop.html',
     controller: 'ToolCtrl'
   }
+  var errorState = {
+    name: 'error',
+    url: '/error',
+    templateUrl: 'views/404.html',
+    controller: 'indexCtrl'
+  }
   $stateProvider.state(UploadPicsState);
+  $stateProvider.state(errorState);
   $stateProvider.state(mySelectionState);
   $stateProvider.state(cropState);
   $stateProvider.state(homeState);
@@ -161,7 +168,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   $stateProvider.state(faqState);
 });
 
-boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q) {
+boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state) {
   // Products list
   $scope.products = new Array();
   $rootScope.products = new Array();
@@ -197,10 +204,43 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $rootScope, Cordova
       $scope.setStorage();
     }
   });
+  // Clear local storage
+  $scope.cleanStorage = function(){
+    var i = sessionStorage.length;
+    while (i--) {
+        var key = sessionStorage.key(i);
+        sessionStorage.removeItem(key);
+    }
+    $scope.tool.myLibrary = new Array();
+    $scope.tool.size = 0;
+  }
+  // Check Internet connexion
+  $rootScope.online = navigator.onLine;
+  if (!$rootScope.online)
+    $state.go('error', {}, {
+      location: 'replace'
+    });
+  $window.addEventListener("offline", function() {
+    $rootScope.$apply(function() {
+      $rootScope.online = false;
+      $state.go('error', {}, {
+        location: 'replace'
+      });
+    });
+  }, false);
+
+  $window.addEventListener("online", function() {
+    $rootScope.$apply(function() {
+      $rootScope.online = true;
+      $state.go('home', {}, {
+        location: 'replace'
+      });
+    });
+  }, false);
   // Get Cart
   params = {};
   // check if user is connected
-  if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null){
+  if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null) {
     params.authInfos = $scope.userInfos;
     params.authInfos.addresses = [];
   }

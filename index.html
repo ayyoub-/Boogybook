@@ -55,7 +55,7 @@
             <div class="container">
                 <button class="menu-toggle"><img src="img/menu.svg" alt="Menu Toggle"></button>
                 <div class="logo" ui-sref="home"><img src="img/logo.png" alt=""></div>
-                <button class="btn-clear">
+                <button class="btn-clear" ng-click="cleanStorage()">
                     <img src="img/delete.svg" alt="">
                     <span>VIDER MA BIBLIOTHÈQUE</span>
             </button>
@@ -85,7 +85,7 @@
         </nav>
         <div ui-view>
             <div class="products-list">
-                <div data-ng-repeat="(key, product) in products" class="single-product" ui-sref="product({id:product.id_product})" style="background-image:url(img/product-{{key}}.jpg);">
+                <div data-ng-repeat="(key, product) in products" class="single-product" ui-sref="product({id:product.id_product})" style="background-image:url(img/products/product-{{product.id_product}}.jpg);">
                     <div class="price">{{product.price}} €</div>
                 </div>
             </div>

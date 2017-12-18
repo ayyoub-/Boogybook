@@ -306,7 +306,6 @@ boogybookApp.factory('PSAPI', function($http, $q) {
 
     return d.promise;
   }
-
   return {
     get: PSDatas,
     syncGet: PSSyncDatas,
