@@ -207,4 +207,20 @@ header.sticky {
     display: none;
 }
 
+.btn-help {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    float: right;
+    top: 50%;
+    -webkit-transform: translateY(40%);
+    transform: translateY(40%);
+    cursor: pointer;
+}
+
 @media only screen and (min-width: 992px) {}
