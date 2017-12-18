@@ -218,8 +218,8 @@ header.sticky {
     position: relative;
     float: right;
     top: 50%;
-    -webkit-transform: translateY(40%);
-    transform: translateY(40%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
     cursor: pointer;
 }
 
