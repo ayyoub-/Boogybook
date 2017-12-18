@@ -2,13 +2,14 @@
 <div class="creation-tool-block">
     <div class="container">
         <div class="controls">
-            <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+            <!-- <button class="btn-retour" ng-click="backToDetails()">Retour</button> -->
+            <button class="btn-retour" ng-click="cleanStorage()">Clear</button>
             <div class="selected-img">
                 <div class="text">Images séléctionnées</div>
-                <div class="numbers">{{tool.myLibrary.length}} / 60</div>
+                <div class="numbers">{{tool.size}} / {{config.limit}}</div>
             </div>
-            <button ng-if="tool.myLibrary.length < 60" class="btn-continuer" disabled>Continuer</button>
-            <button ng-if="tool.myLibrary.length == 60" class="btn-continuer">Continuer</button>
+            <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
+            <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
         </div>
         <div class="creation-tool-body">
             <ul class="list-img">
@@ -19,7 +20,7 @@
                         <div class="control-inner-block">
                             <div ng-click="deleteItem(index)" class="delete"></div>
                             <div ng-click="editItem(index)" class="edit"></div>
-                            <div ng-click="duplicateItem(index)" class="duplicate"></div>
+                            <div ng-if="tool.size != config.limit" ng-click="duplicateItem(index)" class="duplicate"></div>
                         </div>
                     </div>
                 </li>

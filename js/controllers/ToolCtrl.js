@@ -35,7 +35,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     Loading
      */
     progress: 0,
-    size: 60,
+    size: 0,
     /*
      Local images data (tmp)
       */
@@ -68,8 +68,20 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
-    if (typeof sessionStorage.getItem("myLibrary") != undefined && sessionStorage.getItem("myLibrary") != null)
+    if (typeof sessionStorage.getItem("myLibrary") != undefined && sessionStorage.getItem("myLibrary") != null){
       $scope.tool.myLibrary = JSON.parse(sessionStorage.getItem("myLibrary"));
+      $scope.tool.size = $scope.tool.myLibrary.length;
+    }
+  }
+  // Clear local storage
+  $scope.cleanStorage = function(){
+    var i = sessionStorage.length;
+    while (i--) {
+        var key = sessionStorage.key(i);
+        sessionStorage.removeItem(key);
+    }
+    $scope.tool.myLibrary = new Array();
+    $scope.tool.size = 0;
   }
   // get url parameters
   $scope.getUrlParameter = function(sParam) {
@@ -148,9 +160,9 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
    */
   $scope.checkDataAjaxLength = function() {
     var len = document.getElementById('images').files.length;
-    if (len > $scope.tool.size) {
+    if (len < $scope.tool.size) {
       $scope.errors.upload_limit.enable = true;
-      return $scope.tools.size;
+      return $scope.tool.size;
     } else {
       $scope.errors.upload_limit.enable = false;
       return len;
@@ -238,14 +250,14 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       item = $scope.tool.myLibrary[index];
       $scope.tool.myLibrary[index + 1] = new Object();
       $scope.tool.myLibrary[index + 1] = item;
-      $scope.tool.size--;
+      $scope.tool.size++;
     } else {
       var from = $scope.getFirstEmptyItem();
       while (from != index) {
         $scope.tool.myLibrary[from] = $scope.tool.myLibrary[from - 1];
         from--;
       }
-      $scope.tool.size--;
+      $scope.tool.size++;
     }
     $scope.setStorage();
   }
@@ -254,7 +266,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     var item = new Object();
     item.index = index;
     $scope.tool.myLibrary[index] = item;
-    $scope.tool.size++;
+    $scope.tool.size--;
     $scope.setStorage();
   }
   // Edit picture
