@@ -631,4 +631,7 @@ header .container {
     .crop-tool .img-container {
         margin-bottom: 0;
     }
+    .filter-group {
+        padding-top: 20px;
+    }
 }
