@@ -14,7 +14,7 @@
             <ul class="list-img">
                 <li class="single-img" ng-repeat="(index, item) in tool.myLibrary track by $index">
                     <img ng-if="item.cropUrl != ''" src="{{item.cropUrl}}" alt="">
-                    <img ng-if="item.cropUrl == ''" src="{{item.server_link}}" alt="">
+                    <img ng-if="item.cropUrl == ''" src="{{item.ratio_link}}" alt="">
                     <div class="control-block">
                         <div class="control-inner-block">
                             <div ng-click="deleteItem(index)" class="delete"></div>
@@ -30,7 +30,7 @@
 
 <div class="creation-tool-nav">
     <ul>
-        <li class="active">Ma sélection</li>
+        <li class="active">Mon Album</li>
         <li ui-sref="upload">Ajouter des photos</li>
         <li>Importer des photos depuis Facebook</li>
         <li>Importer des photos depuis Instagram</li>

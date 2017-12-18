@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/cart.css">
 <div class="cart-block">
-    <div class="container" ng-if="cart.products.length > 0">
+    <div class="container" ng-if="cart.products.length == 0">
         <div class="go-back" ui-sref="home">Continuer mes achats</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
@@ -93,7 +93,7 @@
 
         </div>
     </div>
-    <div class="container" ng-if="cart.products.length == 0">
+    <div class="container" ng-if="cart.products.length != 0">
       Empty cart
     </div>
 </div>

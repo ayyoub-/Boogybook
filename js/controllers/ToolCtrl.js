@@ -375,7 +375,9 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
   console.log($scope.tool.myLibrary);
   if (typeof $stateParams.index != 'undefined') {
     $scope.tool.cropIndex = $stateParams.index;
-    console.log($scope.tool.cropIndex);
+  }
+  else {
+    $scope.tool.cropIndex = -1
   }
 
 });
