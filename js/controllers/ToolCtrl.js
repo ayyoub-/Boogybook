@@ -73,16 +73,6 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       $scope.tool.size = $scope.tool.myLibrary.length;
     }
   }
-  // Clear local storage
-  $scope.cleanStorage = function(){
-    var i = sessionStorage.length;
-    while (i--) {
-        var key = sessionStorage.key(i);
-        sessionStorage.removeItem(key);
-    }
-    $scope.tool.myLibrary = new Array();
-    $scope.tool.size = 0;
-  }
   // get url parameters
   $scope.getUrlParameter = function(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
