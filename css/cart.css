@@ -586,6 +586,17 @@ input[type=checkbox]:checked+label::after {
     float: left;
 }
 
+.pays .dropdown {
+    width: 100%;
+    padding: 14px 1px 14px;
+    background: #ececec;
+    border-radius: 0;
+}
+
+.pays .dropdown .selected::after {
+    box-shadow: none;
+}
+
 @media only screen and (max-width: 420px) {
     .inscription-block {
         width: 90%;
@@ -635,6 +646,11 @@ input[type=checkbox]:checked+label::after {
     height: 288px;
     border: 1px solid #ececec;
     float: left;
+    margin-bottom: 15px;
+}
+
+.shipping-adresse:nth-child(2n) {
+    margin-left: 3%;
 }
 
 .shipping-adresse .title {

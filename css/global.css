@@ -126,7 +126,6 @@ header.sticky {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     bottom: 50px;
-    width: 80%;
 }
 
 .menu-list li a {
@@ -202,6 +201,10 @@ header.sticky {
     width: 100%;
     height: 100%;
     z-index: 99999;
+}
+
+.btn-clear {
+    display: none;
 }
 
 @media only screen and (min-width: 992px) {}
