@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boogybook</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/easydropdown.css">
+    <link rel="stylesheet" href="css/cropper.css">
+    <link rel="stylesheet" href="css/init-cropper.css">
+    <link rel="stylesheet" href="css/creation-tool.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <button class="menu-toggle"><img src="img/menu-toggle.png" alt="Menu Toggle"></button>
+            <div class="logo"><img src="img/logo.png" alt=""></div>
+        </div>
+    </header>
+    <nav class="side-menu">
+        <div class="nav-logo">
+            <img src="img/logo.png" alt="">
+        </div>
+        <ul class="menu-list">
+            <li id="mon-compte"><a href="#">Mon compte</a></li>
+            <li id="panier"><a href="#">Panier</a></li>
+        </ul>
+
+        <ul class="menu-list bottom">
+            <li id="faq"><a href="#">FAQ</a></li>
+            <li id="contact"><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="langue-select-box">
+            <select name="langue-select" id="langue-select" class="dropdown">
+                <option value="fr">Français</option>
+                <option value="eng">English</option>
+                <option value="spa">Spanish</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="creation-tool-block">
+        <div class="container">
+            <div class="controls">
+                <button class="btn-retour">Retour</button>
+                <div class="edit-txt-1">Choisissez la police, <br />ajoutez votre texte</div>
+                <button class="btn-continuer">Continuer</button>
+            </div>
+
+            <div class="creation-tool-body crop-tool text-tool">
+                <div class="container">
+
+                    <div class="img-container">
+                        <img id="image" src="img/picture.jpg" alt="Picture" style="display:none;">
+                    </div>
+
+                    <div class="docs-buttons">
+                        <div class="font-family-block">
+                            <select name="font-name" id="font-name" class="dropdown">
+                                <option value="" class="label">Choisissez la police</option>
+                                <option value="Montserrat" class="font1">Montserrat</option>
+                                <option value="Remachine" class="font2">Panton</option>
+                                <option value="Avenir" class="font3">Avenir</option>
+                                <option value="SansPosterBold" class="font4">SansPosterBold</option>
+                                <option value="SouthernAire" class="font5">SouthernAire</option>
+                                <option value="Brewery" class="font6">Brewery</option>
+                                <option value="Alice" class="font7">Alice</option>
+                                <option value="Sketch" class="font8">Sketch</option>
+                            </select>
+                        </div>
+                        <div class="textarea-block">
+                            <textarea name="" id="" cols="30" rows="10">Insérez votre texte ici</textarea>
+                        </div>
+
+                        <div class="btn-group-bottom">
+                            <button type="button" class="btn btn-primary btn-left" data-method="crop" title="Crop">
+                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;crop&quot;)">
+                                    <span class="fa fa-check"></span>
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-right" data-method="clear" title="Clear">
+                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;clear&quot;)">
+                                    <span class="fa fa-remove"></span>
+                                </span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="crop-tool-nav">
+            <ul>
+                <li>Recadrage</li>
+                <li class="active">Texte</li>
+                <li>Filtres</li>
+            </ul>
+        </div>
+
+        <button class="shopping-cart">
+        <img src="img/shopping-bag.svg" alt="">
+        <div class="counter">0</div>
+    </button>
+
+        <div class="overlay"></div>
+
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <script src="js/jquery.easydropdown.js"></script>
+        <script src="js/global.js"></script>
+        <script src="js/cart.js"></script>
+        <script src="js/cropper.js"></script>
+        <script src="js/init-cropper.js"></script>
+
+        <script>
+        </script>
+</body>
+
+</html>

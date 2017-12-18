@@ -1,9 +1,12 @@
+.shopping-cart {
+    display: none;
+}
+
+
 /*************************
     01.Récapitulatif
 *************************/
-.shopping-cart{
-  display: none;
-}
+
 .go-back {
     cursor: pointer;
     background-image: url(../img/blue-arrow.png);
@@ -282,7 +285,7 @@
         width: 300px;
     }
     .total-block {
-        width: 300px;
+        width: 100%;
     }
     .cart-item-details {
         position: relative;
@@ -561,6 +564,39 @@ input[type=checkbox]:checked+label::after {
     float: left;
 }
 
+.btn-save {
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 0;
+    background-color: #3cc8df;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    margin: 0 auto;
+    line-height: 60px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    float: left;
+}
+
+.pays .dropdown {
+    width: 100%;
+    padding: 14px 1px 14px;
+    background: #ececec;
+    border-radius: 0;
+}
+
+.pays .dropdown .selected::after {
+    box-shadow: none;
+}
+
 @media only screen and (max-width: 420px) {
     .inscription-block {
         width: 90%;
@@ -610,6 +646,11 @@ input[type=checkbox]:checked+label::after {
     height: 288px;
     border: 1px solid #ececec;
     float: left;
+    margin-bottom: 15px;
+}
+
+.shipping-adresse:nth-child(2n) {
+    margin-left: 3%;
 }
 
 .shipping-adresse .title {
@@ -807,4 +848,201 @@ input[type=checkbox]:checked+label::after {
     input[type="checkbox"]+label {
         margin: 0 0 0 30px;
     }
+}
+
+
+/*************************
+    05. PAIEMENT
+*************************/
+
+hr.seperator {
+    width: 420px;
+    margin: 0 auto;
+    border: 0;
+    border-bottom: 2px solid #bcbcbc;
+    margin-bottom: 20px;
+}
+
+.ingenico-logo {
+    width: 170px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.ingenico-logo img {
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 420px) {
+    hr.seperator {
+        width: 100%;
+    }
+}
+
+
+/*************************
+    06. PAIEMENT ACCEPTÉ
+*************************/
+
+.go-back {
+    cursor: pointer;
+    background-image: url(../img/blue-arrow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center left;
+    color: #3cc8df;
+    font-size: 14px;
+    margin-top: 22px;
+    text-transform: uppercase;
+    padding-left: 25px;
+}
+
+.page-title {
+    color: #000000;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 44px;
+}
+
+.page-description {
+    font-size: 18px;
+    color: #535353;
+    font-weight: bold;
+    margin-top: 18px;
+}
+
+.table-data-sheet {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #eaeaea;
+    margin-top: 20px;
+}
+
+.table-data-sheet td,
+.table-data-sheet th {
+    padding: 10px 0;
+    border: 1px solid #ffffff;
+    color: #2c2c2c;
+    font-weight: bold;
+    text-align: center;
+    font-size: 9px;
+}
+
+.reference {
+    font-weight: 100;
+}
+
+.succes {
+    float: left;
+    position: relative;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    left: 50%;
+    padding: 2px 5px;
+    background-color: #66bf67;
+    color: #ffffff;
+}
+
+.error {
+    float: left;
+    position: relative;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    left: 50%;
+    padding: 2px 5px;
+    background-color: #e74c3c;
+    color: #ffffff;
+}
+
+.checked-icon {
+    text-align: center;
+    margin-top: 27px;
+    margin-bottom: 70px;
+}
+
+.checked-icon span {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #66bf67;
+}
+
+.checked-icon img {
+    width: 173px;
+    height: 173px;
+    display: inline;
+    margin-bottom: 10px;
+}
+
+.error-icon {
+    text-align: center;
+    margin-top: 27px;
+    margin-bottom: 70px;
+}
+
+.error-icon span {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #F05228;
+}
+
+.error-icon img {
+    width: 173px;
+    height: 173px;
+    display: inline;
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    .table-data-sheet td,
+    .table-data-sheet th {
+        font-size: 16px;
+    }
+}
+
+.btn-retour {
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 0;
+    background-color: #3cc8df;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    margin: 0 auto;
+    line-height: 60px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.btn-home {
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 0;
+    background-color: #3cc8df;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    margin: 0 auto;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
+
+.btn-group-bottom {
+    margin-top: 30px;
 }
