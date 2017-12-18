@@ -28,6 +28,11 @@ header {
     z-index: 999999;
 }
 
+header .container {
+    position: relative;
+    top: 50%;
+}
+
 header.sticky {
     position: fixed;
     top: 0;
