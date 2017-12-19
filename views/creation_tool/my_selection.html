@@ -39,11 +39,10 @@
   </ul>
 </div>
 
-<button class="bnt-add-picture" ui-sref="upload">
+<button ng-if="tool.size < 60" class="bnt-add-picture" ng-click="triggerInputFile()">
     <img src="img/add-picture.svg" alt="">
 </button>
-
-<button class="btn-clear" ng-click="cleanStorage()">
+<input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)"/>
+<button ng-if="tool.size > 0" class="btn-clear" ng-click="cleanStorage()">
         <img src="img/delete.svg" alt="">
-        
 </button>

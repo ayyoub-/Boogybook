@@ -5,7 +5,7 @@
             <button class="btn-retour" ng-click="backToDetails()">Retour</button>
             <div class="selected-img">
                 <div class="text">Images séléctionnées</div>
-                <div class="numbers">{{tool.size}} / 60</div>
+                <div class="numbers">{{tool.size}} / {{config.limit}}</div>
             </div>
             <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
             <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
@@ -13,7 +13,8 @@
 
         <div class="creation-tool-body">
             <div class="upload-btn-wrapper">
-                <button class="btn-upload" ng-click="triggerInputFile()">
+                <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()">
+                  <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
                     <span>télécharger depuis mobile<br />
                       ({{config.limit - tool.size}}/{{config.limit}})</span></button>
                       <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)"/>

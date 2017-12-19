@@ -1,4 +1,4 @@
-boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $window, PSAPI) {
+boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $window, PSAPI, $http) {
   // Vars
   $scope.config = {
     limit: 60,
@@ -227,7 +227,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     item.effect = 0;
     item.font = '';
     item.index = from + 1;
-    $scope.tool.size--;
+    $scope.tool.size++;
     /*
      Add element to library
      */
@@ -272,9 +272,18 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     console.log("back function");
     $window.history.back();
   }
+  // Clear local storage
+  $scope.cleanStorage = function() {
+    var i = sessionStorage.length;
+    while (i--) {
+      var key = sessionStorage.key(i);
+      sessionStorage.removeItem(key);
+    }
+    $scope.tool.myLibrary = new Array();
+    $scope.tool.size = 0;
+  }
   // Add product to cart
   $scope.submitBoogybook = function() {
-    alert("OK");
     var ratioImagesArray = new Array();
     var imageUidsArray = new Array();
     var countArray = new Array();
@@ -285,15 +294,20 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       cropImageArray.push($scope.tool.myLibrary[i].cropObject);
       countArray.push(1);
     }
-    PSAPI.add('addNewCustomerProduct', {
-      'ratioImagesArray': ratioImagesArray,
-      'imageUidsArray': imageUidsArray,
-      'countArray': countArray,
-      'cropImageArray': cropImageArray,
-    }).then(function(r) {
-      if (r.OK) {
+    $http({
+      url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
+      method: "POST",
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
-    });
+    }).success(function(data, status, headers, config) {
+      if (data.OK) {
+        $state.go('cart_recap', {}, {
+          location: 'replace'
+        });
+      }
+    }).error(function(data, status, headers, config) {});
   }
   // Save croped picture
   $scope.saveCrop = function() {

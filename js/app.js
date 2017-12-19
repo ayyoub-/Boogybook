@@ -205,16 +205,6 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $window, $rootScope
       $scope.setStorage();
     }
   });
-  // Clear local storage
-  $scope.cleanStorage = function(){
-    var i = sessionStorage.length;
-    while (i--) {
-        var key = sessionStorage.key(i);
-        sessionStorage.removeItem(key);
-    }
-    $scope.tool.myLibrary = new Array();
-    $scope.tool.size = 0;
-  }
   // Check Internet connexion
   $rootScope.online = navigator.onLine;
   if (!$rootScope.online)
