@@ -1,4 +1,4 @@
-boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $window) {
+boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $window, PSAPI) {
   // Vars
   $scope.config = {
     limit: 60,
@@ -68,7 +68,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
-    if (typeof sessionStorage.getItem("myLibrary") != undefined && sessionStorage.getItem("myLibrary") != null){
+    if (typeof sessionStorage.getItem("myLibrary") != undefined && sessionStorage.getItem("myLibrary") != null) {
       $scope.tool.myLibrary = JSON.parse(sessionStorage.getItem("myLibrary"));
       $scope.tool.size = $scope.tool.myLibrary.length;
     }
@@ -272,6 +272,29 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     console.log("back function");
     $window.history.back();
   }
+  // Add product to cart
+  $scope.submitBoogybook = function() {
+    alert("OK");
+    var ratioImagesArray = new Array();
+    var imageUidsArray = new Array();
+    var countArray = new Array();
+    var cropImageArray = new Array();
+    for (var i = 0; i < $scope.tool.myLibrary.length; i++) {
+      ratioImagesArray.push($scope.tool.myLibrary[i].server_link);
+      imageUidsArray.push($scope.tool.myLibrary[i].uid);
+      cropImageArray.push($scope.tool.myLibrary[i].cropObject);
+      countArray.push(1);
+    }
+    PSAPI.add('addNewCustomerProduct', {
+      'ratioImagesArray': ratioImagesArray,
+      'imageUidsArray': imageUidsArray,
+      'countArray': countArray,
+      'cropImageArray': cropImageArray,
+    }).then(function(r) {
+      if (r.OK) {
+      }
+    });
+  }
   // Save croped picture
   $scope.saveCrop = function() {
     $.ajax({
@@ -375,8 +398,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
   console.log($scope.tool.myLibrary);
   if (typeof $stateParams.index != 'undefined') {
     $scope.tool.cropIndex = $stateParams.index;
-  }
-  else {
+  } else {
     $scope.tool.cropIndex = -1
   }
 
