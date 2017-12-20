@@ -15,6 +15,9 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     date: ''
   };
   $scope.newAddress = null;
+  $scope.productsLinks = new Array();
+  $scope.voucher = "";
+  $scope.voucherError = false;
   $scope.pattern = {
     email: /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/,
   }
@@ -34,6 +37,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   $scope.setStorage = function() {
     sessionStorage.setItem("userInfos", JSON.stringify($scope.userInfos));
     sessionStorage.setItem("countries", JSON.stringify($scope.countries));
+    sessionStorage.setItem("cart", JSON.stringify($scope.cart));
   }
   // Get customer orders
   $scope.getCustomerOrder = function(userInfos) {
@@ -74,6 +78,22 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       });
     }, function(err) {
       console.log(err);
+    });
+  }
+  // Add voucher
+  $scope.addVoucher = function() {
+    $scope.voucher = $("#coupon-code").val()
+    console.log($scope.voucher);
+    PSAPI.PSExecute('addVoucherToCart', {
+      'voucher': $scope.voucher,
+      'cart': $scope.cart.id,
+    }).then(function(r) {
+      if (r.OK && r.label != null) {
+        $scope.getCartDetails();
+        $scope.voucherError = false;
+      }else{
+        $scope.voucherError = true;
+      }
     });
   }
   // Add new Account
@@ -142,8 +162,40 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       $scope.addAddress();
     }
   };
-  // MAin scripting
+  // Get product images
+  $scope.getProductImage = function(id_p) {
+    PSAPI.PSExecute('getProductImage', {
+      'id_product': id_p
+    }).then(function(res) {
+      if (res.OK)
+        $scope.productsLinks.push(res.link);
+    });
+  }
+  // Get cart details
+  $scope.getCartDetails = function() {
+    params = {};
+    // check if user is connected
+    if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null) {
+      params.authInfos = $scope.userInfos;
+      params.authInfos.addresses = [];
+    }
+    // check if he has an old existing card
+    if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
+      params.id_cart = $scope.cart.id;
+    PSAPI.PSExecute('getCartId', params).then(function(res) {
+      if (typeof res.id != 'undefined') {
+        id_cart = res.id;
+        $scope.cart = res;
+        $scope.setStorage();
+        console.log($scope.cart);
+        $scope.cart.products.forEach(elem => {
+          $scope.getProductImage(elem.id_product);
+        });
+      }
+    });
+  }
   $scope.getStorage();
+  $scope.getCartDetails();
   console.log($scope.cart);
   console.log($scope.userInfos);
   if (typeof $scope.userInfos.addresses == 'undefined')
@@ -156,11 +208,11 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     address1: 'Casa',
     address2: 'Casa',
     postcode: '12345',
-    company : 'ShareConseil',
+    company: 'ShareConseil',
     id_country: [],
     city: 'Casa',
     phone: '0988776655',
-    phone_mobile:'0988776655',
+    phone_mobile: '0988776655',
     alias: 'ayyoub'
   }
   if ($scope.countries == null)
