@@ -15,9 +15,8 @@
             <div class="upload-btn-wrapper">
                 <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()">
                   <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                    <span>télécharger depuis mobile<br />
-                      ({{config.limit - tool.size}}/{{config.limit}})</span></button>
-                      <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)"/>
+                    <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
             </div>
             <ul class="list-img hidden">
                 <li class="single-img">
@@ -72,4 +71,11 @@
         <li>Importer des photos depuis Facebook</li>
         <li>Importer des photos depuis Instagram</li>
     </ul>
+</div>
+
+<div class="upload-progress">
+    <div class="counter">
+        Merci de patienter<br/>
+        <span>0 % en cours...</span>
+    </div>
 </div>
