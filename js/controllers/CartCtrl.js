@@ -6,6 +6,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     password: 'mamaka',
     ordersHistory: null
   };
+  $scope.connected = false;
   $scope.newAccount = {
     gender: '',
     first_name: '',
@@ -22,6 +23,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     email: /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/,
   }
   $scope.countries = null;
+  $scope.selectedAddress = 0;
   // functions
   // get local storage
   $scope.getStorage = function() {
@@ -80,6 +82,21 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       console.log(err);
     });
   }
+  // Create Order
+  $scope.createNewOrder = function(){
+    $scope.selectedAddress = parseInt($("#selectedAddress").val());
+    console.log($scope.cart);
+    PSAPI.PSExecute('makeOrder', {
+      'address': $scope.selectedAddress,
+      'cart': $scope.cart.id,
+      'total_products':$scope.cart.total_products,
+      'total_products_wt':$scope.cart.total_products_wt,
+      'total_shipping':$scope.cart.total_shipping,
+      'total_shipping_tax_exc':$scope.cart.total_shipping_tax_exc,
+      'id_customer': $scope.userInfos.id,
+    }).then(function(r) {
+    });
+  }
   // Add voucher
   $scope.addVoucher = function() {
     $scope.voucher = $("#coupon-code").val()
@@ -91,7 +108,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       if (r.OK && r.label != null) {
         $scope.getCartDetails();
         $scope.voucherError = false;
-      }else{
+      } else {
         $scope.voucherError = true;
       }
     });
@@ -198,6 +215,8 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   $scope.getCartDetails();
   console.log($scope.cart);
   console.log($scope.userInfos);
+  if (typeof $scope.userInfos.id != 'undefined')
+    $scope.connected = true;
   if (typeof $scope.userInfos.addresses == 'undefined')
     $scope.getAddresses();
   console.log($scope.userInfos.addresses);
@@ -218,6 +237,6 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   if ($scope.countries == null)
     $scope.getCountries();
   //$scope.addAddress();
-  //$scope.getAddresses();
+  $scope.getAddresses();
   //console.log($scope.userInfos.addresses);
 });

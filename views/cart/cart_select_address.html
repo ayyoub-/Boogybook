@@ -20,7 +20,7 @@
                     Choisissez une adresse de livraison :
                 </div>
                 <div class="select-adress">
-                    <select name="" id="" class="dropdown">
+                    <select name="selectedAddress" id="selectedAddress" class="dropdown">
                         <option ng-repeat="item in userInfos.addresses" value="{{item.id}}">{{item.address1}}</option>
                     </select>
                 </div>
@@ -50,9 +50,9 @@
                         </button>
                     </div>
                     <div class="clearfix"></div>
-                    <button class="add-adress">Ajouter une nouvelle adresse</button>
+                    <button class="add-adress" ui-sref="cart_add_address">Ajouter une nouvelle adresse</button>
                 </div>
-                <div class="btn-commander">
+                <div class="btn-commander" ng-click="createNewOrder()">
                     Commander
                 </div>
             </div>

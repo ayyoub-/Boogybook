@@ -3,7 +3,7 @@
 <script src="js/lib/jquery.easydropdown.js"></script>
 <div class="cart-block">
     <div class="container">
-        <div class="go-back">Continuer mes achats</div>
+        <div class="go-back" ui-sref="cart_recap">Continuer mes achats</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
 
@@ -55,7 +55,6 @@
                         <label for="">Donnez un titre à cette adresse pour la retrouver plus facilement</label>
                         <input type="text" class="input-text2" ng-model="newAddress.alias" placeholder="Mon adresse" required>
                     </div>
-                    {{add_address.$invalid}}
                     <button type="submit" class="btn-save">Enregister</button>
                 </form>
             </div>
