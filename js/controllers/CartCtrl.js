@@ -41,12 +41,35 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     sessionStorage.setItem("countries", JSON.stringify($scope.countries));
     sessionStorage.setItem("cart", JSON.stringify($scope.cart));
   }
+  // Update product quantity
+  $scope.addQuantity = function(index, quantity) {
+    console.log($scope.cart.products[index].id_product);
+    console.log(quantity);
+    PSAPI.PSExecute('updateProductCartQuantity', {
+      'product': $scope.cart.products[index].id_product,
+      'cart': $scope.cart.id,
+      'qty': quantity,
+      'currentqty': $scope.cart.products[index].quantity,
+    }).then(function(r) {
+      if (r.OK)
+        $scope.getCartDetails();
+    });
+  }
   // Get customer orders
   $scope.getCustomerOrder = function(userInfos) {
     PSAPI.PSExecute('getOrders', {
       'authInfos': userInfos
     }).then(function(r) {
       $scope.userInfos.ordersHistory = r.orders;
+    });
+  }
+  $scope.removeProductFromCart = function(index) {
+    PSAPI.PSExecute('removeProductFromCart', {
+      'product': $scope.cart.products[index].id_product,
+      'cart': $scope.cart.id,
+    }).then(function(r) {
+      if (r.OK)
+        $scope.getCartDetails();
     });
   }
   // Get countries
@@ -83,18 +106,21 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     });
   }
   // Create Order
-  $scope.createNewOrder = function(){
+  $scope.createNewOrder = function() {
     $scope.selectedAddress = parseInt($("#selectedAddress").val());
     console.log($scope.cart);
     PSAPI.PSExecute('makeOrder', {
       'address': $scope.selectedAddress,
       'cart': $scope.cart.id,
-      'total_products':$scope.cart.total_products,
-      'total_products_wt':$scope.cart.total_products_wt,
-      'total_shipping':$scope.cart.total_shipping,
-      'total_shipping_tax_exc':$scope.cart.total_shipping_tax_exc,
+      'total_products': $scope.cart.total_products,
+      'total_products_wt': $scope.cart.total_products_wt,
+      'total_shipping': $scope.cart.total_shipping,
+      'total_shipping_tax_exc': $scope.cart.total_shipping_tax_exc,
       'id_customer': $scope.userInfos.id,
     }).then(function(r) {
+      $state.go('successorder', {}, {
+        location: 'replace'
+      });
     });
   }
   // Add voucher
@@ -152,15 +178,16 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   }
   // Get customer addresses
   $scope.getAddresses = function() {
-    PSAPI.get('addresses', {
-      'id_customer': $scope.userInfos.id,
-      'deleted': '0'
-    }, 'full').then(function(res) {
-      $scope.userInfos.addresses = res;
-      $scope.setStorage();
-    }, function(res) {
-      $scope.userInfos.addresses = [];
-    });
+    if (typeof $scope.userInfos.id != undefined)
+      PSAPI.get('addresses', {
+        'id_customer': $scope.userInfos.id,
+        'deleted': '0'
+      }, 'full').then(function(res) {
+        $scope.userInfos.addresses = res;
+        $scope.setStorage();
+      }, function(res) {
+        $scope.userInfos.addresses = [];
+      });
   }
   // Check add account form and send request
   $scope.addAccountSubmitForm = function(isValid) {
@@ -217,6 +244,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   console.log($scope.userInfos);
   if (typeof $scope.userInfos.id != 'undefined')
     $scope.connected = true;
+  console.log($scope.connected);
   if (typeof $scope.userInfos.addresses == 'undefined')
     $scope.getAddresses();
   console.log($scope.userInfos.addresses);

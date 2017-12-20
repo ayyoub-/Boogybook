@@ -157,7 +157,14 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/tutorial.html',
     controller: 'indexCtrl'
   }
+  var successOrderState = {
+    name: 'successorder',
+    url: '/successorder',
+    templateUrl: 'views/cart-payment-2.html',
+    controller: 'CartCtrl'
+  }
   $stateProvider.state(UploadPicsState);
+  $stateProvider.state(successOrderState);
   $stateProvider.state(tutorialState);
   $stateProvider.state(errorState);
   $stateProvider.state(mySelectionState);
@@ -201,6 +208,28 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $window, $rootScope
       $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
+  }
+  $scope.tutoPrevious = function() {
+    $state.go('home', {}, {
+      location: 'replace'
+    });
+  }
+  $scope.tutoNext = function() {
+    var currentSlide = $('.tutorial-intro').find('.slide.active');
+    var currentIndicator = $('.slider-indicators').find('li.active');
+
+    if ($('.slide.active').hasClass('slide-5')) {
+      $state.go('home', {}, {
+        location: 'replace'
+      });
+    } else {
+      //Reset
+      $('.tutorial-intro').find('.slide').removeClass('active');
+      $('.slider-indicators').find('li').removeClass('active');
+      //Activate
+      currentSlide.next().addClass('active');
+      currentIndicator.next().addClass('active');
+    }
   }
   // Get products by category
   $scope.getStorage();

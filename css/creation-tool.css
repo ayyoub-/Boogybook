@@ -328,8 +328,11 @@ header .container {
     width: 100%;
     height: 100%;
     z-index: 9999999;
+    display: none;
 }
-
+.upload-progress.active {
+  display: block;
+}
 .upload-progress .counter {
     color: #ffffff;
     position: absolute;

@@ -81,7 +81,7 @@ header.sticky {
     background-color: #ffffff;
     position: fixed;
     top: 0;
-    z-index: 999999;
+    z-index: 99999999;
     -webkit-transition: .6s all;
     transition: .6s all;
 }

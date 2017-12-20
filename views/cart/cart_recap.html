@@ -30,13 +30,13 @@
                             <div class="cart-item-quantity">
                                 <b>Quantité :</b><br />
                                 <div class="qte-box">
-                                    <div class="btn-remove">-</div>
+                                    <div ng-if="item.quantity > 1" class="btn-remove" ng-click="addQuantity(index, -1)">-</div>
                                     <input type="text" class="qte-input" name="qte-input" value="{{item.quantity}}">
-                                    <div class="btn-add">+</div>
+                                    <div class="btn-add" ng-click="addQuantity(index, 1)">+</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="remove-item">
+                        <div class="remove-item" ng-click="removeProductFromCart(index)">
                             <img src="img/delete.svg" alt="">
                         </div>
                     </div>
@@ -64,7 +64,9 @@
             </div>
         </div>
     </div>
-    <div class="container" ng-if="cart.products.length == 0">
-      Empty cart
+    <div class="container empty-cart-container" ng-if="cart.products.length == 0">
+      <div class="empty-cart">
+        Votre panier est vide
+      </div>
     </div>
 </div>

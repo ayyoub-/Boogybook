@@ -7,6 +7,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     mobile: false,
     crop_photo_url: '',
     source: 'computer',
+    loadingProgress: 0,
     urls: {
       connection: "https://boogybook.com/web_medias/instagram-request.php",
       photos: "https://boogybook.com/web_medias/instagram-images-refonte.php",
@@ -26,6 +27,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       enable: false
     },
   }
+  $scope.loadingImages = false;
   $scope.tool = {
     /*
     Boogybook Reference
@@ -135,7 +137,9 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     if ($scope.errors.upload_limit.enable)
       alert("Limit error");
     else {
-      console.log(len);
+      // Activate loading overlay
+      $scope.loadingImages = true;
+      $(".upload-progress").addClass("active");
       for (var i = 0; i < len; i++)
         formData.append("" + i + "", document.getElementById('images').files[i]);
       formData.append('cart', $scope.config.cart);
@@ -172,6 +176,19 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       contentType: false,
       processData: false,
       cache: false,
+      xhr: function() {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function(evt) {
+          if (evt.lengthComputable) {
+            var percentComplete = evt.loaded / evt.total;
+            $scope.config.loadingProgress = Math.floor(percentComplete * 100);
+            console.log(Math.floor(percentComplete * 100));
+            console.log($scope.config.loadingProgress + '****');
+            $("#loadingProgress").html(Math.floor(percentComplete * 100));
+          }
+        }, false);
+        return xhr;
+      },
       success: function(data) {
         /*
         Build items
@@ -180,6 +197,8 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
         var from = $scope.getFirstEmptyItem();
         $scope.addItemsToLibrary(data, from);
         $scope.setStorage();
+        $scope.loadingImages = false;
+        $(".upload-progress").removeClass("active");
         $state.go('mySelection', {}, {
           location: 'replace'
         });
@@ -415,5 +434,4 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
   } else {
     $scope.tool.cropIndex = -1
   }
-
 });
