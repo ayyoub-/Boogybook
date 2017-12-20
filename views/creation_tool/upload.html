@@ -1,75 +1,81 @@
 <link rel="stylesheet" href="css/creation-tool.css">
 <div class="creation-tool-block">
-    <div class="container">
-        <div class="controls">
-            <button class="btn-retour" ng-click="backToDetails()">Retour</button>
-            <div class="selected-img">
-                <div class="text">Images séléctionnées</div>
-                <div class="numbers">{{tool.size}} / {{config.limit}}</div>
-            </div>
-            <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
-            <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
-        </div>
-
-        <div class="creation-tool-body">
-            <div class="upload-btn-wrapper">
-                <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()">
-                  <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                    <span>télécharger depuis mobile<br />
-                      ({{config.limit - tool.size}}/{{config.limit}})</span></button>
-                      <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)"/>
-            </div>
-            <ul class="list-img hidden">
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
-                    <div class="control-block">
-                        <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
-                        </div>
-                    </div>
-                </li>
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
-                    <div class="control-block">
-                        <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
-                        </div>
-                    </div>
-                </li>
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
-                    <div class="control-block">
-                        <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
-                        </div>
-                    </div>
-                </li>
-                <li class="single-img">
-                    <img src="img/blank-img.png" alt="">
-                    <div class="control-block">
-                        <div class="control-inner-block">
-                            <div class="delete"></div>
-                            <div class="edit"></div>
-                            <div class="duplicate"></div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
+  <div class="container">
+    <div class="controls">
+      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <div class="selected-img">
+        <div class="text">Images séléctionnées</div>
+        <div class="numbers">{{tool.size}} / {{config.limit}}</div>
+      </div>
+      <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
+      <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
     </div>
+
+    <div class="creation-tool-body">
+      <div class="upload-btn-wrapper">
+        <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()">
+                  <span>télécharger depuis mobile<br />
+                  ({{config.limit - tool.size}}/{{config.limit}})
+                </span>
+              </button>
+        <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
+                    <span>télécharger depuis mobile<br />
+                      ({{config.limit - tool.size}}/{{config.limit}})
+                    </span>
+                  </button>
+        <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
+      </div>
+      <ul class="list-img hidden">
+        <li class="single-img">
+          <img src="img/blank-img.png" alt="">
+          <div class="control-block">
+            <div class="control-inner-block">
+              <div class="delete"></div>
+              <div class="edit"></div>
+              <div class="duplicate"></div>
+            </div>
+          </div>
+        </li>
+        <li class="single-img">
+          <img src="img/blank-img.png" alt="">
+          <div class="control-block">
+            <div class="control-inner-block">
+              <div class="delete"></div>
+              <div class="edit"></div>
+              <div class="duplicate"></div>
+            </div>
+          </div>
+        </li>
+        <li class="single-img">
+          <img src="img/blank-img.png" alt="">
+          <div class="control-block">
+            <div class="control-inner-block">
+              <div class="delete"></div>
+              <div class="edit"></div>
+              <div class="duplicate"></div>
+            </div>
+          </div>
+        </li>
+        <li class="single-img">
+          <img src="img/blank-img.png" alt="">
+          <div class="control-block">
+            <div class="control-inner-block">
+              <div class="delete"></div>
+              <div class="edit"></div>
+              <div class="duplicate"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
 </div>
 <div class="creation-tool-nav">
-    <ul>
-        <li ui-sref="mySelection">Mon Album</li>
-        <li class="active">Ajouter des photos</li>
-        <li>Importer des photos depuis Facebook</li>
-        <li>Importer des photos depuis Instagram</li>
-    </ul>
+  <ul>
+    <li ui-sref="mySelection">Mon Album</li>
+    <li class="active">Ajouter des photos</li>
+    <li>Importer des photos depuis Facebook</li>
+    <li>Importer des photos depuis Instagram</li>
+  </ul>
 </div>

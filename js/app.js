@@ -151,7 +151,14 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/404.html',
     controller: 'indexCtrl'
   }
+  var tutorialState = {
+    name: 'tutorial',
+    url: '/tutorial',
+    templateUrl: 'views/tutorial.html',
+    controller: 'indexCtrl'
+  }
   $stateProvider.state(UploadPicsState);
+  $stateProvider.state(tutorialState);
   $stateProvider.state(errorState);
   $stateProvider.state(mySelectionState);
   $stateProvider.state(cropState);
