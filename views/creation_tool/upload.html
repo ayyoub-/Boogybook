@@ -11,58 +11,12 @@
       <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
     </div>
 
-    <div class="creation-tool-body">
-      <div class="upload-btn-wrapper">
-        <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()">
-                  <span>télécharger depuis mobile<br />
-                  ({{config.limit - tool.size}}/{{config.limit}})
-                </span>
-              </button>
-        <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                    <span>télécharger depuis mobile<br />
-                      ({{config.limit - tool.size}}/{{config.limit}})
-                    </span>
-                  </button>
-        <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
-      </div>
-      <ul class="list-img hidden">
-        <li class="single-img">
-          <img src="img/blank-img.png" alt="">
-          <div class="control-block">
-            <div class="control-inner-block">
-              <div class="delete"></div>
-              <div class="edit"></div>
-              <div class="duplicate"></div>
-            </div>
-          </div>
-        </li>
-        <li class="single-img">
-          <img src="img/blank-img.png" alt="">
-          <div class="control-block">
-            <div class="control-inner-block">
-              <div class="delete"></div>
-              <div class="edit"></div>
-              <div class="duplicate"></div>
-            </div>
-          </div>
-        </li>
-        <li class="single-img">
-          <img src="img/blank-img.png" alt="">
-          <div class="control-block">
-            <div class="control-inner-block">
-              <div class="delete"></div>
-              <div class="edit"></div>
-              <div class="duplicate"></div>
-            </div>
-          </div>
-        </li>
-        <li class="single-img">
-          <img src="img/blank-img.png" alt="">
-          <div class="control-block">
-            <div class="control-inner-block">
-              <div class="delete"></div>
-              <div class="edit"></div>
-              <div class="duplicate"></div>
+        <div class="creation-tool-body">
+            <div class="upload-btn-wrapper">
+                <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()">
+                  <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
+                    <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
             </div>
           </div>
         </li>
@@ -78,4 +32,11 @@
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
+</div>
+
+<div class="upload-progress">
+    <div class="counter">
+        Merci de patienter<br/>
+        <span>0 % en cours...</span>
+    </div>
 </div>
