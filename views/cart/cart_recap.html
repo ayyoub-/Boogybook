@@ -47,7 +47,14 @@
           <input type="text" ng-model="voucher" id="coupon-code" class="coupon-code">
           <button type="button" ng-click="addVoucher()" class="btn-validate">OK</button>
         </div>
+        <div class="clearfix"></div>
+        <ul class="promo-codes-list">
+          <li>Codepromo1</li>
+          <li>Codepromo1</li>
+          <li>Codepromo1</li>
+        </ul>
         <p ng-if="voucherError" style="color:red">Voucher Error</p>
+     
         <p ng-if="usedCartRule" style="color:red">{{usedCartRule.id}}</p>
         <div class="clearfix"></div>
       </div>
