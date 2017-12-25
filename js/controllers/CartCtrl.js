@@ -15,6 +15,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     email: '',
     date: ''
   };
+  $scope.usedCartRule = null;
   $scope.newAddress = null;
   $scope.productsLinks = new Array();
   $scope.voucher = "";
@@ -24,6 +25,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   }
   $scope.countries = null;
   $scope.selectedAddress = 0;
+  $scope.cartLoaded = false;
   // functions
   // get local storage
   $scope.getStorage = function() {
@@ -33,6 +35,8 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       $scope.countries = JSON.parse(sessionStorage.getItem("countries"));
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
+    if (typeof sessionStorage.getItem("cartRules") != 'undefined' && sessionStorage.getItem("cartRules") != null)
+      $scope.usedCartRule = JSON.parse(sessionStorage.getItem("cartRules"));
     console.log($scope.countries);
   }
   // Save and update local storage
@@ -40,11 +44,11 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     sessionStorage.setItem("userInfos", JSON.stringify($scope.userInfos));
     sessionStorage.setItem("countries", JSON.stringify($scope.countries));
     sessionStorage.setItem("cart", JSON.stringify($scope.cart));
+    sessionStorage.setItem("cartRules", JSON.stringify($scope.usedCartRule));
   }
   // Update product quantity
   $scope.addQuantity = function(index, quantity) {
-    console.log($scope.cart.products[index].id_product);
-    console.log(quantity);
+    $(".upload-progress").addClass("active");
     PSAPI.PSExecute('updateProductCartQuantity', {
       'product': $scope.cart.products[index].id_product,
       'cart': $scope.cart.id,
@@ -64,6 +68,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     });
   }
   $scope.removeProductFromCart = function(index) {
+    $(".upload-progress").addClass("active");
     PSAPI.PSExecute('removeProductFromCart', {
       'product': $scope.cart.products[index].id_product,
       'cart': $scope.cart.id,
@@ -125,6 +130,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
   }
   // Add voucher
   $scope.addVoucher = function() {
+    $(".upload-progress").addClass("active");
     $scope.voucher = $("#coupon-code").val()
     console.log($scope.voucher);
     PSAPI.PSExecute('addVoucherToCart', {
@@ -134,8 +140,32 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       if (r.OK && r.label != null) {
         $scope.getCartDetails();
         $scope.voucherError = false;
+        $scope.usedCartRule = r.cartrule;
+        console.log($scope.usedCartRule);
+        $scope.setStorage();
       } else {
         $scope.voucherError = true;
+        $(".upload-progress").removeClass("active");
+      }
+    });
+  }
+  // Remove Voucher
+  $scope.removeVoucher = function() {
+    $(".upload-progress").addClass("active");
+    $scope.voucher = $("#coupon-code").val()
+    console.log($scope.voucher);
+    PSAPI.PSExecute('removeVoucherToCart', {
+      'voucher': 'WYSIWYGD',
+      'cart': $scope.cart.id,
+    }).then(function(r) {
+      if (r.OK && r.label != null) {
+        $scope.getCartDetails();
+        $scope.voucherError = false;
+        $scope.usedCartRule = null;
+        $scope.setStorage();
+      } else {
+        $scope.voucherError = true;
+        $(".upload-progress").removeClass("active");
       }
     });
   }
@@ -235,9 +265,13 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
         $scope.cart.products.forEach(elem => {
           $scope.getProductImage(elem.id_product);
         });
+        $(".upload-progress").removeClass("active");
       }
     });
   }
+  // MAIN PROCESS
+  if ($state.$current.self.name == 'cart_recap')
+    $(".upload-progress").addClass("active");
   $scope.getStorage();
   $scope.getCartDetails();
   console.log($scope.cart);
@@ -266,5 +300,6 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
     $scope.getCountries();
   //$scope.addAddress();
   $scope.getAddresses();
+  // $scope.removeVoucher();
   //console.log($scope.userInfos.addresses);
 });

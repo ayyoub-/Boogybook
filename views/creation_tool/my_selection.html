@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/creation-tool.css">
 <div class="creation-tool-block">
-    <div class="container">
+    <div class="container" ng-if="tool.size > 0">
         <div class="controls">
             <button class="btn-retour" ng-click="backToDetails()">Retour</button>
             <div class="selected-img">
@@ -14,7 +14,7 @@
         </div>
         <div class="creation-tool-body">
             <ul class="list-img">
-                <li class="single-img" ng-repeat="(index, item) in tool.myLibrary track by $index">
+                <li class="single-img" ng-repeat="(index, item) in tool.myLibrary track by $index" id="{{item.uid}}-{{index}}">
                     <img ng-if="item.cropUrl != ''" src="{{item.cropUrl}}" alt="">
                     <img ng-if="item.cropUrl == ''" src="{{item.ratio_link}}" alt="">
                     <div class="control-block">
@@ -28,21 +28,45 @@
             </ul>
         </div>
     </div>
+    <div class="container" ng-if="tool.size == 0">
+        <div class="controls">
+            <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+            <div class="selected-img">
+                <div class="text">Images séléctionnées</div>
+                <div class="numbers">{{tool.size}} / {{config.limit}}</div>
+            </div>
+            <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
+            <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
+        </div>
+
+       <div class="creation-tool-body">
+            <div class="upload-btn-wrapper">
+                <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
+                    <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
+            </div>
+        </div>
+   </div>
 </div>
 
 <div class="creation-tool-nav">
     <ul>
-        <li class="active">Mon Album</li>
-        <li ui-sref="upload">Ajouter des photos</li>
+        <li>Mon Album</li>
+        <li ng-click="cleanStorage()">Vider ma biblio</li>
         <li>Importer des photos depuis Facebook</li>
         <li>Importer des photos depuis Instagram</li>
     </ul>
 </div>
 
-<button ng-if="tool.size < 60" class="bnt-add-picture" ng-click="triggerInputFile()">
+<button ng-if="tool.size < 60 && tool.size > 0" class="bnt-add-picture" ng-click="triggerInputFile()">
     <img src="img/add-picture.svg" alt="">
 </button>
 <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
-<button ng-if="tool.size > 0" class="btn-clear" ng-click="cleanStorage()">
-        <img src="img/delete.svg" alt="">
-</button>
+<div class="upload-progress">
+    <div class="counter">
+        Merci de patienter<br/>
+        <span>
+          <span id="loadingProgress">0</span>% en cours...</span>
+    </div>
+</div>

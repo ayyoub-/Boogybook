@@ -135,7 +135,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   }
   var mySelectionState = {
     name: 'mySelection',
-    url: '/mySelection',
+    url: '/mySelection?index',
     templateUrl: 'views/creation_tool/my_selection.html',
     controller: 'ToolCtrl'
   }
@@ -183,7 +183,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   $stateProvider.state(faqState);
 });
 
-boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state) {
+boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state) {
   // Products list
   $scope.products = new Array();
   $rootScope.products = new Array();
@@ -206,8 +206,14 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $window, $rootScope
   $scope.getStorage = function() {
     if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null)
       $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
+    if (typeof sessionStorage.getItem("products") != 'undefined' && sessionStorage.getItem("products") != null)
+      $scope.products = JSON.parse(sessionStorage.getItem("products"));
+    else
+      $scope.getProducts();
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
+    else
+      $scope.getCartDetails();
   }
   $scope.tutoPrevious = function() {
     $state.go('home', {}, {
@@ -231,17 +237,43 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $window, $rootScope
       currentIndicator.next().addClass('active');
     }
   }
-  // Get products by category
-  $scope.getStorage();
-  PSAPI.PSExecute('listBBCaseProductsByCategory', {
-    'id_category': $scope.globalCategory,
-  }).then(function(r) {
-    if (r.OK) {
-      $scope.products = r.covers;
-      console.log($scope.products);
-      $scope.setStorage();
+  // Get cart details
+  $scope.getCartDetails = function() {
+    params = {};
+    // check if user is connected
+    if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null) {
+      params.authInfos = $scope.userInfos;
+      params.authInfos.addresses = [];
     }
-  });
+    // check if he has an old existing card
+    if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
+      params.id_cart = $scope.cart.id;
+    PSAPI.PSExecute('getCartId', params).then(function(res) {
+      if (typeof res.id != 'undefined') {
+        id_cart = res.id;
+        $scope.cart = res;
+        console.log($scope.cart);
+        $scope.setStorage();
+      }
+    });
+  }
+  // Get products by category
+  $scope.getProducts = function() {
+    PSAPI.PSExecute('listBBCaseProductsByCategory', {
+      'id_category': $scope.globalCategory,
+    }).then(function(r) {
+      if (r.OK) {
+        $scope.products = r.covers;
+        var itemsSorted = $filter('orderBy')($scope.products, 'id_product');
+        var help = itemsSorted[0];
+        itemsSorted[0] = itemsSorted[itemsSorted.length - 1];
+        itemsSorted[itemsSorted.length - 1] = help;
+        $scope.products = itemsSorted
+        $scope.setStorage();
+      }
+    });
+  }
+  $scope.getStorage();
   // Check Internet connexion
   $rootScope.online = navigator.onLine;
   if (!$rootScope.online)

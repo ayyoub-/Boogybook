@@ -1,72 +1,81 @@
 <link rel="stylesheet" href="css/cart.css">
 <div class="cart-block">
-    <div class="container" ng-if="cart.products.length > 0">
-        <div class="go-back" ui-sref="home">Continuer mes achats</div>
-        <div class="cart-inner-block">
-            <div class="cart-steps-block">
-                <div class="cart-steps">
-                    <div class="step active">1</div>
-                    <div class="step">2</div>
-                    <div class="step">3</div>
-                    <div class="step">4</div>
-                    <div class="step">5</div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cart-step-text">01. Récapitulatif</div>
-            </div>
-            <div class="cart-items-block">
-                <div class="cart-item" ng-repeat="(index, item) in cart.products">
-                    <div class="cart-item-img">
-                        <img src="{{productsLinks[index]}}" alt="">
-                    </div>
-                    <div class="cart-item-details">
-                        <div class="top">
-                            <div class="cart-item-name">{{item.name}}</div>
-                            <div class="cart-item-reference">Référence: i2qe168e</div>
-                        </div>
-                        <div class="bottom">
-                            <div class="cart-item-price"><b>Prix :</b> {{item.price_with_reduction}} €</div>
-                            <div class="cart-item-shipping"><b>Frais de port:</b> 4€</div>
-                            <div class="cart-item-quantity">
-                                <b>Quantité :</b><br />
-                                <div class="qte-box">
-                                    <div ng-if="item.quantity > 1" class="btn-remove" ng-click="addQuantity(index, -1)">-</div>
-                                    <input type="text" class="qte-input" name="qte-input" value="{{item.quantity}}">
-                                    <div class="btn-add" ng-click="addQuantity(index, 1)">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="remove-item" ng-click="removeProductFromCart(index)">
-                            <img src="img/delete.svg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="coupon-code-block">
-                <div class="title">Bons de réduction :</div>
-                <div class="coupon-code-input">
-                    <input type="text" ng-model="voucher" id="coupon-code" class="coupon-code">
-                    <button type="button" ng-click="addVoucher()" class="btn-validate">OK</button>
-                </div>
-                <p ng-if="voucherError" style="color:red">Voucher Error</p>
-                <div class="clearfix"></div>
-            </div>
-            <div class="total-block">
-                <div class="total-txt">TOTAL :</div>
-                <div class="total-price">{{cart.total_price}} €</div>
-                <div class="clearfix"></div>
-            </div>
-            <div ng-if="!connected" class="btn-commander" ui-sref="cart_login">
-                Commander
-            </div>
-            <div ng-if="connected" class="btn-commander" ui-sref="cart_select_address">
-                Commander
-            </div>
+  <div class="container" ng-if="cart.products.length > 0">
+    <div class="cart-inner-block">
+      <div class="cart-steps-block">
+        <div class="cart-steps">
+          <div class="step active">1</div>
+          <div class="step">2</div>
+          <div class="step">3</div>
+          <div class="step">4</div>
+          <div class="step">5</div>
+          <div class="clearfix"></div>
         </div>
-    </div>
-    <div class="container empty-cart-container" ng-if="cart.products.length == 0">
-      <div class="empty-cart">
-        Votre panier est vide
+        <div class="cart-step-text">01. Récapitulatif</div>
+      </div>
+      <div class="cart-items-block">
+        <div class="cart-item" ng-repeat="(index, item) in cart.products">
+          <div class="cart-item-img">
+            <img src="{{productsLinks[index]}}" alt="">
+          </div>
+          <div class="cart-item-details">
+            <div class="top">
+              <div class="cart-item-name">{{item.name}}</div>
+              <div class="cart-item-reference">Référence: i2qe168e</div>
+            </div>
+            <div class="bottom">
+              <div class="cart-item-price"><b>Prix :</b> {{item.price_with_reduction}} €</div>
+              <div class="cart-item-shipping"><b>Frais de port:</b> 4€</div>
+              <div class="cart-item-quantity">
+                <b>Quantité :</b><br />
+                <div class="qte-box">
+                  <div ng-if="item.quantity > 1" class="btn-remove" ng-click="addQuantity(index, -1)">-</div>
+                  <input type="text" class="qte-input" name="qte-input" value="{{item.quantity}}">
+                  <div class="btn-add" ng-click="addQuantity(index, 1)">+</div>
+                </div>
+              </div>
+            </div>
+            <div class="remove-item" ng-click="removeProductFromCart(index)">
+              <img src="img/delete.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="coupon-code-block">
+        <div class="title">Bons de réduction :</div>
+        <div class="coupon-code-input">
+          <input type="text" ng-model="voucher" id="coupon-code" class="coupon-code">
+          <button type="button" ng-click="addVoucher()" class="btn-validate">OK</button>
+        </div>
+        <p ng-if="voucherError" style="color:red">Voucher Error</p>
+        <p ng-if="usedCartRule" style="color:red">{{usedCartRule.id}}</p>
+        <div class="clearfix"></div>
+      </div>
+      <div class="total-block">
+        <div class="total-txt">TOTAL :</div>
+        <div class="total-price">{{cart.total_price}} €</div>
+        <div class="clearfix"></div>
+      </div>
+      <div ng-if="!connected" class="btn-commander" ui-sref="cart_login">
+        Commander
+      </div>
+      <div ng-if="connected" class="btn-commander" ui-sref="cart_select_address">
+        Commander
       </div>
     </div>
+  </div>
+  <div class="container empty-cart-container" ng-if="cart.products.length == 0">
+
+    <div class="empty-cart">
+      <img src="img/empty-cart-1.png" alt="">
+      <br>
+      Votre panier est vide
+    </div>
+  </div>
+</div>
+<div class="upload-progress" ng-show="!cartLoaded">
+  <div class="counter">
+    <img class="counter-img" src="img/loading.gif" alt=""><br/>
+    <br/> Merci de patienter
+  </div>
 </div>

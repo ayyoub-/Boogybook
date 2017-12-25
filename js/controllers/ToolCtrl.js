@@ -1,4 +1,4 @@
-boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $window, PSAPI, $http) {
+boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $stateParams, $window, PSAPI, $http) {
   // Vars
   $scope.config = {
     limit: 60,
@@ -13,7 +13,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       photos: "https://boogybook.com/web_medias/instagram-images-refonte.php",
       upload: "https://boogybook.com/web_medias/preprod_scripts/preprod_boogybook_upload.php",
       instagram_more: "https://boogybook.com/web_medias/instagram-more-images-refonte.php",
-      improve: "https://boogybook.com/web_medias/preview_refonte_improve.php?img=",
+      improve: "https://boogybook.com/web_medias/preview_refonte_classic_page5.php?img=",
       facebook_improve: "http://boogybook.com/web_medias/preview_facebook_note_page5.php?img=",
       wsrecovery: "https://www.boogybook.com/api/remote_exec?output_format=JSON&rfunc=getJsonByProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ&product="
     },
@@ -48,7 +48,8 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
       */
     myLibrary: new Array(),
     myLibraryTexts: new Array(),
-    cropIndex: 0
+    cropIndex: 0,
+    anchorScrollIndex: 0,
   }
   $scope.cropDetails = {
     cropper: null,
@@ -117,6 +118,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
    * Upload images to server, create images links
    */
   $scope.createImages = function(files) {
+    console.log("createImages");
     /*
      * Load image from tmp & setup arrays (cout, order, crop, crop urls)
      */
@@ -154,7 +156,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
    */
   $scope.checkDataAjaxLength = function() {
     var len = document.getElementById('images').files.length;
-    if (len < $scope.tool.size) {
+    if (len > ($scope.config.limit - $scope.tool.size)) {
       $scope.errors.upload_limit.enable = true;
       return $scope.tool.size;
     } else {
@@ -182,8 +184,6 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
           if (evt.lengthComputable) {
             var percentComplete = evt.loaded / evt.total;
             $scope.config.loadingProgress = Math.floor(percentComplete * 100);
-            console.log(Math.floor(percentComplete * 100));
-            console.log($scope.config.loadingProgress + '****');
             $("#loadingProgress").html(Math.floor(percentComplete * 100));
           }
         }, false);
@@ -199,6 +199,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
         $scope.setStorage();
         $scope.loadingImages = false;
         $(".upload-progress").removeClass("active");
+        $("#loadingProgress").html(0);
         $state.go('mySelection', {}, {
           location: 'replace'
         });
@@ -274,7 +275,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
   $scope.deleteItem = function(index) {
     var item = new Object();
     item.index = index;
-    $scope.tool.myLibrary[index] = item;
+    $scope.tool.myLibrary.splice(index, 1);
     $scope.tool.size--;
     $scope.setStorage();
   }
@@ -349,7 +350,9 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
          * Back to @source page
          */
         $scope.setStorage();
-        $state.go('mySelection', {}, {
+        $state.go('mySelection', {
+          "index": $scope.tool.cropIndex
+        }, {
           location: 'replace'
         });
       },
@@ -397,16 +400,20 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
     else
       $scope.cropDetails.cropper.scale(1, 1);
   }
+  // scroll by id
+  $scope.scrollTo = function(id) {
+    $anchorScroll(id);
+  }
   // MAIN CODE
   $scope.getStorage();
   angular.element(document).ready(function() {
     /*
      * Set up cropper area
      */
-    if (typeof $stateParams.index != 'undefined') {
+    if (typeof $stateParams.index != 'undefined' && $state.$current.self.name == 'edit') {
       var image = document.getElementById('image');
       $scope.cropDetails.cropper = new Cropper(image, {
-        aspectRatio: 9 / 9,
+        aspectRatio: 12 / 8,
         autoCropArea: 1,
         viewMode: 1,
         data: $scope.tool.myLibrary[$scope.tool.cropIndex].cropObject,
@@ -424,14 +431,21 @@ boogybookApp.controller("ToolCtrl", function($scope, $state, $stateParams, $wind
         crop: function(e) {}
       });
     }
+    else if (typeof $stateParams.index != 'undefined' && $state.$current.self.name != 'edit') {
+      $scope.tool.anchorScrollIndex = $stateParams.index;
+      var id = ''+$scope.tool.myLibrary[$scope.tool.anchorScrollIndex].uid+ '-'+$stateParams.index;
+      var el = document.getElementById(id);
+      el.scrollIntoView(true);
+    }
   });
   // check if he has an old existing card
   if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
     $scope.config.cart = $scope.cart.id;
-  console.log($scope.tool.myLibrary);
   if (typeof $stateParams.index != 'undefined') {
     $scope.tool.cropIndex = $stateParams.index;
+    $scope.tool.anchorScrollIndex = $stateParams.index;
   } else {
-    $scope.tool.cropIndex = -1
+    $scope.tool.cropIndex = -1;
+    $scope.tool.anchorScrollIndex = 0;
   }
 });
