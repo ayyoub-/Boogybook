@@ -51,25 +51,24 @@
 </head>
 
 <body ng-app="boogybookApp">
-  <div ng-controller="indexCtrl">
-    <header>
-      <div class="container">
-        <button class="menu-toggle"><img src="img/menu.svg" alt="Menu Toggle"></button>
-        <div class="logo" ui-sref="home"><img src="img/logo.png" alt=""></div>
-        <button class="btn-help" ui-sref="tutorial">
+    <div ng-controller="indexCtrl">
+        <header>
+            <div class="container">
+                <button class="menu-toggle"><img src="img/menu.svg" alt="Menu Toggle"></button>
+                <div class="logo" ui-sref="home"><img src="img/logo.svg" alt="" width="91" height="44"></div>
+                <button class="btn-help" ui-sref="tutorial">
                     <img src="img/information.svg" alt="">
                 </button>
-      </div>
-    </header>
-    <nav class="side-menu">
-      <div class="nav-logo" ui-sref="home">
-        <img src="img/logo.png" alt="" ui-sref="home">
-      </div>
-      <ul class="menu-list">
-        <li id="mon-compte"><a ui-sref="myAccount">Mon compte</a></li>
-        <li id="panier"><a ui-sref="cart_recap">Panier</a></li>
-      </ul>
-
+            </div>
+        </header>
+        <nav class="side-menu">
+            <div class="nav-logo" ui-sref="home">
+                <img src="img/logo.svg" alt="" ui-sref="home" width="91" height="44">
+            </div>
+            <ul class="menu-list">
+                <li id="mon-compte"><a ui-sref="myAccount">Mon compte</a></li>
+                <li id="panier"><a ui-sref="cart_recap">Panier</a></li>
+            </ul>
       <ul class="menu-list bottom">
         <li id="faq"><a ui-sref="faq">FAQ</a></li>
         <li id="contact"><a ui-sref="contact">Contact</a></li>
