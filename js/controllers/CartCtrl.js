@@ -37,7 +37,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state) {
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
     if (typeof sessionStorage.getItem("cartRules") != 'undefined' && sessionStorage.getItem("cartRules") != null)
       $scope.usedCartRule = JSON.parse(sessionStorage.getItem("cartRules"));
-    console.log($scope.countries);
+    console.log($scope.usedCartRule);
   }
   // Save and update local storage
   $scope.setStorage = function() {
