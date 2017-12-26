@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/cart.css">
 <div class="cart-block">
     <div class="container">
-        <div class="go-back">Continuer mes achats</div>
+        <div class="go-back" ui-sref="cart_recap">Continuer mes achats</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
                 <div class="cart-steps">
@@ -44,7 +44,7 @@
                             <li>{{item.phone}}</li>
                             <li>{{item.phone_mobile}}</li>
                         </ul>
-                        <button class="update-adress">
+                        <button class="update-adress" ui-sref="address_update({id_address: item.id})">
                             Mettre à jour
                         </button>
                     </div>

@@ -97,6 +97,12 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/cart/cart_add_address.html',
     controller: 'CartCtrl'
   }
+  var addressUpdateState = {
+    name: 'address_update',
+    url: '/address_update?id_address',
+    templateUrl: 'views/cart/cart_update_address.html',
+    controller: 'CartCtrl'
+  }
   var cartShippingState = {
     name: 'cart_shipping',
     url: '/cart_shipping',
@@ -181,6 +187,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   $stateProvider.state(contactState);
   $stateProvider.state(accountState);
   $stateProvider.state(faqState);
+  $stateProvider.state(addressUpdateState);
 });
 
 boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state) {

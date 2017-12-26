@@ -21,11 +21,11 @@
           <div class="cart-item-details">
             <div class="top">
               <div class="cart-item-name">{{item.name}}</div>
-              <div class="cart-item-reference">Référence: i2qe168e</div>
+              <div class="cart-item-reference">Référence : {{item.reference}}</div>
             </div>
             <div class="bottom">
               <div class="cart-item-price"><b>Prix :</b> {{item.price_with_reduction}} €</div>
-              <div class="cart-item-shipping"><b>Frais de port:</b> 4€</div>
+              <div class="cart-item-shipping"><b>Frais de port :</b> {{cart.total_shipping}}€</div>
               <div class="cart-item-quantity">
                 <b>Quantité :</b><br />
                 <div class="qte-box">
@@ -47,6 +47,10 @@
           <input type="text" ng-model="voucher" id="coupon-code" class="coupon-code">
           <button type="button" ng-click="addVoucher()" class="btn-validate">OK</button>
         </div>
+        <div class="clearfix"></div>
+        <ul class="promo-codes-list" ng-if="usedCartRule">
+          <li ng-click="removeVoucher()">{{usedCartRule.code}}</li>
+        </ul>
         <p ng-if="voucherError" style="color:red">Voucher Error</p>
         <div class="clearfix"></div>
       </div>

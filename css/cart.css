@@ -1083,3 +1083,30 @@ hr.seperator {
 .btn-group-bottom {
   margin-top: 30px;
 }
+
+.promo-codes-list{
+  position: relative;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+ width: 270px;
+}
+
+.promo-codes-list li{
+  margin-top: 20px;
+
+  font-weight: bold;
+  text-transform: uppercase
+}
+.promo-codes-list li:after{
+  content: '';
+  background-image: url(../img/delete.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+ /*  margin-left: 10px;
+  margin-top: -2px; */
+  right: 12px;
+  width: 20px;
+  height: 20px;
+}
