@@ -216,8 +216,28 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, $stateParams
       }
     });
   }
+  // Update Existing address
+  $scope.updateAddress = function() {
+    PSAPI.PSExecute('addNewAddress', {
+      'id_customer': $scope.userInfos.id,
+      'lastname': $scope.newAddress.lastname,
+      'firstname': $scope.newAddress.firstname,
+      'address1': $scope.newAddress.address1,
+      'address2': $scope.newAddress.address2,
+      'postcode': $scope.newAddress.postcode,
+      'id_country': $scope.newAddress.id_country,
+      'city': $scope.newAddress.city,
+      'phone': $scope.newAddress.phone,
+      'alias': $scope.newAddress.alias
+    }).then(function(r) {
+      if (r.OK) {
+        alert("OK");
+      }
+    });
+  }
   // Get customer addresses
   $scope.getAddresses = function() {
+    $(".upload-progress").addClass("active");
     if (typeof $scope.userInfos.id != undefined)
       PSAPI.get('addresses', {
         'id_customer': $scope.userInfos.id,
@@ -247,6 +267,26 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, $stateParams
     if (isValid) {
       console.log($scope.newAddress);
       $scope.addAddress();
+    } else {
+      swal(
+        'Oops...',
+        'Merci de vérifier votre formulaire',
+        'error'
+      )
+    }
+  };
+  $scope.updateAddressSubmitForm = function(isValid) {
+    // check to make sure the form is completely valid
+    console.log(isValid);
+    if (isValid) {
+      console.log($scope.newAddress);
+      $scope.updateAddress();
+    } else {
+      swal(
+        'Oops...',
+        'Merci de vérifier votre formulaire',
+        'error'
+      )
     }
   };
   // Get product images
@@ -322,6 +362,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, $stateParams
     $scope.getCountries();
   //$scope.addAddress();
   if (typeof $stateParams.id_address != 'undefined') {
+    $(".upload-progress").addClass("active");
     PSAPI.get('addresses', {
       'id_customer': $scope.userInfos.id,
       'deleted': '0'
@@ -329,6 +370,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, $stateParams
       $scope.userInfos.addresses = res;
       $scope.getAddressById($stateParams.id_address);
       console.log($scope.addressUpdate);
+      $(".upload-progress").removeClass("active");
     }, function(res) {});
 
   }
