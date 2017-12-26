@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/* $(document).ready(function() {
     $(document).ready(function() {
         var s = $("header");
         var pos = s.position();
@@ -11,4 +11,4 @@ $(document).ready(function() {
             }
         });
     });
-});
+}); */
