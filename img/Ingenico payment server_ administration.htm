@@ -1,0 +1,956 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0254)https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&CSRFTS=20171226173551&branding=OGONE&MenuId=40 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" class="k-webkit k-webkit63"><script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Ingenico payment server: administration</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="shortcut icon" href="https://secure.ogone.com/Ncol/Prod/WebAssets/ImageHandler.ashx?AssetType=StaticFile&amp;AssetName=Content/OGONE/favicon.png&amp;AssetKey=137F779B-0847-4D4B-9DFE-838616EB1EFA&amp;ver=1" type="image/x-icon">
+    <link href="./Ingenico payment server_ administration_files/StyleSheetHandler.ashx" rel="stylesheet" type="text/css">
+
+    <link href="./Ingenico payment server_ administration_files/StyleSheetHandler(1).ashx" rel="stylesheet" type="text/css">
+
+       
+    <!--[if lte IE 6]><link href="https://secure.ogone.com/Ncol/Prod/WebAssets/StyleSheetHandler.ashx?AssetType=StyleSheet&amp;BundleName=IE6hack&amp;AssetKey=137F779B-0847-4D4B-9DFE-838616EB1EFA&amp;ver=1" rel="stylesheet" type="text/css" />
+<![endif]-->
+    <!--[if IE 7]> <link href="https://secure.ogone.com/Ncol/Prod/WebAssets/StyleSheetHandler.ashx?AssetType=StyleSheet&amp;BundleName=IE7hack&amp;AssetKey=137F779B-0847-4D4B-9DFE-838616EB1EFA&amp;ver=1" rel="stylesheet" type="text/css" />
+<![endif]-->
+    <!--[if IE]> <link href="https://secure.ogone.com/Ncol/Prod/WebAssets/StyleSheetHandler.ashx?AssetType=StyleSheet&amp;BundleName=KendoIEhack&amp;AssetKey=137F779B-0847-4D4B-9DFE-838616EB1EFA&amp;ver=1" rel="stylesheet" type="text/css" />
+<![endif]-->
+    <script src="./Ingenico payment server_ administration_files/JavaScriptHandler.ashx" type="text/javascript"></script>
+
+     <script src="./Ingenico payment server_ administration_files/JavaScriptHandler(1).ashx" type="text/javascript"></script>
+
+    <script src="./Ingenico payment server_ administration_files/JavaScriptHandler(2).ashx" type="text/javascript"></script>
+
+    <script src="./Ingenico payment server_ administration_files/JavaScriptHandler(3).ashx" type="text/javascript"></script>
+
+    <script src="./Ingenico payment server_ administration_files/JavaScriptHandler(4).ashx" type="text/javascript"></script>
+
+    <script src="./Ingenico payment server_ administration_files/JavaScriptHandler(5).ashx" type="text/javascript"></script>
+
+    <script src="./Ingenico payment server_ administration_files/JavaScriptHandler(6).ashx" type="text/javascript"></script>
+
+  
+    <!--[if IE]><script src="https://secure.ogone.com/Ncol/Prod/WebAssets/JavaScriptHandler.ashx?AssetType=JavaScript&amp;BundleName=IE7&amp;AssetKey=137F779B-0847-4D4B-9DFE-838616EB1EFA&amp;ver=1" type="text/javascript"></script>
+<!--<![endif]-->
+    <script type="text/javascript">var bundleUrl = 'https://secure.ogone.com/Ncol/Prod/WebAssets/JavaScriptHandler.ashx?AssetType=JavaScript&BundleName={0}&AssetKey=137F779B-0847-4D4B-9DFE-838616EB1EFA&ver=1';</script>
+    <script src="./Ingenico payment server_ administration_files/psp.bootstrap.js" type="text/javascript"> </script>
+    <script src="./Ingenico payment server_ administration_files/require.js" data-main="/Ncol/Prod/BackOffice/Scripts/main.js" type="text/javascript"> </script>
+
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main" src="./Ingenico payment server_ administration_files/main.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="psp" src="./Ingenico payment server_ administration_files/JavaScriptHandler(7).ashx"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="./Ingenico payment server_ administration_files/JavaScriptHandler.ashx"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="kendo" src="./Ingenico payment server_ administration_files/JavaScriptHandler(1).ashx"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="backbone" src="./Ingenico payment server_ administration_files/JavaScriptHandler(8).ashx"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="https://secure.ogone.com/Ncol/Prod/WebAssets/JavaScriptHandler.ashx?AssetType=JavaScript&amp;BundleName=AdminMenuModule&amp;AssetKey=137F779B-0847-4D4B-9DFE-838616EB1EFA&amp;ver=1" src="./Ingenico payment server_ administration_files/JavaScriptHandler(9).ashx"></script></head>
+<body>
+    <div id="Info" class="help-popupa">
+    </div>
+<div id="div-menu">
+    
+        <div id="connectModalUserInfo">
+            <div class="modal-contentConnectUserInfo">
+                <h3 class="h-menuConnectUserInfo"><span>Info. utilisateur</span></h3>
+                <div class="infoUserConnect">
+                    <span class="userDetailsConnect">
+                        Yves Levaux <span class="small">(Admin)</span><br>
+                        <span class="small">
+                            Dernière connexion: 2017-12-26 16:48:08
+                                <a value="UserTimeZone" title="(GMT+01:00) Brussels, Copenhagen, Madrid, Paris" name="lnk_UserTimeZone" id="lnk_UserTimeZone" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" class="logout openTimeZone">
+                                    <span>((GMT+01:00) Brussels, Copenhagen, Madrid, Paris)</span>
+                                </a>
+                        </span>
+                    </span>
+                    <div class="user-action-buttons">
+                            <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/password/change?CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=16F605F9A6722F040C9FCE17A53DEC31C8BB5C5D&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET">Changer le mot de passe</a>
+                            <br>
+                        <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/logout/index?CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=487FBACF593738ED45635EE5C78A29665E35935D&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" id="logout">Déconnexion</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="connectModalLanguage">
+        <div class="modal-contentConnectLanguage">
+            <ul>
+                    <li class=""><a href="https://secure.ogone.com/Ncol/Prod/BackOffice/Home?languageId=1&amp;MenuId=4&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Fmenu%2Findex&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=1" id="lnk_Home_Index" title="EN"><span>EN</span></a></li>
+                    <li class="active"><a href="https://secure.ogone.com/Ncol/Prod/BackOffice/Home?languageId=2&amp;MenuId=4&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Fmenu%2Findex&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=2" id="lnk_Home_Index" title="FR"><span>FR</span></a></li>
+                    <li class=""><a href="https://secure.ogone.com/Ncol/Prod/BackOffice/Home?languageId=3&amp;MenuId=4&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Fmenu%2Findex&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=3" id="lnk_Home_Index" title="NL"><span>NL</span></a></li>
+                    <li class=""><a href="https://secure.ogone.com/Ncol/Prod/BackOffice/Home?languageId=4&amp;MenuId=4&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Fmenu%2Findex&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=4" id="lnk_Home_Index" title="IT"><span>IT</span></a></li>
+                    <li class=""><a href="https://secure.ogone.com/Ncol/Prod/BackOffice/Home?languageId=5&amp;MenuId=4&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Fmenu%2Findex&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=5" id="lnk_Home_Index" title="DE"><span>DE</span></a></li>
+                    <li class=""><a href="https://secure.ogone.com/Ncol/Prod/BackOffice/Home?languageId=6&amp;MenuId=4&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Fmenu%2Findex&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=6" id="lnk_Home_Index" title="ES"><span>ES</span></a></li>
+            </ul>
+        </div>
+    </div>
+    
+
+        <div class="row-header-mainConnect">
+            <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/home/index?CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" class="logo-svgConnect" title="OGONE"></a>
+            <div class="grid-10 fright top-right-nav">
+                
+
+            </div>
+            <div class="settings-toolbar-containerConnect">
+                <a id="connectLanguageBtn" class="languageConnect" title="Changer la langue">FR</a>
+                    <a id="connectUserInfoBtn" class="personConnect" title="Moi">
+                        <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="ComponentsUserInfoModalSVG" transform="translate(-1256.000000, -20.000000)" stroke="#FFFFFF"><g id="headerbar"><g id="icon_user_inverted" transform="translate(1256.000000, 20.000000)"><g id="NEW"><circle id="Oval" cx="20" cy="20" r="19.5"></circle><path d="M25.1464466,12.7535534 C26.5847354,14.1918422 27.3,15.8761749 27.3,17.9 C27.3,19.9238251 26.5847354,21.6081578 25.1464466,23.0464466 C23.7081578,24.4847354 22.0238251,25.2 20,25.2 C17.9761749,25.2 16.2918422,24.4847354 14.8535534,23.0464466 C13.4152646,21.6081578 12.7,19.9238251 12.7,17.9 C12.7,15.8761749 13.4152646,14.1918422 14.8535534,12.7535534 C16.4200107,11.285356 18.0118052,10.6 20,10.6 C22.0238251,10.6 23.7081578,11.3152646 25.1464466,12.7535534 Z M33.6,33.8953601 C30.040728,37.4768108 25.2015795,39.5 20,39.5 C14.7984205,39.5 9.95927202,37.4768108 6.4,33.8953601 L6.4,33.7 C6.54497475,32.7207107 6.54497475,32.7207107 6.69497475,31.6707107 C6.77531922,31.0285751 6.88757575,30.5635123 7.18076197,29.5373606 L7.2,29.4 C7.2,29.4654159 7.19607284,29.4758883 7.1972136,29.4736068 C7.25285351,29.362327 7.28299462,29.2911007 7.29447918,29.1991407 C7.34784063,29.0465181 7.41051522,28.8949791 7.48574268,28.7351207 C7.62093839,28.4478299 7.65473496,28.386996 8.13412157,27.5480695 C8.45757505,26.9028839 8.82041246,26.4039825 9.21234752,26.0904344 C9.67972519,25.6273816 10.1080103,25.3548365 10.7969596,25.0595725 C11.2917042,24.8131649 11.9706936,24.7 12.8,24.7 C12.8089272,24.7 13.040112,24.805084 13.3,25 C13.6102885,25.2358973 13.7929367,25.3728835 13.9882688,25.509616 C14.2931312,25.7230196 14.5796853,25.8988597 14.8763932,26.0472136 C15.4336667,26.4233696 16.1432866,26.7414751 17.1418861,27.0743416 C18.0326998,27.3712795 18.9594871,27.5 20,27.5 C21.0405129,27.5 21.9673002,27.3712795 22.8581139,27.0743416 C24.0474807,26.6778861 24.7141402,26.3890002 25.2123475,25.9904344 C25.3086674,25.9284803 25.4400089,25.8424659 25.6030733,25.7368446 C25.6368959,25.7149368 25.9186303,25.5329833 25.9974942,25.4817218 C26.3072918,25.2803534 26.5114521,25.1414109 26.7,25 L26.7,25 C27.0147008,24.8142747 27.2889601,24.7 27.3,24.7 C28.0966963,24.7 28.7112869,24.8059639 29.3030404,25.0595725 C29.9919897,25.3548365 30.4202748,25.6273816 30.8464466,26.0535534 C31.147102,26.3542087 31.4044458,26.7080565 31.9839749,27.5773501 C32.3033798,28.0564575 32.4895909,28.4593398 32.7053207,29.097521 C32.7166528,29.1902668 32.7468203,29.2616745 32.8027864,29.3736068 C32.8039272,29.3758883 32.8,29.3654159 32.8,29.3 L32.819238,29.4373606 C33.1124242,30.4635123 33.2246808,30.9285751 33.3038611,31.5620174 C33.3336726,31.8005099 33.3684165,32.014378 33.4300539,32.3585199 C33.5673384,33.1250251 33.6,33.3572853 33.6,33.7 L33.6,33.8953601 Z" id="userInfoModalSVG" fill-rule="nonzero"></path></g></g></g></g></g></svg>
+                    </a>
+            </div>
+        </div>
+
+<div>
+    <div id="mastedDiv">
+        <div id="headernavigation" isnew="true">
+                <ul>
+                        <li id="-14">
+              <a class="bgnone " href="https://secure.ogone.com/Ncol/Prod/BackOffice/Home/index?MenuId=4&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=05F90E6BC795DB7F120AF8C8214EC5627D13BF2E&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" menugroup="-14" menuparameter="-14" method="setNoSubItemSelected"><span>Accueil</span></a>
+                         
+                        </li>
+                        <li id="-15">
+              <a class="bgnone " href="https://secure.ogone.com/Ncol/Prod/BackOffice/Support/Index?MenuId=5&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=10FAE8BAB1F5561AF517B7D0E5D089DEFAC1A2B8&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" menugroup="-15" menuparameter="-15" method="setNoSubItemSelected"><span>Support</span></a>
+                         
+                        </li>
+                                <li id="0" class="selected">
+                                    
+<a class="cgnone submenu " href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" menugroup="0" method="loadSubMenu"><span>Configuration</span></a>                                    
+
+                                   
+                                </li>
+                                <li id="1">
+                                    
+<a class="cgnone submenu " href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" menugroup="1" method="loadSubMenu"><span>Avancé</span></a>                                    
+
+                                   
+                                </li>
+                                <li id="6">
+                                    
+<a class="cgnone submenu " href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" menugroup="6" method="loadSubMenu"><span>Opérations</span></a>                                    
+
+                                   
+                                </li>
+                </ul>
+
+        </div>
+        <div class="subnav">
+            <div id="submenu" class="">
+                <div class="dmenu-left">
+                    &nbsp;</div>
+                <div class="dmenu-right">
+                    &nbsp;</div>
+                <div class="dmenu-mid cavaer-menu">
+                    <div class="menu-prev-horizontal">
+                    </div>
+                    <div class="cvrmenu" style="overflow: hidden;">
+                        <ul class="cvrmenu" id="myogonemenu">
+
+<li><a id="1" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/BackOffice/Password/Change?MenuId=1&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=16F605F9A6722F040C9FCE17A53DEC31C8BB5C5D&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Mot" de="" passe=""><span>Mot de passe</span></a></li><li><a id="2" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/BackOffice/AdministrativeDetail/Index?MenuId=2&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=994BD314613CC8EF1AD7E1ACB3C6B0386E7EE91A&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Abonnement"><span>Abonnement</span></a></li><li><a id="3" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/BackOffice/PMConfiguration/Index?MenuId=3&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=8137BC9B11CF67730EADB943AC384AC1A776AE3B&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Méthodes" de="" paiement=""><span>Méthodes de paiement</span></a></li><li><a id="11" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/BackOffice/User/Index?MenuId=11&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=A5AC21A2CDFD56C0623E294DA665521A7E846D57&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Utilisateurs"><span>Utilisateurs</span></a></li><li><a id="38" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/BackOffice/AliasManagement/Index?MenuId=38&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=1190FA18F23B18BB8180BD94C59DC39F242B3A17&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Alias"><span>Alias</span></a></li><li><a id="40" class="innerSubMenu menu-link linkselected" href="https://secure.ogone.com/Ncol/Prod/BackOffice/TechnicalInformation/Index?MenuId=40&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=9E5A830EC16C5CEE8BC33A33D144A5801150E251&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Information" technique=""><span>Information technique</span></a></li><li><a id="41" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/chg_taxes.asp?MenuId=41&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp&amp;CSRFKEY=358059404F491422721D5F8A92213B96500FC90B&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Règles" de="" tva=""><span>Règles de TVA</span></a></li><li><a id="42" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/chg_shipping.asp?MenuId=42&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp&amp;CSRFKEY=E9CA78CAEF5929A3562A4831662EC786158D79FE&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Règles" de="" frais="" port=""><span>Règles de frais de port</span></a></li><li><a id="43" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/BackOffice/Template/Index?MenuId=43&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&amp;CSRFKEY=77418D04BD0D3BE1E275883CCF964171C6228199&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Modèle"><span>Modèle</span></a></li><li><a id="65" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/Invoices.asp?MenuId=65&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp&amp;CSRFKEY=9346FC87EEAC7308C83D4DEA9CDE69405F4784B7&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Facturation"><span>Facturation</span></a></li><li class="lastbgnone"><a id="158" class="innerSubMenu menu-link" href="https://secure.ogone.com/Ncol/Prod/view_merchant_logs.asp?MenuId=158&amp;CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp&amp;CSRFKEY=C753A6CBD9DFAB94B9EB07422E697B2511FF3301&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MigrationMode=DOTNET" title="Journaux" d'erreur=""><span>Journaux d'erreur</span></a></li>                        </ul>
+                    </div>
+                    <div class="menu-next-horizontal">
+                    </div>
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+// Loads the javascript array for submenu items
+    var items = [];
+    var isClicked = false;var method;var menuGroup;
+        
+            items.push({"MenuId":1,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/Password/Change?MenuId=1\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=16F605F9A6722F040C9FCE17A53DEC31C8BB5C5D\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":6,"Lib1":"Mot de passe","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":2502,"PageName":"Password/Change?"});
+        
+        
+            items.push({"MenuId":2,"SeqId":31,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/AdministrativeDetail/Index?MenuId=2\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=994BD314613CC8EF1AD7E1ACB3C6B0386E7EE91A\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":2,"Lib1":"Abonnement","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":1379,"PageName":"AdministrativeDetail/Index?"});
+        
+        
+            items.push({"MenuId":3,"SeqId":16,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/PMConfiguration/Index?MenuId=3\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=8137BC9B11CF67730EADB943AC384AC1A776AE3B\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":72,"Lib1":"Méthodes de paiement","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":2497,"PageName":"PMConfiguration/Index?"});
+        
+        
+            items.push({"MenuId":11,"SeqId":14,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/User/Index?MenuId=11\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=A5AC21A2CDFD56C0623E294DA665521A7E846D57\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":3134,"Lib1":"Utilisateurs","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":2496,"PageName":"User/Index?"});
+        
+        
+            items.push({"MenuId":38,"SeqId":12,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/AliasManagement/Index?MenuId=38\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=1190FA18F23B18BB8180BD94C59DC39F242B3A17\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":2450,"Lib1":"Alias","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":957,"PageName":"AliasManagement/Index?"});
+        
+        
+            items.push({"MenuId":40,"SeqId":17,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/TechnicalInformation/Index?MenuId=40\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=9E5A830EC16C5CEE8BC33A33D144A5801150E251\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":336,"Lib1":"Information technique","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":2512,"PageName":"TechnicalInformation/Index?"});
+        
+        
+            items.push({"MenuId":41,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/chg_taxes.asp?MenuId=41\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=358059404F491422721D5F8A92213B96500FC90B\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":3,"Lib1":"Règles de TVA","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":2513,"PageName":"chg_taxes.asp?"});
+        
+        
+            items.push({"MenuId":42,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/chg_shipping.asp?MenuId=42\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=E9CA78CAEF5929A3562A4831662EC786158D79FE\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":4,"Lib1":"Règles de frais de port","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":2511,"PageName":"chg_shipping.asp?"});
+        
+        
+            items.push({"MenuId":43,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/Template/Index?MenuId=43\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=77418D04BD0D3BE1E275883CCF964171C6228199\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":6072,"Lib1":"Modèle","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":6072,"PageName":"Template/Index?"});
+        
+        
+            items.push({"MenuId":65,"SeqId":4,"Url":"https://secure.ogone.com/Ncol/Prod/Invoices.asp?MenuId=65\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=9346FC87EEAC7308C83D4DEA9CDE69405F4784B7\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":"","LibPromptId":2105,"Lib1":"Facturation","MenuActionUrl":null,"IsTest":false,"Environment":5,"HelpPromptId":2105,"PageName":"Invoices.asp?"});
+        
+        
+            items.push({"MenuId":158,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/view_merchant_logs.asp?MenuId=158\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=C753A6CBD9DFAB94B9EB07422E697B2511FF3301\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":0,"Target":"","Fonct":null,"LibPromptId":5247,"Lib1":"Journaux d\u0027erreur","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":0,"PageName":"view_merchant_logs.asp?"});
+        
+        
+            items.push({"MenuId":58,"SeqId":8,"Url":"https://secure.ogone.com/Ncol/Prod/chg_CAP.asp?MenuId=58\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=359C4E7DA4C829C4E0958F746CE421BF091852CB\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":1,"Target":"page","Fonct":"","LibPromptId":1195,"Lib1":"Fraud detection","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":1381,"PageName":"chg_CAP.asp?"});
+        
+        
+            items.push({"MenuId":152,"SeqId":0,"Url":"https://secure.ogone.com/Ncol/Prod/gest_merchsubscriptions.asp?MenuId=152\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=FFC7D14BDFF6549D58EDDC6676AF17B4B09B3C58\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":1,"Target":"page","Fonct":null,"LibPromptId":3508,"Lib1":"Abonnement","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":0,"PageName":"gest_merchsubscriptions.asp?"});
+        
+        
+            items.push({"MenuId":32,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/Payment_Select.Asp?level=Financial\u0026amp;MenuId=32\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=38546F20E56E29FB22CA580C456625C2A351E9FA\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":6,"Target":"page","Fonct":"","LibPromptId":392,"Lib1":"Historique financier","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":2504,"PageName":"Payment_Select.Asp?level=Financial\u0026amp;"});
+        
+        
+            items.push({"MenuId":34,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/orderras.asp?new=True\u0026amp;MenuId=34\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=71C912E211C23AACD5369815EDD40D37EB802FA4\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":6,"Target":"page","Fonct":"","LibPromptId":235,"Lib1":"Nouvelle transaction","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":2501,"PageName":"orderras.asp?new=True\u0026amp;"});
+        
+        
+            items.push({"MenuId":36,"SeqId":2,"Url":"https://secure.ogone.com/Ncol/Prod/Payment_Select.Asp?level=Order\u0026amp;MenuId=36\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=38546F20E56E29FB22CA580C456625C2A351E9FA\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":6,"Target":"page","Fonct":"","LibPromptId":1055,"Lib1":"Gestion transactions","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":2508,"PageName":"Payment_Select.Asp?level=Order\u0026amp;"});
+        
+        
+            items.push({"MenuId":45,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/Reports_Select.asp?MenuId=45\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenuindex.asp\u0026CSRFKEY=554EA78912EA7EF9E6423844C7A18FAC9B24F354\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":6,"Target":"page","Fonct":"","LibPromptId":1057,"Lib1":"Rapports électroniques","MenuActionUrl":null,"IsTest":false,"Environment":7,"HelpPromptId":2506,"PageName":"Reports_Select.asp?"});
+        
+        
+            items.push({"MenuId":166,"SeqId":1,"Url":"https://secure.ogone.com/Ncol/Prod/BackOffice/Batch/Index?MenuId=166\u0026CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex\u0026CSRFKEY=D7E4589C904EB8F266AB77C9A33969B4D67F4DEA\u0026CSRFTS=20171226173553\u0026branding=OGONE\u0026MigrationMode=DOTNET","MenuGroup":6,"Target":"page","Fonct":"","LibPromptId":6368,"Lib1":"Gestionnaire de batch","MenuActionUrl":null,"IsTest":false,"Environment":16391,"HelpPromptId":2505,"PageName":"Batch/Index?"});
+        
+;
+     window.allMenuList = items;
+</script>
+        <div id="UpdateTimeZone"></div>
+</div>
+
+<script type="text/javascript" language="javascript">
+    PSP.Page.registerModule('AdminMenuModule', {
+        items: window.allMenuList,
+        timezoneUrl: 'https://secure.ogone.com/Ncol/Prod/BackOffice/timezone/managetimezone?CSRFSP=%2fncol%2fprod%2fbackoffice%2fmenu%2findex&CSRFKEY=C2E82752D24451CA504BA905E8C751104F8AB642&CSRFTS=20171226173553&branding=OGONE&MigrationMode=DOTNET',
+        currentMenuId: '40'
+    });
+
+    var isLanguageBtnExists = document.getElementById("connectLanguageBtn");
+    if (isLanguageBtnExists) {
+        document.getElementById("connectLanguageBtn").onclick = function () {
+            document.getElementById('connectModalLanguage').style.display = "block";
+        }
+    }
+
+    var isUserInfoBtnExists = document.getElementById("connectUserInfoBtn");
+    if (isUserInfoBtnExists) {
+        document.getElementById("connectUserInfoBtn").onclick = function () {
+            document.getElementById('connectModalUserInfo').style.display = "block";
+        }
+    }
+
+    if (isLanguageBtnExists || isUserInfoBtnExists) {
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('connectModalLanguage')) {
+                document.getElementById('connectModalLanguage').style.display = "none";
+            }
+            else if (event.target == document.getElementById("connectModalUserInfo")) {
+                document.getElementById('connectModalUserInfo').style.display = "none";
+            }
+        }
+    }
+</script>
+    <div id="midpage" class="grid">
+        <div class="mid-grid">
+            
+
+
+<div class="clear">
+</div>
+<div class="boxCnt" id="WorkflowConfig">
+    <ul id="maintab" class="shadetabs">
+                    <li id="lstTechnicalInformationHeader" style="max-width: 195.429px;">
+                        <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/index?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2fdataandoriginverification&amp;CSRFKEY=9E5A830EC16C5CEE8BC33A33D144A5801150E251&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MenuId=40" id="lnk_TechnicalInformationHeader" title="Vos paramètres techniques" style="overflow: hidden;">Vos paramètres techniques</a>
+                                            </li>
+                    <li id="lstGlobalTransactionParameters" style="max-width: 195.429px;">
+                        <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/globaltraxparameter?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2fdataandoriginverification&amp;CSRFKEY=6724A7D8F5635C010A6AE298A49F63731FC268A8&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MenuId=40" id="lnk_GlobalTransactionParameters" title="Paramètres de transaction globaux" style="overflow: hidden;">Paramètres de transaction globaux</a>
+                                            </li>
+                    <li id="lstGlobalSecurityParameters" style="max-width: 195.429px;">
+                        <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/globalsecurityparameter?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2fdataandoriginverification&amp;CSRFKEY=85383CFC6DC50629223A26F2E7F3FD4EAB423579&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MenuId=40" id="lnk_GlobalSecurityParameters" title="Paramètres globaux de sécurité" style="overflow: hidden;">Paramètres globaux de sécurité</a>
+                                            </li>
+                    <li id="lstPaymentPageLayout" style="max-width: 195.429px;">
+                        <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/paymentpagelayout?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2fdataandoriginverification&amp;CSRFKEY=30FFA17D6474475D911F06359F76F4CFE68FCA7D&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MenuId=40" id="lnk_PaymentPageLayout" title="Page de paiement" style="overflow: hidden;">Page de paiement</a>
+                                            </li>
+                <li class="selected" id="lstDataAndOriginVerification" style="max-width: 195.429px;"><a id="lnk_DataAndOriginVerification" title="Contrôle de données et d&#39;origine" href="javascript:void(0);" style="overflow: hidden;">Contrôle de données et d'origine</a></li>
+                    <li id="lstTransactionFeedbacks" style="max-width: 195.429px;">
+                        <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/transactionfeedback?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2fdataandoriginverification&amp;CSRFKEY=E841CEF09C3B397B7FCBEEE1176E821EBAFE6A02&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MenuId=40" id="lnk_TransactionFeedbacks" title="Retour d&#39;information sur la transaction" style="overflow: hidden;">Retour d'information sur la transaction</a>
+                                            </li>
+                    <li id="lstTransactionEmails" style="max-width: 195.429px;">
+                        <a href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/transactionemail?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2fdataandoriginverification&amp;CSRFKEY=518516DF85E939E12B9F3B5991354B27C27BD50A&amp;CSRFTS=20171226173553&amp;branding=OGONE&amp;MenuId=40" id="lnk_TransactionEmails" title="E-mails de transaction" style="overflow: hidden;">E-mails de transaction</a>
+                                            </li>
+    </ul>
+</div>
+<div class="clear">
+</div>
+
+<div class="t-content t-state-active">
+<form action="https://secure.ogone.com/Ncol/Prod/BackOffice/TechnicalInformation/DataAndOriginVerification" id="frm_TechnicalInformation_DataAndOriginVerification" method="post" novalidate="novalidate"><input class="inp-txt" id="CSRFKEY" name="CSRFKEY" type="hidden" value="4D0F13119E003C399028BE46F9AE24FF70A6CBBE">
+<input class="inp-txt" id="CSRFTS" name="CSRFTS" type="hidden" value="20171226173553">
+<input class="inp-txt" id="CSRFSP" name="CSRFSP" type="hidden" value="/ncol/prod/backoffice/technicalinformation/dataandoriginverification">
+<input class="inp-txt" id="Lang" name="Lang" type="hidden" value="2">
+<input class="inp-txt" id="branding" name="branding" type="hidden" value="OGONE">
+        <div class="workflowbox only-star">
+            <div class="insidebg">
+                    <div id="generalMessage">
+    </div>
+
+
+                    <div class="functionality-box">
+                                <div class="function-title padding0 grid-12">
+            <div class="title">
+                <span class="fleft">Contrôles pour e-Commerce &amp; Alias Gateway</span>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="btm-line">
+            </div>
+        </div>
+
+                            <div class="form-section grid padding0 margin-0">
+                                <div class="grid-1">
+                                    <a class="padding-top2 ico-help helptooltip" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" onclick="return false;" onmouseover="ShowHelp(this);" tabindex="10000"></a>
+                                </div>
+                                <div class="grid-15">
+                                    <p>
+                                        <label for="txt_DataAndOriginVerification_Refer" id="lbl_DataAndOriginVerification_Refer" title="URL de la page du commerçant">URL de la page du marchand contenant le formulaire de paiement qui appellera la page:</label>
+                                            orderstandard.asp
+                                    </p>
+                                    <div class="clear">
+                                    </div>
+                                    <div class="form-section grid padding0 margin-0">
+                                        <div class="grid-16">
+                                            <div>
+
+
+    <div class="grid-5 input-bg">
+<input class="inp-txt valid" data-val="true" data-val-length="La longueur de URL de la page du commerçant doit être comprise entre 14 et 255 caractères." data-val-length-max="255" data-val-length-min="14" data-val-regex="Seuls les caractères alphanumérique et caractères spéciaux _!~*,.()?:@&amp;=+$,%#-/{}[]\;; sont autorisés." data-val-regex-pattern="^[a-zA-ZàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßŠšŽžŸÿęĘ0-9_!~\*,\.\(\)\?:@&amp;=\+\$,%#\-/{}\[\]\\; ;]*$" id="txt_DataAndOriginVerification_Refer" maxlength="255" name="DataAndOriginVerification.Refer" tabindex="" type="text" value="https://www.boogybook.com" width="100%">    </div>
+    <div>
+    </div>
+
+                                            </div>
+                                            <div class="grid-8 prefix-0 mlm5">
+                                                <span class="fleft required-symbol">&nbsp;</span>
+                                                <div class="grid-15 fright">
+                                                    <span class="field-validation-valid" data-valmsg-for="DataAndOriginVerification.Refer" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="clear">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                    <p>        </p><div class="info-msg">
+            <span class="ico-info">&nbsp;</span>
+            <div class="infomargin-left35">
+                Vous pouvez entrer différents URL, séparés par ‘;’.
+            </div>
+            <div class="clear"></div>
+        </div>        
+        <div class="clear"></div>
+<p></p>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="functionality-box">
+                        <div class="form-section grid padding0 margin-0">
+                            <div class="grid-1 margin-bottomm5">
+                                <a class="padding-top2 ico-help helptooltip" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" onclick="return false;" onmouseover="ShowHelp(this);" tabindex="10000"></a>
+                            </div>
+                            <div class="grid-15 margin-bottomm5" id="div-sha-in">
+                                <div class="form-section grid padding0 margin-0" id="divShaIn">
+                                    
+
+    <p>
+        <label for="pwd_DataAndOriginVerification_ShaIn" id="lbl_DataAndOriginVerification_ShaIn" title="ShaIn">Clé SHA-IN</label>
+    </p>
+   
+    <div class="clear">
+    </div>
+    <div class="grid-16  margin-bottomm5">
+        <div id="divShaInPassword" class="grid-5 input-bg div-display">
+            <input autocomplete="off" class="valid inp-txt" data-val="true" data-val-length="La longueur de Champ ne peut compter plus de 255 caractères." data-val-length-max="255" id="pwd_DataAndOriginVerification_ShaIn" maxlength="255" name="DataAndOriginVerification.ShaIn" type="password" value="gsdfgsdfgsfdgsfsgdfgsdgsg32kghjkfdhfgdjsqqqgh">
+        </div>
+        <div id="divShaInText" class="div-hidden">
+
+
+    <div class="input-bg grid-5">
+<input class="inp-txt " id="txt_DataAndOriginVerification_ShaIn" maxlength="255" name="DataAndOriginVerification.ShaIn" tabindex="" type="text" value="gsdfgsdfgsfdgsfsgdfgsdgsg32kghjkfdhfgdjsqqqgh" width="100%" disabled="disabled">    </div>
+    <div>
+    </div>
+
+        </div>
+            <div class="prefix-0">
+                <span class="fleft required-symbol">*</span></div>
+        <a class="button margin-left15" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFKEY=4D0F13119E003C399028BE46F9AE24FF70A6CBBE&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Ftechnicalinformation%2Fdataandoriginverification&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=2" id="lnk_ShaInText" onclick="javascript:ShowShaInHash(); return false;" title="Visible"><span>Visible</span></a>
+        <div class="clear">
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    var visible = 'Visible';
+    var hide = 'Cacher';
+
+    $(document).ready(function () {
+        showhidebutton('txt_DataAndOriginVerification_ShaIn', 'lnk_ShaInText');
+
+        if ($("#txt_DataAndOriginVerification_ShaIn").length > 0) {
+            $("#txt_DataAndOriginVerification_ShaIn").attr("disabled", "disabled");
+        }
+
+        $("#pwd_DataAndOriginVerification_ShaIn").keyup(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn', 'lnk_ShaInText');
+        });
+
+        $("#pwd_DataAndOriginVerification_ShaIn").keypress(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn', 'lnk_ShaInText');
+        });
+
+        $("#txt_DataAndOriginVerification_ShaIn").keyup(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn', 'lnk_ShaInText');
+        });
+        $("#pwd_DataAndOriginVerification_ShaIn").keydown(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn', 'lnk_ShaInText');
+        });
+
+
+
+    });
+
+    function ShowShaInHash() {
+        var message;
+             if ($('#divShaInPassword').hasClass("div-display")) {
+
+            $('#pwd_DataAndOriginVerification_ShaIn').val('gsdfgsdfgsfdgsfsgdfgsdgsg32kghjkfdhfgdjsqqqgh');
+
+                message = $('#pwd_DataAndOriginVerification_ShaIn').val();
+
+                if ('False' != 'True' && 'False' != 'True') {
+                    //Disable textbox to pass only one value for shain in request
+                    $('#divShaInPassword #pwd_DataAndOriginVerification_ShaIn').attr("disabled", "disabled");
+                    $('#divShaInText #txt_DataAndOriginVerification_ShaIn').removeAttr("disabled");
+                }
+
+                $('#divShaInPassword').removeClass("div-display").addClass("div-hidden");
+                $('#txt_DataAndOriginVerification_ShaIn').val(message);
+                $('#divShaInText').addClass("div-display").removeClass("div-hidden");
+                $("#lnk_ShaInText span").text(hide);
+            }
+            else if ($('#divShaInText').hasClass("div-display")) {
+                message = $('#txt_DataAndOriginVerification_ShaIn').val();
+
+
+                if ('False' != 'True' && 'False' != 'True') {
+                    //Disable textbox to pass only one value for shain in request
+                    $('#divShaInText #txt_DataAndOriginVerification_ShaIn').attr("disabled", "disabled");
+                    $('#divShaInPassword #pwd_DataAndOriginVerification_ShaIn').removeAttr("disabled", "disabled");
+                }
+
+                $('#divShaInText').removeClass("div-display").addClass("div-hidden");
+                $('#pwd_DataAndOriginVerification_ShaIn').val(message);
+                $('#divShaInPassword').addClass("div-display").removeClass("div-hidden"); ;
+                $("#lnk_ShaInText span").text(visible);
+            }
+
+
+    }
+
+    function showhidebutton(txtbox, btn) {
+
+        var shain = $('#' + txtbox).val();
+        if (shain != undefined) {
+            if (shain.length > 0) {
+                $('#' + btn).show();
+            }
+            else {
+                $('#' + btn).hide();
+            }
+        }
+    }
+
+</script>
+
+                                </div>
+                                <div class="grid-14 margin-bottomm5">
+                                    <div id="maxLengthWaringMessage" class="grid-15 margin-bottomm5">
+                                        <span class="field-validation-valid" data-valmsg-for="DataAndOriginVerification.ShaIn" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                                    <div class="functionality-box">
+                                <div class="function-title padding0 grid-12">
+            <div class="title">
+                <span class="fleft"><span>Contrôles pour   e-Terminal et Batch (Manual)</span></span>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="btm-line">
+            </div>
+        </div>
+
+                        <div class="form-section grid padding0 margin-t5">
+                            <div class="grid-1">
+                            </div>
+                            <div class="grid-15">
+                                <p>
+                                    Lorsque ces modes de soumission sont utilisés, il est nécessaire de s’identifier dans le back-office.
+                                </p>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="clear">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                                    <div class="functionality-box">
+                                <div class="function-title padding0 grid-12">
+            <div class="title">
+                <span class="fleft"><span>Contrôles pour   DirectLink et Batch (Automatic)</span></span>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="btm-line">
+            </div>
+        </div>
+
+                        <div class="form-section grid padding0 margin-0">
+                            <div class="grid-1">
+                                <a class="padding-top2 ico-help helptooltip" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" onclick="return false;" onmouseover="ShowHelp(this);" tabindex="10000"></a>
+                            </div>
+                            <div class="grid-15">
+                                <p>
+                                    Lorsque ces modes de soumission sont utilisés, les données d’identification (login) doivent être transmises dans les paramètres HTTP.</p>
+                                <div class="clear">
+                                </div>
+                                <p>
+                                    <label for="txt_DataAndOriginVerification_IPAddress" id="lbl_DataAndOriginVerification_IPAddress" title="Adresse IP">Adresse IP</label>
+                                </p>
+                                <div class="clear">
+                                </div>
+                                <div class="form-section grid padding0 margin-0">
+                                    <div class="grid-16">
+                                        <div>
+
+
+    <div class="input-bg grid-5">
+<input class="inp-txt " data-val="true" data-val-regex="Adresse IP est invalide." data-val-regex-pattern="^(((2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)|(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)-(2[0-4]\d|25[0-5]|[01]?\d\d?)|(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)/(\d|[0-2]\d|3[0-2]))(;( )?((2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)|(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)-(2[0-4]\d|25[0-5]|[01]?\d\d?)|(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)\.(2[0-4]\d|25[0-5]|[01]?\d\d?)/(\d|[0-2]\d|3[0-2])))*)?$" id="txt_DataAndOriginVerification_IPAddress" maxlength="255" name="DataAndOriginVerification.IPAddress" tabindex="" type="text" value="5.39.70.166;37.187.173.134;195.154.227.23;212.129.21.45;62.4.21.16;62.4.21.17;81.67.32.119;195.190.27.44;62.4.21.16;82.233.175.198;41.77.119.30" width="100%">    </div>
+    <div class="grid-8">
+<span class="required-symbol" id="IPAddress">&nbsp;</span>            <div class="grid-11 fright">
+                <span class="field-validation-valid" data-valmsg-for="DataAndOriginVerification.IPAddress" data-valmsg-replace="true"></span>
+                <div class="clear">
+                </div>
+            </div>
+    </div>
+
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear">
+                                </div>
+                                <p>
+                                            </p><div class="info-msg">
+            <span class="ico-info">&nbsp;</span>
+            <div class="infomargin-left35">
+                Vous pouvez entrer différentes adresses IP, séparés par ‘;’.
+            </div>
+            <div class="clear"></div>
+        </div>        
+        <div class="clear"></div>
+
+                                <p></p>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="clear">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                    <div class="">
+                        <div class="form-section grid padding0 margin-0 ">
+                            <div class="grid-1  margin-bottomm5">
+                                <a class="padding-top2 ico-help helptooltip" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" onclick="return false;" onmouseover="ShowHelp(this);" tabindex="10000"></a>
+                            </div>
+                            <div class="grid-15 margin-bottomm5">
+                                <div class="clear">
+                                </div>
+                                <div class="form-section margin-0 padding0 grid" id="divShaIn2">
+                                    
+
+    <p>
+        <label for="pwd_DataAndOriginVerification_ShaIn2" id="lbl_DataAndOriginVerification_ShaIn2" title="ShaIn2">Clé SHA-IN</label>
+    </p>
+    <div class="clear">
+    </div>
+    <div class="grid-16  margin-bottomm5">
+        <div id="divShaIn2Password" class="grid-5 input-bg div-display">
+            <input autocomplete="off" class="inp-txt inp-txt" data-val="true" data-val-length="La longueur de Champ ne peut compter plus de 255 caractères." data-val-length-max="255" id="pwd_DataAndOriginVerification_ShaIn2" maxlength="255" name="DataAndOriginVerification.ShaIn2" type="password" value="gsdfgsdfgsfdgsfsgdfgsdgsg32kghjkfdhfgdjsqqqgh">
+        </div>
+        <div id="divShaIn2Text" class="div-hidden">
+
+
+    <div class="input-bg grid-5">
+<input class="inp-txt " id="txt_DataAndOriginVerification_ShaIn2" maxlength="255" name="DataAndOriginVerification.ShaIn2" tabindex="" type="text" value="gsdfgsdfgsfdgsfsgdfgsdgsg32kghjkfdhfgdjsqqqgh" width="100%" disabled="disabled">    </div>
+    <div>
+    </div>
+
+        </div>
+        <a class="button margin-left15" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFKEY=4D0F13119E003C399028BE46F9AE24FF70A6CBBE&amp;CSRFTS=20171226173553&amp;CSRFSP=%2Fncol%2Fprod%2Fbackoffice%2Ftechnicalinformation%2Fdataandoriginverification&amp;MigrationMode=DOTNET&amp;branding=OGONE&amp;Lang=2" id="lnk_ShaIn2Text" onclick="javascript:ShowShaIn2Hash(); return false;" title="Visible"><span>Visible</span></a>
+        <div class="clear">
+        </div>
+    </div>
+
+<script type="text/javascript">
+    var visible = 'Visible';
+    var hide = 'Cacher';
+
+    $(document).ready(function () {
+        showhidebutton('txt_DataAndOriginVerification_ShaIn2', 'lnk_ShaIn2Text');
+
+        if ($("#txt_DataAndOriginVerification_ShaIn2").length > 0) {
+            $("#txt_DataAndOriginVerification_ShaIn2").attr("disabled", "disabled");
+        }
+
+        $("#pwd_DataAndOriginVerification_ShaIn2").keyup(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn2', 'lnk_ShaIn2Text');
+        });
+
+        $("#pwd_DataAndOriginVerification_ShaIn2").keypress(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn2', 'lnk_ShaIn2Text');
+        });
+
+        $("#txt_DataAndOriginVerification_ShaIn2").keyup(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn2', 'lnk_ShaIn2Text');
+        });
+
+        $("#pwd_DataAndOriginVerification_ShaIn2").keydown(function () {
+            showhidebutton('pwd_DataAndOriginVerification_ShaIn2', 'lnk_ShaIn2Text');
+        });
+    });
+
+    function ShowShaIn2Hash() {
+        var message;
+            if ($('#divShaIn2Password').hasClass("div-display")) {
+                message = $('#pwd_DataAndOriginVerification_ShaIn2').val();
+
+                if ('False' != 'True' && 'False' != 'True') {
+                    //Disable textbox to pass only one value for shain in request
+                    $('#divShaIn2Password #pwd_DataAndOriginVerification_ShaIn2').attr("disabled", "disabled");
+                    $('#divShaIn2Text #txt_DataAndOriginVerification_ShaIn2').removeAttr("disabled");
+                }
+
+                $('#divShaIn2Password').removeClass("div-display").addClass("div-hidden");
+                $('#txt_DataAndOriginVerification_ShaIn2').val(message);
+                $('#divShaIn2Text').addClass("div-display").removeClass("div-hidden");
+                $("#lnk_ShaIn2Text span").text(hide);
+            }
+            else if ($('#divShaIn2Text').hasClass("div-display")) {
+
+                message = $('#txt_DataAndOriginVerification_ShaIn2').val();
+
+                if ('False' != 'True' && 'False' != 'True') {
+                    //Disable textbox to pass only one value for shain in request
+                    $('#divShaIn2Text #txt_DataAndOriginVerification_ShaIn2').attr("disabled", "disabled");
+                    $('#divShaIn2Password #pwd_DataAndOriginVerification_ShaIn2').removeAttr("disabled", "disabled");
+                }
+
+                $('#divShaIn2Text').removeClass("div-display").addClass("div-hidden");
+                $('#pwd_DataAndOriginVerification_ShaIn2').val(message);
+                $('#divShaIn2Password').addClass("div-display").removeClass("div-hidden");
+                $("#lnk_ShaIn2Text span").text(visible);
+            }
+        
+    }
+
+    function showhidebutton(txtbox, btn) {
+        var shain = $('#' + txtbox).val();
+        if (shain != undefined) {
+            if (shain.length > 0) {
+                $('#' + btn).show();
+            }
+            else {
+                $('#' + btn).hide();
+            }
+        }
+    }
+
+</script>
+
+                                </div>
+                                <div class="grid-14 margin-bottomm5">
+                                    <div id="maxLengthWaringMessage2" class="grid-15 margin-bottomm5">
+                                        <span class="field-validation-valid" data-valmsg-for="DataAndOriginVerification.ShaIn2" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear">
+                            </div>
+                        </div>
+                    </div>
+                <div class="grid-16 set-btn-pad padding-bottom10">
+                    <button class="button" id="btn_SaveDataAndOrigin" name="SaveDataAndOrigin" type="submit"><span class="btnspan"></span><span class="innerSpan">&nbsp;Sauvegardez</span></button>
+                </div>
+                <div class="clear">
+                </div>
+                
+                <div class="clear">
+                </div>
+            </div>
+        </div>       
+</form></div>
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+        var settings = $.data($('form')[0], 'validator').settings;
+        var isShaRequired = 'True' == 'True';
+
+        var shaInValue = 'gsdfgsdfgsfdgsfsgdfgsdgsg32kghjkfdhfgdjsqqqgh';
+        var decodedShaIn = $('<textbox />').html(shaInValue).text();
+        var shaIn2Value = 'gsdfgsdfgsfdgsfsgdfgsdgsg32kghjkfdhfgdjsqqqgh';
+        var decodedShaIn2 = $('<textbox />').html(shaIn2Value).text();
+
+
+        $.validator.addMethod("SHAInRegex", validateShaPassword);
+        $.validator.addMethod("SHAIn2Regex", validateShaPassword);
+
+
+        $.extend(true, settings, {
+            rules: {
+                "DataAndOriginVerification.ShaIn": {
+                    //required: isShaRequired,
+                    SHAInRegex: decodedShaIn
+                }
+            },
+            messages: {
+                "DataAndOriginVerification.ShaIn": {
+                    // required: isShaRequired ? "Notre système doit effectuer une vérification des données avant de traiter le paiement afin de s&#39;assurer de l&#39;exactitude des données de la commande. Veuillez configurer la signature SHA-IN." : '',
+                    SHAInRegex: 'Votre mot de passe/phrase secrète doit contenir au moins 16 caractères, doit contenir au moins 4 caractères différents, dont au moins une lettre (a-z) et au moins un numéro (0-9) ou un symbole (&amp;,@,#,!,...).'
+                }
+            }
+        });
+
+        $.extend(true, settings, {
+            rules: {
+                "DataAndOriginVerification.ShaIn2": {
+                    SHAIn2Regex: decodedShaIn2
+                }
+            },
+            messages: {
+                "DataAndOriginVerification.ShaIn2": {
+                    SHAIn2Regex: 'Votre mot de passe/phrase secrète doit contenir au moins 16 caractères, doit contenir au moins 4 caractères différents, dont au moins une lettre (a-z) et au moins un numéro (0-9) ou un symbole (&amp;,@,#,!,...).'
+                }
+            }
+        });
+
+        // Validate SHA Password.
+        function validateShaPassword(value, element, params) {
+            var shaPasswordPattern = new RegExp('^(?=.*[a-zA-ZàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßŠšŽžŸÿęĘ])(?=.*[0-9_\\-\\.\\+\\$&€¢¥@#\\(§!\\)\\*µ£,\\?/=%°;:\\\\ ])[a-zA-ZàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßŠšŽžŸÿęĘ0-9_\\-\\.\\+\\$&€¢¥@#\\(§!\\)\\*µ£,\\?/=%°;:\\\\ ]{16,255}$'); // SHA Password Pattern Regex
+            var shaPasswordPatternForBackwardCompatiability = new RegExp('^[a-zA-ZàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßŠšŽžŸÿęĘ0-9<>{}\\[\\]\\^”\\|~,`’¾¼²³½¿Œœ÷©"\'»«¡™¹›‹˜¯‰±_\\-\\.\\+\\$&€¢¥@#\\(§!\\)\\*µ£,\\?/=%°;:\\\\ ]*$'); // SHA Password Pattern for Backward compatibility 
+            return this.optional(element) || (params != value ? shaPasswordPattern.test(value) : shaPasswordPatternForBackwardCompatiability.test(value)); // Validate value with SHA Password pattern if value change, otherwise validate it against backward compatibility regex
+        }
+        var objname = "#pwd_DataAndOriginVerification_ShaIn";
+        if ($(objname).hasClass('inp-txt-error')) {
+            $(objname).removeClass('inp-txt-error');
+            var inputobj = $(objname).parent();
+            if ($(inputobj).hasClass('input-bg-alert')) {
+                $(inputobj).removeClass('input-bg-alert');
+                $(inputobj).addClass('input-bg');
+            }
+        }
+
+        $(objname).attr("class", "valid inp-txt");
+        var objMessage = $(objname).parent();
+        var grid8 = $(objMessage.parent()).find(".grid-5");
+        var spanObj = $(grid8).find('.field-validation-error');
+        var divObj = $(spanObj).parent();
+        $(divObj).removeClass('error-box');
+        var label = $(spanObj).get(0);
+        if (label != null)
+            label.innerHTML = "";
+        var label1 = $(spanObj).get(1);
+        if (label1 != undefined)
+            label1.innerHTML = "";
+    });
+    $('[type="password"]').bind('paste', function (event) {
+        if (event != null) {
+            var maxWarningDiv = $(this).prop('id') == 'pwd_DataAndOriginVerification_ShaIn' ? $('#maxLengthWaringMessage') : $('#maxLengthWaringMessage2');
+            ApplyMaxLengthWarning(this, event, maxWarningDiv, 'Clé SHA-IN');
+        }
+    });
+</script>
+
+            <div class="bottom-left">
+            </div>
+            <div class="bottom-right">
+                    <span>UserID: Boogybook - thomas.fauchille@gmail.com | Dernière connexion: 2017-12-26 16:48:08 - PSPID: Boogybook | Profil: Admin | 2017-12-26 17:35:53 <label id="spnsep">|</label> <a class="normal" href="https://secure.ogone.com/Ncol/Prod/BackOffice/technicalinformation/dataandoriginverification?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2findex&amp;CSRFKEY=3B5104DB992C2198D457B38E71D11BA579F6FA60&amp;CSRFTS=20171226173551&amp;branding=OGONE&amp;MenuId=40#" title="print" id="lnk_aprint">Imprimer</a>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $('#lnk_aprint').click(printPage);
+    });
+    function printPage() {
+        var anchorLink = $('#lnk_aprint');
+        var spn = $("#spnsep");
+        if ((navigator.appVersion.indexOf("MSIE") > 0)
+                && (parseInt(navigator.appVersion) >= 4)) {
+            // To remove the behaviour 'Shrink to Fit' from IE only
+            anchorLink.className = 'form-grid-Hidden';
+            spn.className = 'form-grid-Hidden';
+            document.execCommand('print', false, null);
+        } else {
+            window.print();
+            var print = true;
+            if (navigator.platform.indexOf("Win") >= 0) {
+                if (navigator.userAgent.indexOf("MSIE") < 0) {
+                    if (navigator.userAgent.indexOf("Mozilla/5") < 0) {
+                        print = false;
+                    }
+                }
+            } else
+                print = false;
+            if (!print) {
+                anchorLink.className = 'form-grid-Hidden';
+                spn.className = 'form-grid-Hidden';
+            }
+
+        }
+
+    }
+</script>
+
+                    </span>
+                <br>
+                
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-bar grid div-hidden" id="divFooterBar">
+    <div class="close fr" onclick="CloseWarning();">
+    </div>
+    <p class="brow-warning">
+    </p>
+    <div class="clear">
+    </div>
+</div>
+<script type="text/javascript">
+
+    function GetBrowserWarning(browserMessage) {
+        var browserName = ""; var version = "";
+        switch (window.BrowserDetect.browser) {
+            case "Chrome":
+                if (window.BrowserDetect.version < 23) {
+                    version = 22; browserName = "Chrome version-";
+                }
+                else {
+                    browserMessage = "";
+                }
+                break;
+            case "Firefox":
+                if (window.BrowserDetect.version < 17) {
+                    version = 17; browserName = "Firefox-";
+                }
+                else {
+                    browserMessage = "";
+                }
+                break;
+            case "Explorer":
+                if (window.BrowserDetect.version < 9) {
+                    version = 8; browserName = "ie";
+                }
+                else {
+                    browserMessage = "";
+                }
+                break;
+            default:
+                browserMessage = "";
+                break;
+        }
+        if (browserMessage != "") {
+            browserMessage = browserMessage.replace("$param$", browserName + version);
+        }
+        return browserMessage;
+    }
+    
+    var footerdiv = document.getElementById("divFooterBar");
+    var message = window.GetBrowserWarning('Si vous utilisez $param$ ou inférieur, mettez à jour votre navigateur pour optimiser l&#39;affichage.');
+    if (message != "") {
+        footerdiv.style.display = 'block';
+        footerdiv.getElementsByTagName("p")[0].innerHTML = message;
+    } 
+    function CloseWarning() {
+        footerdiv.style.display = 'none';
+    }
+
+</script>
+
+        <script type="text/javascript">
+            sessiontimeout = parseInt('15') * 60 * 1000;
+            isauthenticated = 'True';
+            logouturl = 'https://secure.ogone.com/Ncol/Prod/BackOffice/logout/index?CSRFSP=%2fncol%2fprod%2fbackoffice%2ftechnicalinformation%2fdataandoriginverification&CSRFKEY=487FBACF593738ED45635EE5C78A29665E35935D&CSRFTS=20171226173553&Branding=OGONE';
+            maxLengthWarningMessage = 'La valeur $field$ a été tronquée parce qu&#39;elle dépassait la limite maximale $maxlength$.';
+            $(document).ready(function () {
+                parent.document.title = 'Ingenico payment server: administration'; //set page title
+                autoLogout();
+                LoadHackCss();
+
+            });
+        </script>
+    <script type="text/javascript">
+        if ($('.flaxibox  div.top-right').length > 0) {
+            $('.flaxibox  div.top-right').html("<div class='div-star'></div>");
+        }
+        else if ($('.workflowbox:first').length > 0) {
+            $('.workflowbox:first').addClass("only-star");
+        }
+    </script>
+    <script type="text/javascript">
+
+        function LoadHackCss() {
+
+            if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+                AddCssLink('Androidhack');
+            } else if (window.BrowserDetect.browser.toLowerCase() == "opera") {
+                AddCssLink('Operahack');
+            } else if (window.BrowserDetect.browser == 'Explorer') {
+                if (document.documentMode == '7' || window.BrowserDetect.version == '7') {
+                    AddCssLink('IE7hack');
+                } else if (window.BrowserDetect.version == '8' && document.documentMode == '8') {
+                    AddCssLink('IE8hack');
+                }
+            }
+        }
+
+        function AddCssLink(cssName) {
+
+            var hostUrl = 'https://secure.ogone.com/Ncol/Prod/WebAssets/StyleSheetHandler.ashx?AssetType=StyleSheet&BundleName={0}&AssetKey={1}&ver=1';
+            var assetKey = '137F779B-0847-4D4B-9DFE-838616EB1EFA';
+
+            if (hostUrl.indexOf('{0}') > -1) {
+                hostUrl = hostUrl.replace('{0}', cssName);
+                hostUrl = hostUrl.replace('{1}', assetKey);
+            }
+
+            var cssLink = document.createElement("link");
+            cssLink.href = hostUrl;
+            cssLink.rel = "stylesheet";
+            cssLink.type = "text/css";
+            var headObj = document.getElementsByTagName("head")[0];
+            headObj.appendChild(cssLink);
+        }
+
+    </script>
+
+
+<div id="tiptip_holder" style="max-width:400px;"><div id="tiptip_arrow"><div id="tiptip_arrow_inner"></div></div><div id="tiptip_content"></div></div><script id="wappalyzer" src="chrome-extension://gppongmhjkpfnbhagpmjfkannfbllamg/js/inject.js"></script><span style="border-radius: 3px; text-indent: 20px; width: auto; padding: 0px 4px 0px 0px; text-align: center; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 11px; line-height: 20px; font-family: &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(255, 255, 255); background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; -webkit-font-smoothing: antialiased;">Enregistrer</span><span style="width: 24px; height: 24px; background: url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxtYXNrIGlkPSJtIj48cmVjdCBmaWxsPSIjZmZmIiB4PSIwIiB5PSIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSI2IiByeT0iNiIvPjxyZWN0IGZpbGw9IiMwMDAiIHg9IjUiIHk9IjUiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgcng9IjEiIHJ5PSIxIi8+PHJlY3QgZmlsbD0iIzAwMCIgeD0iMTAiIHk9IjAiIHdpZHRoPSI0IiBoZWlnaHQ9IjI0Ii8+PHJlY3QgZmlsbD0iIzAwMCIgeD0iMCIgeT0iMTAiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0Ii8+PC9tYXNrPjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9IiNmZmYiIG1hc2s9InVybCgjbSkiLz48L3N2Zz4=&quot;) 50% 50% / 14px 14px no-repeat rgba(0, 0, 0, 0.4); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; border-radius: 12px;"></span></body></html>

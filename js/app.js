@@ -141,16 +141,23 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   }
   var mySelectionState = {
     name: 'mySelection',
-    url: '/mySelection?index',
+    url: '/mySelection?inde&type',
     templateUrl: 'views/creation_tool/my_selection.html',
+    controller: 'ToolCtrl'
+  }
+  var mySelectionNoteState = {
+    name: 'my_selection_notebook',
+    url: '/my_selection_notebook?inde&type',
+    templateUrl: 'views/creation_tool/my_selection_notebook.html',
     controller: 'ToolCtrl'
   }
   var cropState = {
     name: 'edit',
-    url: '/edit?index',
+    url: '/edit?index&type',
     templateUrl: 'views/creation_tool/crop.html',
     controller: 'ToolCtrl'
   }
+
   var errorState = {
     name: 'error',
     url: '/error',
@@ -169,7 +176,29 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/cart-payment-2.html',
     controller: 'CartCtrl'
   }
+  var cropNoteState = {
+    name: 'note-crop-tool',
+    url: '/note-crop-tool?index&type',
+    templateUrl: 'views/creation_tool/note-crop-tool.html',
+    controller: 'ToolCtrl'
+  }
+  var cropNoteFilterState = {
+    name: 'note-filter-tool',
+    url: '/note-filter-tool?index&type',
+    templateUrl: 'views/creation_tool/note-filtre-tool.html',
+    controller: 'ToolCtrl'
+  }
+  var cropNoteTextState = {
+    name: 'note-text-tool',
+    url: '/note-text-tool?index&type',
+    templateUrl: 'views/creation_tool/note-text-tool.html',
+    controller: 'ToolCtrl'
+  }
   $stateProvider.state(UploadPicsState);
+  $stateProvider.state(cropNoteState);
+  $stateProvider.state(mySelectionNoteState);
+  $stateProvider.state(cropNoteFilterState);
+  $stateProvider.state(cropNoteTextState);
   $stateProvider.state(successOrderState);
   $stateProvider.state(tutorialState);
   $stateProvider.state(errorState);

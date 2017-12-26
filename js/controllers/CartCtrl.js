@@ -127,20 +127,39 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, $stateParams
   }
   // Create Order
   $scope.createNewOrder = function() {
-    $scope.selectedAddress = parseInt($("#selectedAddress").val());
-    PSAPI.PSExecute('makeOrder', {
-      'address': $scope.selectedAddress,
-      'cart': $scope.cart.id,
-      'total_products': $scope.cart.total_products,
-      'total_products_wt': $scope.cart.total_products_wt,
-      'total_shipping': $scope.cart.total_shipping,
-      'total_shipping_tax_exc': $scope.cart.total_shipping_tax_exc,
-      'id_customer': $scope.userInfos.id,
-    }).then(function(r) {
-      $state.go('successorder', {}, {
+    if ($scope.cart.total_products == 0) {
+      $scope.selectedAddress = parseInt($("#selectedAddress").val());
+      PSAPI.PSExecute('makeOrder', {
+        'address': $scope.selectedAddress,
+        'cart': $scope.cart.id,
+        'total_products': $scope.cart.total_products,
+        'total_products_wt': $scope.cart.total_products_wt,
+        'total_shipping': $scope.cart.total_shipping,
+        'total_shipping_tax_exc': $scope.cart.total_shipping_tax_exc,
+        'id_customer': $scope.userInfos.id,
+      }).then(function(r) {
+        $state.go('successorder', {}, {
+          location: 'replace'
+        });
+      });
+    } else {
+      $state.go('cart_ogone', {}, {
         location: 'replace'
       });
-    });
+    }
+  }
+  $scope.ogoneProcess = function() {
+    PSAPI.get('addresses', {
+      'id_customer': $scope.userInfos.id,
+      'deleted': '0'
+    }, 'full').then(function(res) {
+      $scope.userInfos.addresses = res;
+      if (window.cordova)
+        window.open('https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + ($scope.cart.id) + '&idc=' + $scope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $scope.userInfos.addresses[$scope.selectedAddress].id, '_blank', 'location=no');
+      else {
+        window.location.href = 'https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + $scope.cart.id + '&idc=' + $scope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $scope.userInfos.addresses[$scope.selectedAddress].id;
+      }
+    }, function(res) {});
   }
   // Add voucher
   $scope.addVoucher = function() {
@@ -275,6 +294,11 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, $stateParams
       )
     }
   };
+  $scope.backToAddresses = function() {
+    $state.go('cart_select_address', {}, {
+      location: 'replace'
+    });
+  }
   $scope.updateAddressSubmitForm = function(isValid) {
     // check to make sure the form is completely valid
     console.log(isValid);
