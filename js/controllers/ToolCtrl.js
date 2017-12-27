@@ -2,6 +2,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   // Vars
   $scope.config = {
     limit: 60,
+    limitNote: 30,
     total: 0,
     cart: 0,
     type: 'Classic',
@@ -51,6 +52,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       */
     myLibrary: new Array(),
     myLibraryNote: new Array(),
+    myLibraryDuo: new Array(),
     myLibraryTexts: new Array(),
     cropIndex: 0,
     anchorScrollIndex: 0,
@@ -178,7 +180,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       }
     } else {
       var len = document.getElementById('images').files.length;
-      if (len > ($scope.config.limit - $scope.tool.sizeNote)) {
+      if (len > ($scope.config.limitNote - $scope.tool.sizeNote)) {
         $scope.errors.upload_limit.enable = true;
         return $scope.tool.sizeNote;
       } else {
@@ -225,7 +227,9 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         $("#loadingProgress").html(0);
         console.log($scope.tool.myLibraryNote);
         $scope.setStorage();
-        $state.go('mySelection', {}, {
+        $state.go('mySelection', {
+          "type": $scope.config.type,
+        }, {
           location: 'replace'
         });
       },
@@ -245,7 +249,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           return i;
       }
     } else {
-      for (var i = 0; i < $scope.config.limit; i++) {
+      for (var i = 0; i < $scope.config.limitNote; i++) {
         if (typeof $scope.tool.myLibraryNote[i] == "undefined")
           return i;
         else if (typeof $scope.tool.myLibraryNote[i].uid == "undefined")
@@ -349,19 +353,19 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     }
     $scope.setStorage();
   }
-  $scope.croptChangeText = function(){
+  $scope.croptChangeText = function(index) {
+    $scope.setStorage();
   }
   // Edit picture
   $scope.editItem = function(index, type) {
-    if ($scope.config.type = "BoogyNote"){
+    if ($scope.config.type = "BoogyNote") {
       $state.go('note-crop-tool', {
         "index": index,
         "type": type
       }, {
         location: 'replace'
       });
-    }
-    else
+    } else
       $state.go('edit', {
         "index": index,
         "type": type
@@ -376,10 +380,55 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   $scope.backToSelection = function(type) {
     $state.go('mySelection', {
-      type:type,
+      type: type,
     }, {
       location: 'replace'
     });
+  }
+  $scope.addEffect = function(effect) {
+    switch (effect) {
+      case 1:
+        if ($scope.tool.myLibraryNote[$scope.tool.cropIndex].effect != 1) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $('.cropper-view-box img').css("-webkit-filter", "grayscale(80%)");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = effect;
+        } else if ($scope.tool.myLibraryNote[$scope.tool.cropIndex].effect == 1) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = 0;
+        }
+        break;
+      case 2:
+        if ($scope.tool.myLibraryNote[$scope.tool.cropIndex].effect != 2) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $('.cropper-view-box img').css("-webkit-filter", "sepia(0.6)");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = effect;
+        } else if ($scope.tool.myLibraryNote[$scope.tool.cropIndex].effect == 2) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = 0;
+        }
+        break;
+      case 3:
+        if ($scope.tool.myLibraryNote[$scope.tool.cropIndex].effect != 3) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $('.cropper-view-box img').css("-webkit-filter", "invert(0.2)");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = effect;
+        } else if (this.myPDF[this.tools.index].effect == 3) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = 0;
+        }
+        break;
+      case 4:
+        if ($scope.tool.myLibraryNote[$scope.tool.cropIndex].effect != 4) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $('.cropper-view-box img').css("-webkit-filter", "invert(0)");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = effect;
+        } else if ($scope.tool.myLibraryNote[$scope.tool.cropIndex].effect == 4) {
+          $('.cropper-view-box img').css("-webkit-filter", "none");
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = 0;
+        }
+        break;
+    }
+    $scope.setStorage();
   }
   // Clear local storage
   $scope.cleanStorage = function(type) {
@@ -400,6 +449,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       $scope.tool.myLibraryNote = new Array();
       $scope.tool.sizeNote = 0;
     }
+    console.log($scope.tool);
   }
   // Add product to cart
   $scope.submitBoogybook = function() {
@@ -443,7 +493,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     $http({
       url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
       method: "POST",
-      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart+'&type=NoteBook',
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=NoteBook',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -457,35 +507,69 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Save croped picture
   $scope.saveCrop = function() {
-    $.ajax({
-      url: "https://boogybook.com/web_medias/preview_refonte.php",
-      type: 'post',
-      data: {
-        'img': $scope.tool.myLibrary[$scope.tool.cropIndex].server_link,
-        'crop': JSON.stringify($scope.cropDetails.cropper.getData()),
-        'cart': $scope.config.cart
-      },
-      success: function(data) {
-        var result = JSON.parse(data);
+    if ($scope.config.type == 'Classic') {
+      $.ajax({
+        url: "https://boogybook.com/web_medias/preview_refonte.php",
+        type: 'post',
+        data: {
+          'img': $scope.tool.myLibrary[$scope.tool.cropIndex].server_link,
+          'crop': JSON.stringify($scope.cropDetails.cropper.getData()),
+          'cart': $scope.config.cart
+        },
+        success: function(data) {
+          var result = JSON.parse(data);
 
-        /*
-         * Store croped img link
-         */
-        $scope.tool.myLibrary[$scope.tool.cropIndex].cropUrl = "https://boogybook.com/web_medias/preview_refonte_preview.php?img=" + $scope.cropDetails.cropImgPrefix + "" + result.link + "?cart=" + $scope.config.cart;
-        /*
-         * Back to @source page
-         */
-        $scope.setStorage();
-        $state.go('mySelection', {
-          "index": $scope.tool.cropIndex
-        }, {
-          location: 'replace'
-        });
-      },
-      error: function(request) {
-        console.error("Error");
-      }
-    });
+          /*
+           * Store croped img link
+           */
+          $scope.tool.myLibrary[$scope.tool.cropIndex].cropUrl = "https://boogybook.com/web_medias/preview_refonte_classic_page5.php?img=" + $scope.cropDetails.cropImgPrefix + "" + result.link + "?cart=" + $scope.config.cart;
+          /*
+           * Back to @source page
+           */
+          $scope.setStorage();
+          $state.go('mySelection', {
+            "index": $scope.tool.cropIndex,
+            "type": $scope.config.type
+          }, {
+            location: 'replace'
+          });
+        },
+        error: function(request) {
+          console.error("Error");
+        }
+      });
+    } else {
+      $.ajax({
+        url: "https://boogybook.com/web_medias/preview_refonte.php",
+        type: 'post',
+        data: {
+          'img': $scope.tool.myLibraryNote[$scope.tool.cropIndex].server_link,
+          'crop': JSON.stringify($scope.cropDetails.cropper.getData()),
+          'cart': $scope.config.cart
+        },
+        success: function(data) {
+          var result = JSON.parse(data);
+
+          /*
+           * Store croped img link
+           */
+          $scope.tool.myLibraryNote[$scope.tool.cropIndex].cropUrl = "https://boogybook.com/web_medias/preview_refonte_preview.php?img=" + $scope.cropDetails.cropImgPrefix + "" + result.link + "?cart=" + $scope.config.cart;
+          /*
+           * Back to @source page
+           */
+          $scope.setStorage();
+          $state.go('mySelection', {
+            "index": $scope.tool.cropIndex,
+            "type": $scope.config.type
+          }, {
+            location: 'replace'
+          });
+        },
+        error: function(request) {
+          console.error("Error");
+        }
+      });
+    }
   }
   // Save croped picture
   $scope.resetCrop = function() {
@@ -506,6 +590,11 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
      */
     $scope.cropDetails.cropper.rotate($scope.cropDetails.rotateParam);
     $scope.cropDetails.rotateParam = 0;
+    if ($scope.config.type == 'BoogyNote') {
+      $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = 0;
+      $('.cropper-view-box img').css("-webkit-filter", "none");
+    }
+
   }
   // Crop functions
   $scope.rotate = function(param) {
@@ -538,12 +627,13 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
      */
     if (typeof $stateParams.index != 'undefined' && ($state.$current.self.name == 'edit' || $state.$current.self.name == 'note-crop-tool' || $state.$current.self.name == 'note-filter-tool' || $state.$current.self.name == 'note-text-tool')) {
       var image = document.getElementById('image');
-      if ($scope.config.type == 'BoogyNote')
+      if ($scope.config.type == 'BoogyNote') {
+        console.log($scope.tool.myLibraryNote[$scope.tool.cropIndex]);
         $scope.cropDetails.cropper = new Cropper(image, {
           aspectRatio: 9 / 9,
           autoCropArea: 1,
           viewMode: 1,
-          data: $scope.tool.myLibrary[$scope.tool.cropIndex].cropObject,
+          data: $scope.tool.myLibraryNote[$scope.tool.cropIndex].cropObject,
           strict: true,
           guides: true,
           highlight: false,
@@ -557,7 +647,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           minContainerHeight: 350,
           crop: function(e) {}
         });
-      else {
+      } else {
         $scope.cropDetails.cropper = new Cropper(image, {
           aspectRatio: 12 / 8,
           autoCropArea: 1,
@@ -597,6 +687,11 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   if ($stateParams.type == "BoogyNote") {
     $scope.config.type = 'BoogyNote';
+    console.log($scope.config.type);
+    console.log($scope.tool);
+  }
+  else if ($stateParams.type == "BoogyDuo") {
+    $scope.config.type = 'BoogyDuo';
     console.log($scope.config.type);
     console.log($scope.tool);
   }

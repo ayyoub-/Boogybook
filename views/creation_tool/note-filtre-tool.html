@@ -11,17 +11,28 @@
       <div class="container">
 
         <div class="img-container">
-          <img id="image" style="display: none;" src="{{tool.myLibrary[tool.cropIndex].server_link}}" alt="Picture">
+          <img id="image" style="display: none;" src="{{tool.myLibraryNote[tool.cropIndex].server_link}}" alt="Picture">
         </div>
 
         <div class="docs-buttons">
           <div class="filter-group">
-            <button class="filter-btn" id="filter-1"><img src="img/filter_1.png" alt=""></button>
-            <button class="filter-btn" id="filter-2"><img src="img/filter_2.png" alt=""></button>
-            <button class="filter-btn" id="filter-3"><img src="img/filter_3.png" alt=""></button>
-            <button class="filter-btn" id="filter-4"><img src="img/filter_4.png" alt=""></button>
+            <button class="filter-btn" id="filter-1" ng-click="addEffect(1)"><img src="img/filter_1.png" alt=""></button>
+            <button class="filter-btn" id="filter-2" ng-click="addEffect(2)"><img src="img/filter_2.png" alt=""></button>
+            <button class="filter-btn" id="filter-3" ng-click="addEffect(3)"><img src="img/filter_3.png" alt=""></button>
+            <button class="filter-btn" id="filter-4" ng-click="addEffect(4)"><img src="img/filter_4.png" alt=""></button>
           </div>
-
+          <div class="btn-group-bottom">
+            <button type="button" class="btn btn-primary btn-left" data-method="crop" title="Crop">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" ng-click="saveCrop()">
+                                <span class="fa fa-check"></span>
+                            </span>
+                        </button>
+            <button type="button" class="btn btn-primary btn-right" data-method="clear" title="Clear">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" ng-click="resetCrop()">
+                                <span class="fa fa-remove"></span>
+                            </span>
+                        </button>
+          </div>
           <div class="clearfix"></div>
 
         </div>
@@ -31,8 +42,8 @@
   </div>
   <div class="crop-tool-nav">
     <ul>
-      <li ui-sref="note-crop-tool({'index':tool.cropIndex, 'type': conifg.type})">Recadrage</li>
-      <li ui-sref="note-text-tool({'index':tool.cropIndex, 'type': conifg.type})">Texte</li>
+      <li ui-sref="note-crop-tool({'index':tool.cropIndex, 'type': config.type})">Recadrage</li>
+      <li ui-sref="note-text-tool({'index':tool.cropIndex, 'type': config.type})">Texte</li>
       <li class="active">Filtres</li>
     </ul>
   </div>

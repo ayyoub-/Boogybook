@@ -1,125 +1,124 @@
 <link rel="stylesheet" href="css/creation-tool.css">
-<div class="creation-tool-block">
-  <div class="container" ng-if="tool.size > 0 && config.type == 'Classic'">
-    <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
-      <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
-        <div ng-if="config.type == 'Classic'" class="numbers">{{tool.size}} / 3</div>
-      </div>
-      <form method="post" id="myForm" enctype="multipart/form-data" ng-if="config.type == 'Classic'">
-        <button ng-if="tool.size < config.limit" type="submit" class="btn-continuer" ng-click="submitBoogybook()" disabled>Continuer</button>
-        <button ng-if="tool.size == config.limit" class="btn-continuer" ng-click="submitBoogybook()">Continuer</button>
-      </form>
-    </div>
-    <div class="creation-tool-body">
-      <ul class="list-img" ng-if="config.type == 'Classic'">
-        <li class="single-img" ng-repeat="(index, item) in tool.myLibrary track by $index" id="{{item.uid}}-{{index}}">
-          <img ng-if="item.cropUrl != ''" src="{{item.cropUrl}}" alt="">
-          <img ng-if="item.cropUrl == ''" src="{{item.ratio_link}}" alt="">
-          <div class="control-block">
-            <div class="control-inner-block">
-              <div ng-click="deleteItem(index, config.type)" class="delete"></div>
-              <div ng-click="editItem(index, config.type)" class="edit"></div>
-              <div ng-if="tool.size != config.limit" ng-click="duplicateItem(index, config.type)" class="duplicate"></div>
+    <div class="creation-tool-block">
+        <div class="container" ng-if="tool.size > 0 && config.type == 'Classic'">
+            <div class="controls">
+                <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+                <div class="selected-img">
+                    <div class="text">Images séléctionnées</div>
+                    <div ng-if="config.type == 'Classic'" class="numbers">{{tool.size}} / {{config.limit}}</div>
+                </div>
+                <form method="post" id="myForm" enctype="multipart/form-data" ng-if="config.type == 'Classic'">
+                    <button ng-if="tool.size < config.limit" type="submit" class="btn-continuer" ng-click="submitBoogybook()" disabled>Continuer</button>
+                    <button ng-if="tool.size == config.limit" class="btn-continuer" ng-click="submitBoogybook()">Continuer</button>
+                </form>
             </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="container" ng-if="tool.sizeNote > 0 && config.type == 'BoogyNote'">
-    <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
-      <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
-        <div ng-if="config.type == 'BoogyNote'" class="numbers">{{tool.sizeNote}} / 4</div>
-      </div>
-      <form method="post" id="myForm" enctype="multipart/form-data" ng-if="config.type == 'BoogyNote'">
-        <button ng-if="tool.sizeNote < config.limit" type="submit" class="btn-continuer" ng-click="submitNotebook()" disabled>Continuer</button>
-        <button ng-if="tool.sizeNote == config.limit" class="btn-continuer" ng-click="submitNotebook()">Continuer</button>
-      </form>
-    </div>
-    <div class="creation-tool-body">
-      <ul class="list-img" ng-if="config.type == 'BoogyNote'">
-        <li class="single-img-note" ng-repeat="(index, item) in tool.myLibraryNote track by $index" id="{{item.uid}}-{{index}}">
-          <img ng-if="item.cropUrl != ''" src="{{item.cropUrl}}" alt="">
-          <img ng-if="item.cropUrl == ''" src="{{item.ratio_link}}" alt="">
-          <div class="control-block">
-            <div class="control-inner-block">
-              <div ng-click="deleteItem(index, config.type)" class="delete"></div>
-              <div ng-click="editItem(index, config.type)" class="edit"></div>
-              <div ng-if="tool.size != config.limit" ng-click="duplicateItem(index, config.type)" class="duplicate"></div>
+            <div class="creation-tool-body">
+                <ul class="list-img" ng-if="config.type == 'Classic'">
+                    <li class="single-img" ng-repeat="(index, item) in tool.myLibrary track by $index" id="{{item.uid}}-{{index}}">
+                        <img ng-if="item.cropUrl != ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.cropUrl}}" alt="">
+                            <img ng-if="item.cropUrl == ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.ratio_link}}" alt="">
+                                <div class="control-block">
+                                    <div class="control-inner-block">
+                                        <div ng-click="deleteItem(index, config.type)" class="delete"></div>
+                                        <div ng-click="editItem(index, config.type)" class="edit"></div>
+                                        <div ng-if="tool.size != config.limit" ng-click="duplicateItem(index, config.type)" class="duplicate"></div>
+                                    </div>
+                                </div>
+                                </li>
+                </ul>
             </div>
-          </div>
-          <input type="text" name="" value="" class="item-text" ng-bind="item.text">
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="container" ng-if="tool.size == 0 && config.type == 'Classic'">
-    <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
-      <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
-        <div class="numbers">{{tool.size}} / {{config.limit}}</div>
-      </div>
-      <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
+        </div>
+        <div class="container" ng-if="tool.sizeNote > 0 && config.type == 'BoogyNote'">
+            <div class="controls">
+                <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+                <div class="selected-img">
+                    <div class="text">Images séléctionnées</div>
+                    <div ng-if="config.type == 'BoogyNote'" class="numbers">{{tool.sizeNote}} / {{config.limitNote}}</div>
+                </div>
+                <form method="post" id="myForm" enctype="multipart/form-data" ng-if="config.type == 'BoogyNote'">
+                    <button ng-if="tool.sizeNote < config.limitNote" type="submit" class="btn-continuer" ng-click="submitNotebook()" disabled>Continuer</button>
+                    <button ng-if="tool.sizeNote == config.limitNote" class="btn-continuer" ng-click="submitNotebook()">Continuer</button>
+                </form>
+            </div>
+            <div class="creation-tool-body">
+                <ul class="list-img" ng-if="config.type == 'BoogyNote'">
+                    <li class="single-img-note" ng-repeat="(index, item) in tool.myLibraryNote track by $index" id="{{item.uid}}-{{index}}">
+                        <img ng-if="item.cropUrl != ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.cropUrl}}" alt="">
+                            <img ng-if="item.cropUrl == ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.ratio_link}}" alt="">
+                                <div class="control-block">
+                                    <div class="control-inner-block">
+                                        <div ng-click="deleteItem(index, config.type)" class="delete"></div>
+                                        <div ng-click="editItem(index, config.type)" class="edit"></div>
+                                        <div ng-if="tool.size != config.limitNote" ng-click="duplicateItem(index, config.type)" class="duplicate"></div>
+                                    </div>
+                                </div>
+                                <input type="text" name="" value="" class="item-text" ng-model="item.text" ng-change="croptChangeText(index)">
+                                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" ng-if="tool.size == 0 && config.type == 'Classic'">
+            <div class="controls">
+                <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+                <div class="selected-img">
+                    <div class="text">Images séléctionnées</div>
+                    <div class="numbers">{{tool.size}} / {{config.limit}}</div>
+                </div>
+                <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
+                <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
+            </div>
+
+            <div class="creation-tool-body">
+                <div class="upload-btn-wrapper">
+                    <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                    <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
+                        <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                    <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="container" ng-if="tool.sizeNote == 0 && config.type == 'BoogyNote'">
+            <div class="controls">
+                <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+                <div class="selected-img">
+                    <div class="text">Images séléctionnées</div>
+                    <div class="numbers">{{tool.sizeNote}} / {{config.limitNote}}</div>
+                </div>
+                <button ng-if="tool.sizeNote < config.limitNote" class="btn-continuer" disabled>Continuer</button>
+                <button ng-if="tool.sizeNote == config.limitNote" class="btn-continuer">Continuer</button>
+            </div>
+            <div class="creation-tool-body" ng-if="config.type == 'BoogyNote'">
+                <div class="upload-btn-wrapper">
+                    <button ng-if="tool.sizeNote < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limitNote - tool.sizeNote}}/{{config.limitNote}})</span></button>
+                    <button ng-if="tool.sizeNote == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
+                        <span>télécharger depuis mobile<br />({{config.limitNote - tool.sizeNote}}/{{config.limitNote}})</span></button>
+                    <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="creation-tool-body">
-      <div class="upload-btn-wrapper">
-        <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
-        <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                    <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
-        <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
-      </div>
-    </div>
-  </div>
-
-  <div class="container" ng-if="tool.sizeNote == 0 && config.type == 'BoogyNote'">
-    <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
-      <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
-        <div class="numbers">{{tool.size}} / {{config.limit}}</div>
-      </div>
-      <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
+    <div class="creation-tool-nav">
+        <ul>
+            <li>Mon Album</li>
+            <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+            <li>Importer des photos depuis Facebook</li>
+            <li>Importer des photos depuis Instagram</li>
+        </ul>
     </div>
 
-    <div class="creation-tool-body">
-      <div class="upload-btn-wrapper">
-        <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
-        <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                   <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
-        <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
-      </div>
+    <button ng-if="tool.size < 60 && tool.size > 0 && config.type == 'Classic'" class="bnt-add-picture" ng-click="triggerInputFile()">
+        <img src="img/add-picture.svg" alt="">
+    </button>
+    <button ng-if="tool.sizeNote < 60 && tool.size > 0 && config.type == 'BoogyNote'" class="bnt-add-picture" ng-click="triggerInputFile()">
+        <img src="img/add-picture.svg" alt="">
+    </button>
+    <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
+    <div class="upload-progress">
+        <div class="counter">
+            Merci de patienter<br/>
+            <span>
+                <span id="loadingProgress">0</span>% en cours...</span>
+        </div>
     </div>
-  </div>
-</div>
-
-<div class="creation-tool-nav">
-  <ul>
-    <li>Mon Album</li>
-    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
-    <li>Importer des photos depuis Facebook</li>
-    <li>Importer des photos depuis Instagram</li>
-  </ul>
-</div>
-
-<button ng-if="tool.size < 60 && tool.size > 0 && config.type == 'Classic'" class="bnt-add-picture" ng-click="triggerInputFile()">
-    <img src="img/add-picture.svg" alt="">
-</button>
-<button ng-if="tool.sizeNote < 60 && tool.size > 0 && config.type == 'BoogyNote'" class="bnt-add-picture" ng-click="triggerInputFile()">
-    <img src="img/add-picture.svg" alt="">
-</button>
-<input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
-<div class="upload-progress">
-  <div class="counter">
-    Merci de patienter<br/>
-    <span>
-          <span id="loadingProgress">0</span>% en cours...</span>
-  </div>
-</div>

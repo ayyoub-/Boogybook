@@ -11,7 +11,7 @@
                 <div class="container">
 
                   <div class="img-container">
-                    <img id="image" style="display: none;" src="{{tool.myLibrary[tool.cropIndex].server_link}}" alt="Picture">
+                    <img id="image" style="display: none;" src="{{tool.myLibraryNote[tool.cropIndex].server_link}}" alt="Picture">
                   </div>
 
                     <div class="docs-buttons">
@@ -29,7 +29,7 @@
                             </select>
                         </div>
                         <div class="textarea-block">
-                            <textarea ng-model="tool.myLibraryNote[tool.cropIndex].text" ng-change="croptChangeText()" name="" id="" cols="30" rows="10" placeholder="Insérez votre texte ici"></textarea>
+                            <textarea ng-model="tool.myLibraryNote[tool.cropIndex].text" ng-change="croptChangeText(tool.cropIndex)" name="" id="" cols="30" rows="10" placeholder="Insérez votre texte ici"></textarea>
                         </div>
 
                         <div class="btn-group-bottom">
@@ -52,9 +52,9 @@
         </div>
         <div class="crop-tool-nav">
             <ul>
-                <li ui-sref="note-crop-tool({'index':tool.cropIndex, 'type': conifg.type})">Recadrage</li>
+                <li ui-sref="note-crop-tool({'index':tool.cropIndex, 'type': config.type})">Recadrage</li>
                 <li class="active">Texte</li>
-                <li ui-sref="note-filter-tool({'index':tool.cropIndex, 'type': conifg.type})">Filtres</li>
+                <li ui-sref="note-filter-tool({'index':tool.cropIndex, 'type': config.type})">Filtres</li>
             </ul>
         </div>
 
