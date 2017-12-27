@@ -68,7 +68,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   // Set local storage
   $scope.setStorage = function() {
     sessionStorage.setItem("myLibrary", JSON.stringify($scope.tool.myLibrary));
-    sessionStorage.setItem("myLibraryNote", JSON.stringify($scope.tool.myLibrary));
+    sessionStorage.setItem("myLibraryNote", JSON.stringify($scope.tool.myLibraryNote));
   }
   // Get local Storage
   $scope.getStorage = function() {
@@ -81,8 +81,11 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       $scope.tool.size = $scope.tool.myLibrary.length;
     }
     if (typeof sessionStorage.getItem("myLibraryNote") != undefined && sessionStorage.getItem("myLibraryNote") != null) {
+
       $scope.tool.myLibraryNote = JSON.parse(sessionStorage.getItem("myLibraryNote"));
       $scope.tool.sizeNote = $scope.tool.myLibraryNote.length;
+      console.log($scope.tool.myLibraryNote);
+      console.log($scope.tool.sizeNote);
     }
   }
   // get url parameters
@@ -220,6 +223,8 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         $scope.loadingImages = false;
         $(".upload-progress").removeClass("active");
         $("#loadingProgress").html(0);
+        console.log($scope.tool.myLibraryNote);
+        $scope.setStorage();
         $state.go('mySelection', {}, {
           location: 'replace'
         });
@@ -288,6 +293,8 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     } else {
       $scope.tool.myLibraryNote[from] = item;
       $scope.tool.sizeNote++;
+      console.log($scope.tool.myLibraryNote);
+      console.log($scope.tool.sizeNote);
     }
     $scope.setStorage();
   }
@@ -422,7 +429,6 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     }).error(function(data, status, headers, config) {});
   }
   $scope.submitNotebook = function() {
-    alert("OK");
     console.log($scope.tool.myLibraryNote);
     var ratioImagesArray = new Array();
     var imageUidsArray = new Array();
@@ -591,5 +597,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   if ($stateParams.type == "BoogyNote") {
     $scope.config.type = 'BoogyNote';
+    console.log($scope.config.type);
+    console.log($scope.tool);
   }
 });
