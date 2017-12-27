@@ -264,9 +264,15 @@
 
 .single-img-note .item-text {
     position: absolute;
-    bottom: 0px;
-    width: 100%;
+    bottom: 10px;
+    width: 90%;
     text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30px;
+    box-shadow: 3px 3px 33px #393434;
+    border: 3px solid #3cc8df;
+    border-radius: 0;
 }
 
 .single-img-note:hover .control-block {
