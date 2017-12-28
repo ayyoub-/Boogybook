@@ -76,15 +76,33 @@
     background-color: #3cc8df;
     padding: 0;
     margin: 0;
-    width: 100%;
+    width: 45%;
     height: 60px;
     border-radius: 5px;
-    margin: 0 auto;
-    margin-top: 30px;
     line-height: 55px;
+    float: left;
 }
 
 .btn-creer {
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 0;
+    background-color: #3cc8df;
+    padding: 0;
+    margin: 0;
+    width: 45%;
+    height: 60px;
+    border-radius: 5px;
+    line-height: 55px;
+    float: right;
+}
+
+.btn-creer-detail {
     cursor: pointer;
     display: block;
     font-size: 20px;
