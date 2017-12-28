@@ -1,1 +1,67 @@
-<h1>Cart</h1>
+<link rel="stylesheet" href="css/cart.css">
+<script src="js/cart.js"></script>
+<div class="cart-block">
+  <div class="container">
+    <div class="go-back" ui-sref="cart_recap">Continuer mes achats</div>
+    <div class="cart-inner-block">
+      <div class="cart-steps-block">
+        <div class="cart-steps">
+          <div class="step">1</div>
+          <div class="step">2</div>
+          <div class="step">3</div>
+          <div class="step">4</div>
+          <div class="step active">5</div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="cart-step-text">05. PAIEMENT</div>
+      </div>
+      <div class="cart-items-block">
+        <div class="cart-item" ng-repeat="(index, item) in cart.products">
+          <div class="cart-item-img">
+            <img src="{{productsLinks[index]}}" alt="">
+          </div>
+          <div class="cart-item-details">
+            <div class="top">
+              <div class="cart-item-name">{{item.name}}</div>
+              <div class="cart-item-reference">Référence : {{item.reference}}</div>
+            </div>
+            <div class="bottom">
+              <div class="cart-item-price"><b>Prix :</b> {{item.price_with_reduction}} €</div>
+              <div class="cart-item-shipping"><b>Frais de port :</b> {{cart.total_shipping}}€</div>
+              <div class="cart-item-quantity">
+                <b>Quantité :</b><br />
+                <div class="qte-box">
+                  <div ng-if="item.quantity > 1" class="btn-remove" ng-click="addQuantity(index, -1)">-</div>
+                  <input type="text" class="qte-input" name="qte-input" value="{{item.quantity}}">
+                  <div class="btn-add" ng-click="addQuantity(index, 1)">+</div>
+                </div>
+              </div>
+            </div>
+            <div class="remove-item" ng-click="removeProductFromCart(index)">
+              <img src="img/delete.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="seperator">
+      <div class="total-block">
+        <div class="total-txt">TOTAL :</div>
+        <div class="total-price">{{cart.total_price}} €</div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="btn-commander" ng-click="ogoneProcess()">
+        Payez par carte bancaire
+      </div>
+      <div class="ingenico-logo">
+        <img src="img/ingenico-logo.png" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="upload-progress" ng-show="!cartLoaded">
+  <div class="counter">
+    <img class="counter-img" src="img/loading.gif" alt=""><br/>
+    <br/> Merci de patienter
+  </div>
+</div>

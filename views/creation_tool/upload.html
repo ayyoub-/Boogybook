@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="css/creation-tool.css">
+<div class="creation-tool-block">
+    <div class="container">
+        <div class="controls">
+            <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+            <div class="selected-img">
+                <div class="text">Images séléctionnées</div>
+                <div class="numbers">{{tool.size}} / {{config.limit}}</div>
+            </div>
+            <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
+            <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
+        </div>
+
+       <div class="creation-tool-body">
+            <div class="upload-btn-wrapper">
+                <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
+                    <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
+            </div>
+        </div>
+   </div>
+</div>
+</div>
+<div class="creation-tool-nav">
+    <ul>
+        <li ui-sref="mySelection">Mon Album</li>
+        <li class="active">Ajouter des photos</li>
+        <li>Importer des photos depuis Facebook</li>
+        <li>Importer des photos depuis Instagram</li>
+    </ul>
+</div>
+
+<div class="upload-progress">
+    <div class="counter">
+        Merci de patienter<br/>
+        <span>
+          <span id="loadingProgress">0</span>% en cours...</span>
+    </div>
+</div>

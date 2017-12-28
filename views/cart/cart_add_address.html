@@ -1,81 +1,62 @@
 <link rel="stylesheet" href="css/cart.css">
+<script src="js/cart.js"></script>
+<script src="js/lib/jquery.easydropdown.js"></script>
 <div class="cart-block">
     <div class="container">
-        <div class="go-back">Continuer mes achats</div>
+        <div class="go-back" ng-click="backToAddresses()">Continuer mes achats</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
-                <div class="cart-steps">
-                    <div class="step">1</div>
-                    <div class="step">2</div>
-                    <div class="step active">3</div>
-                    <div class="step">4</div>
-                    <div class="step">5</div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cart-step-text">03. Vos adresses</div>
+
+                <div class="cart-step-text">AJOUTER UNE NOUVELLE ADRESSE</div>
             </div>
-            <div class="select-adress-block">
-                <div class="adress-select-txt">
-                    Choisissez une adresse de livraison :
-                </div>
-                <div class="select-adress">
-                    <select name="" id="" class="dropdown">
-                        <option value="">Adresse 1</option>
-                        <option value="">Adresse 2</option>
-                        <option value="">Adresse 3</option>
-                    </select>
-                </div>
-
-                <div class="form-group3 adresse-checkbox">
-                    <input id="adresse-checkbox" type="checkbox" name="adresse-checkbox" value="adresse-checkbox">
-                    <label for="adresse-checkbox">Utiliser la même adresse pour la facturation </label>
-                </div>
-
-                <div class="current-addresses">
-                    <div class="shipping-adresse">
-                        <div class="title">
-                            Adresse de livraison
-                        </div>
-                        <ul class="adress-infos">
-                            <li>Ismail Sanni</li>
-                            <li>Societé</li>
-                            <li>Adresse</li>
-                            <li>Adresse (2)</li>
-                            <li>Code postal</li>
-                            <li>Ville</li>
-                            <li>Pays</li>
-                            <li>Téléphone fixe</li>
-                            <li>Téléphone mobile</li>
-                        </ul>
-                        <button class="update-adress">
-                            Mettre à jour
-                        </button>
+            <div class="inscription-block">
+                <form id="add_address" name="add_address" ng-submit="addAddressSubmitForm(add_address.$valid)" novalidate>
+                    <div class="form-group2 nom">
+                        <input type="text" class="input-text2 lettersonly" ng-minlength="3" ng-maxlength="15" ng-model="newAddress.lastname" name="last_name" placeholder="Nom" required>
+                        <p ng-show="add_address.last_name.$invalid && !add_address.last_name.$pristine" class="help-block">Votre nom est invalide.</p>
                     </div>
-                    <div class="payment-adresse">
-                        <div class="title">
-                            Adresse de facturation
-                        </div>
-                        <ul class="adress-infos">
-                            <li>Ismail Sanni</li>
-                            <li>Societé</li>
-                            <li>Adresse</li>
-                            <li>Adresse (2)</li>
-                            <li>Code postal</li>
-                            <li>Ville</li>
-                            <li>Pays</li>
-                            <li>Téléphone fixe</li>
-                            <li>Téléphone mobile</li>
-                        </ul>
-                        <button class="update-adress">
-                                Mettre à jour
-                            </button>
+                    <div class="form-group2 prenom">
+                        <input type="text" class="input-text2 lettersonly" ng-minlength="3" ng-maxlength="15" ng-model="newAddress.firstname" name="first_name" placeholder="Prenom" required>
+                        <p ng-show="add_address.first_name.$invalid && !add_address.first_name.$pristine" class="help-block">Votre prénom est invalide.</p>
                     </div>
-                    <div class="clearfix"></div>
-                    <button class="add-adress">Ajouter une nouvelle adresse</button>
-                </div>
-                <div class="btn-commander">
-                    Commander
-                </div>
+                    <div class="form-group2 societe">
+                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="company" ng-model="newAddress.company" placeholder="Societé" required>
+                        <p ng-show="add_address.company.$invalid && !add_address.company.$pristine" class="help-block">Le nom de la société est invalide.</p>
+                    </div>
+                    <div class="form-group2 adresse">
+                        <input type="text" class="input-text2" name="address" ng-minlength="5" ng-maxlength="15" ng-model="newAddress.address1" placeholder="Adresse" required>
+                        <p ng-show="add_address.address.$invalid && !add_address.address.$pristine" class="help-block">Votre addresse invalide.</p>
+                    </div>
+                    <div class="form-group2 adresse2">
+                        <input type="text" class="input-text2" ng-minlength="5" ng-maxlength="15" ng-model="newAddress.address2" placeholder="Adresse (2)">
+                    </div>
+                    <div class="form-group2 codepostal">
+                        <input type="text" class="input-text2" ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/" name="postcode" ng-model="newAddress.postcode" placeholder="Code postal" required>
+                        <p ng-show="add_address.postcode.$invalid && !add_address.postcode.$pristine" class="help-block">Votre addresse invalide.</p>
+                    </div>
+                    <div class="form-group2 ville">
+                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="city" ng-model="newAddress.city" placeholder="Ville" required>
+                        <p ng-show="add_address.city.$invalid && !add_address.city.$pristine" class="help-block">Votre ville invalide.</p>
+                    </div>
+                    <div class="form-group2 pays">
+                        <select name="langue-select" id="langue-select" class="dropdown" ng-model="newAddress.id_country">
+                          <option value="" class="label">Pays</option>
+                <option value="{{item.id}}" ng-repeat="item in countries">{{item.name[0].value}}</option>
+            </select>
+                    </div>
+                    <div class="form-group2 telephone-fixe">
+                        <input type="text" class="input-text2" ng-model="newAddress.phone_mobile" placeholder="Téléphone fixe" required>
+                    </div>
+                    <div class="form-group2 telephone-mobile">
+                        <input type="text" class="input-text2" ng-model="newAddress.phone" placeholder="Téléphone mobile" required>
+                    </div>
+                    <br /><br />
+                    <div class="form-group2 adresse-name">
+                        <label for="">Donnez un titre à cette adresse pour la retrouver plus facilement</label>
+                        <input type="text" class="input-text2" ng-model="newAddress.alias" placeholder="Mon adresse" required>
+                    </div>
+                    <button type="submit" class="btn-save">Enregister</button>
+                </form>
             </div>
 
 

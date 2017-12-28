@@ -47,6 +47,13 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     }
     $translateProvider.preferredLanguage('en');
   }
+  $('.menu-toggle, .overlay, .menu-list li a').click(function(e) {
+    e.preventDefault();
+    $('.overlay').fadeToggle();
+    $('.menu-toggle').toggleClass('active');
+    $('.side-menu').toggleClass('active');
+    $('.btn-help').toggleClass('active');
+  });
   // Routes
   var homeState = {
     name: 'home',
@@ -78,10 +85,22 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/cart/cart_add_account.html',
     controller: 'CartCtrl'
   }
+  var cartSelectAddressState = {
+    name: 'cart_select_address',
+    url: '/cart_select_address',
+    templateUrl: 'views/cart/cart_select_address.html',
+    controller: 'CartCtrl'
+  }
   var cartAddressState = {
     name: 'cart_add_address',
     url: '/cart_add_address',
     templateUrl: 'views/cart/cart_add_address.html',
+    controller: 'CartCtrl'
+  }
+  var addressUpdateState = {
+    name: 'address_update',
+    url: '/address_update?id_address',
+    templateUrl: 'views/cart/cart_update_address.html',
     controller: 'CartCtrl'
   }
   var cartShippingState = {
@@ -114,28 +133,93 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     templateUrl: 'views/faq.html',
     controller: 'FaqCtrl'
   }
+  var UploadPicsState = {
+    name: 'upload',
+    url: '/upload',
+    templateUrl: 'views/creation_tool/upload.html',
+    controller: 'ToolCtrl'
+  }
+  var mySelectionState = {
+    name: 'mySelection',
+    url: '/mySelection?inde&type',
+    templateUrl: 'views/creation_tool/my_selection.html',
+    controller: 'ToolCtrl'
+  }
+  var mySelectionNoteState = {
+    name: 'my_selection_notebook',
+    url: '/my_selection_notebook?inde&type',
+    templateUrl: 'views/creation_tool/my_selection_notebook.html',
+    controller: 'ToolCtrl'
+  }
+  var cropState = {
+    name: 'edit',
+    url: '/edit?index&type',
+    templateUrl: 'views/creation_tool/crop.html',
+    controller: 'ToolCtrl'
+  }
+
+  var errorState = {
+    name: 'error',
+    url: '/error',
+    templateUrl: 'views/404.html',
+    controller: 'indexCtrl'
+  }
+  var tutorialState = {
+    name: 'tutorial',
+    url: '/tutorial',
+    templateUrl: 'views/tutorial.html',
+    controller: 'indexCtrl'
+  }
+  var successOrderState = {
+    name: 'successorder',
+    url: '/successorder',
+    templateUrl: 'views/cart-payment-2.html',
+    controller: 'CartCtrl'
+  }
+  var cropNoteState = {
+    name: 'note-crop-tool',
+    url: '/note-crop-tool?index&type',
+    templateUrl: 'views/creation_tool/note-crop-tool.html',
+    controller: 'ToolCtrl'
+  }
+  var cropNoteFilterState = {
+    name: 'note-filter-tool',
+    url: '/note-filter-tool?index&type',
+    templateUrl: 'views/creation_tool/note-filtre-tool.html',
+    controller: 'ToolCtrl'
+  }
+  var cropNoteTextState = {
+    name: 'note-text-tool',
+    url: '/note-text-tool?index&type',
+    templateUrl: 'views/creation_tool/note-text-tool.html',
+    controller: 'ToolCtrl'
+  }
+  $stateProvider.state(UploadPicsState);
+  $stateProvider.state(cropNoteState);
+  $stateProvider.state(mySelectionNoteState);
+  $stateProvider.state(cropNoteFilterState);
+  $stateProvider.state(cropNoteTextState);
+  $stateProvider.state(successOrderState);
+  $stateProvider.state(tutorialState);
+  $stateProvider.state(errorState);
+  $stateProvider.state(mySelectionState);
+  $stateProvider.state(cropState);
   $stateProvider.state(homeState);
   $stateProvider.state(productState);
   $stateProvider.state(cartRecapState);
   $stateProvider.state(cartLoginState);
   $stateProvider.state(cartAddressState);
+  $stateProvider.state(cartSelectAddressState);
   $stateProvider.state(cartAccountState);
   $stateProvider.state(cartShippingState);
   $stateProvider.state(cartOgoneState);
   $stateProvider.state(contactState);
   $stateProvider.state(accountState);
   $stateProvider.state(faqState);
-
-  $('.menu-toggle, .overlay, .menu-list li a').click(function(e) {
-    e.preventDefault();
-    $('.overlay').fadeToggle();
-    $('.menu-toggle').toggleClass('active');
-    $('.side-menu').toggleClass('active');
-  });
-
+  $stateProvider.state(addressUpdateState);
 });
 
-boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q) {
+boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state) {
   // Products list
   $scope.products = new Array();
   $rootScope.products = new Array();
@@ -158,32 +242,95 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $rootScope, Cordova
   $scope.getStorage = function() {
     if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null)
       $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
+    if (typeof sessionStorage.getItem("products") != 'undefined' && sessionStorage.getItem("products") != null)
+      $scope.products = JSON.parse(sessionStorage.getItem("products"));
+    else
+      $scope.getProducts();
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
+    else
+      $scope.getCartDetails();
+  }
+  $scope.tutoPrevious = function() {
+    $state.go('home', {}, {
+      location: 'replace'
+    });
+  }
+  $scope.tutoNext = function() {
+    var currentSlide = $('.tutorial-intro').find('.slide.active');
+    var currentIndicator = $('.slider-indicators').find('li.active');
+
+    if ($('.slide.active').hasClass('slide-5')) {
+      $state.go('home', {}, {
+        location: 'replace'
+      });
+    } else {
+      //Reset
+      $('.tutorial-intro').find('.slide').removeClass('active');
+      $('.slider-indicators').find('li').removeClass('active');
+      //Activate
+      currentSlide.next().addClass('active');
+      currentIndicator.next().addClass('active');
+    }
+  }
+  // Get cart details
+  $scope.getCartDetails = function() {
+    params = {};
+    // check if user is connected
+    if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null) {
+      params.authInfos = $scope.userInfos;
+      params.authInfos.addresses = [];
+    }
+    // check if he has an old existing card
+    if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
+      params.id_cart = $scope.cart.id;
+    PSAPI.PSExecute('getCartId', params).then(function(res) {
+      if (typeof res.id != 'undefined') {
+        id_cart = res.id;
+        $scope.cart = res;
+        console.log($scope.cart);
+        $scope.setStorage();
+      }
+    });
   }
   // Get products by category
+  $scope.getProducts = function() {
+    PSAPI.PSExecute('listBBCaseProductsByCategory', {
+      'id_category': $scope.globalCategory,
+    }).then(function(r) {
+      if (r.OK) {
+        $scope.products = r.covers;
+        var itemsSorted = $filter('orderBy')($scope.products, 'id_product');
+        var help = itemsSorted[0];
+        itemsSorted[0] = itemsSorted[itemsSorted.length - 1];
+        itemsSorted[itemsSorted.length - 1] = help;
+        $scope.products = itemsSorted
+        $scope.setStorage();
+      }
+    });
+  }
   $scope.getStorage();
-  PSAPI.PSExecute('listBBCaseProductsByCategory', {
-    'id_category': $scope.globalCategory,
-  }).then(function(r) {
-    if (r.OK) {
-      $scope.products = r.covers;
-      $scope.setStorage();
-    }
-  });
-  // Get Cart
-  params = {};
-  // check if user is connected
-  if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null)
-    params.authInfos = $scope.userInfos;
-  // check if he has an old existing card
-  if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
-    params.id_cart = $scope.cart.id;
-  PSAPI.PSExecute('getCartId', params).then(function(res) {
-    if (typeof res.id != 'undefined') {
-      id_cart = res.id;
-      $scope.cart = res;
-      $scope.setStorage();
-    }
-  });
+  // Check Internet connexion
+  $rootScope.online = navigator.onLine;
+  if (!$rootScope.online)
+    $state.go('error', {}, {
+      location: 'replace'
+    });
+  $window.addEventListener("offline", function() {
+    $rootScope.$apply(function() {
+      $rootScope.online = false;
+      $state.go('error', {}, {
+        location: 'replace'
+      });
+    });
+  }, false);
+
+  $window.addEventListener("online", function() {
+    $rootScope.$apply(function() {
+      $rootScope.online = true;
+      $state.go('home', {}, {
+        location: 'replace'
+      });
+    });
+  }, false);
 });

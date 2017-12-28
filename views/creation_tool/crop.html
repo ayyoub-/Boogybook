@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="css/cropper.css">
+<link rel="stylesheet" href="css/init-cropper.css">
+<link rel="stylesheet" href="css/creation-tool.css">
+<div class="creation-tool-block">
+  <div class="container">
+    <div class="controls">
+      <button class="btn-retour" ng-click="backToSelection(config.type)">Retour</button>
+    </div>
+    <div class="creation-tool-body crop-tool">
+      <div class="container">
+        <div class="img-container">
+          <img id="image" style="display: none;" src="{{tool.myLibrary[tool.cropIndex].server_link}}" alt="Picture">
+        </div>
+        <div class="docs-buttons">
+          <div class="btn-group-left">
+            <button type="button" class="btn btn-primary" title="Rotate Left" ng-click="rotate(90)">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false">
+                                <span class="fa fa-rotate-left"></span>
+                            </span>
+                        </button>
+            <button type="button" class="btn btn-primary" ng-click="rotate(-90)">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false">
+                                <span class="fa fa-rotate-right"></span>
+                            </span>
+                        </button>
+          </div>
+          <div class="btn-group-right">
+            <button type="button" class="btn btn-primary" data-method="scaleX" ng-click="scalex(-1, 1)">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false">
+                                <span class="fa fa-arrows-h"></span>
+                            </span>
+                        </button>
+            <button type="button" class="btn btn-primary" data-method="scaleY" ng-click="scaley(1, -1)">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false">
+                                <span class="fa fa-arrows-v"></span>
+                            </span>
+                        </button>
+          </div>
+          <div class="btn-group-bottom">
+            <button type="button" class="btn btn-primary btn-left" data-method="crop" title="Crop">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" ng-click="saveCrop()">
+                                <span class="fa fa-check"></span>
+                            </span>
+                        </button>
+            <button type="button" class="btn btn-primary btn-right" data-method="clear" title="Clear">
+                            <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" ng-click="resetCrop()">
+                                <span class="fa fa-remove"></span>
+                            </span>
+                        </button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  <div class="creation-tool-nav" style="display:none;">
+    <ul>
+      <li class="active">Mon Album</li>
+      <li>Ajouter des photos</li>
+      <li>Importer des photos depuis Facebook</li>
+      <li>Importer des photos depuis Instagram</li>
+    </ul>
+  </div>

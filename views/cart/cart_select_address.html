@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="css/cart.css">
+<div class="cart-block">
+    <div class="container">
+        <div class="go-back" ui-sref="cart_recap">Continuer mes achats</div>
+        <div class="cart-inner-block">
+            <div class="cart-steps-block">
+                <div class="cart-steps">
+                    <div class="step">1</div>
+                    <div class="step">2</div>
+                    <div class="step active">3</div>
+                    <div class="step">4</div>
+                    <div class="step">5</div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="cart-step-text">03. Vos adresses</div>
+            </div>
+            <div class="select-adress-block">
+                <div class="adress-select-txt">
+                    Choisissez une adresse de livraison :
+                </div>
+                <div class="select-adress">
+                    <select name="selectedAddress" id="selectedAddress" class="dropdown">
+                        <option ng-repeat="item in userInfos.addresses" value="{{item.id}}">{{item.address1}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group3 adresse-checkbox">
+                    <input id="adresse-checkbox" type="checkbox" name="adresse-checkbox" value="adresse-checkbox">
+                    <label for="adresse-checkbox">Utiliser la même adresse pour la facturation </label>
+                </div>
+
+                <div class="current-addresses">
+                    <div class="shipping-adresse" ng-repeat="item in userInfos.addresses">
+                        <div class="title">
+                            Adresse de livraison
+                        </div>
+                        <ul class="adress-infos">
+                            <li>{{item.first_name}} {{item.last_name}}</li>
+                            <li>{{item.company}}</li>
+                            <li>{{item.address1}}</li>
+                            <li>{{item.address2}}</li>
+                            <li>{{item.postcode}}</li>
+                            <li>{{item.city}}</li>
+                            <li>{{item.phone}}</li>
+                            <li>{{item.phone_mobile}}</li>
+                        </ul>
+                        <button class="update-adress" ui-sref="address_update({id_address: item.id})">
+                            Mettre à jour
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button class="add-adress" ui-sref="cart_add_address">Ajouter une nouvelle adresse</button>
+                </div>
+                <div class="btn-commander" ng-click="createNewOrder()">
+                    Commander
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="upload-progress" ng-show="!cartLoaded">
+  <div class="counter">
+    <img class="counter-img" src="img/loading.gif" alt=""><br/>
+    <br/> Merci de patienter
+  </div>
+</div>

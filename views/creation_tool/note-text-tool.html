@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="css/cropper.css">
+<link rel="stylesheet" href="css/init-cropper.css">
+<link rel="stylesheet" href="css/creation-tool.css">
+    <div class="creation-tool-block">
+        <div class="container">
+          <div class="controls">
+            <button class="btn-retour" ng-click="backToSelection('BoogyNote')">Retour</button>
+          </div>
+
+            <div class="creation-tool-body crop-tool text-tool">
+                <div class="container">
+
+                  <div class="img-container">
+                    <img id="image" style="display: none;" src="{{tool.myLibraryNote[tool.cropIndex].server_link}}" alt="Picture">
+                  </div>
+
+                    <div class="docs-buttons">
+                        <div class="font-family-block">
+                            <select name="font-name" id="font-name" class="dropdown">
+                                <option value="" class="label">Choisissez la police</option>
+                                <option value="Montserrat" class="font1">Montserrat</option>
+                                <option value="Remachine" class="font2">Panton</option>
+                                <option value="Avenir" class="font3">Avenir</option>
+                                <option value="SansPosterBold" class="font4">SansPosterBold</option>
+                                <option value="SouthernAire" class="font5">SouthernAire</option>
+                                <option value="Brewery" class="font6">Brewery</option>
+                                <option value="Alice" class="font7">Alice</option>
+                                <option value="Sketch" class="font8">Sketch</option>
+                            </select>
+                        </div>
+                        <div class="textarea-block">
+                            <textarea ng-model="tool.myLibraryNote[tool.cropIndex].text" ng-change="croptChangeText(tool.cropIndex)" name="" id="" cols="30" rows="10" placeholder="Insérez votre texte ici"></textarea>
+                        </div>
+
+                        <div class="btn-group-bottom">
+                            <button type="button" class="btn btn-primary btn-left" data-method="crop" title="Crop">
+                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;crop&quot;)">
+                                    <span class="fa fa-check"></span>
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-right" data-method="clear" title="Clear">
+                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;clear&quot;)">
+                                    <span class="fa fa-remove"></span>
+                                </span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="crop-tool-nav">
+            <ul>
+                <li ui-sref="note-crop-tool({'index':tool.cropIndex, 'type': config.type})">Recadrage</li>
+                <li class="active">Texte</li>
+                <li ui-sref="note-filter-tool({'index':tool.cropIndex, 'type': config.type})">Filtres</li>
+            </ul>
+        </div>
+
+        <div class="overlay"></div>

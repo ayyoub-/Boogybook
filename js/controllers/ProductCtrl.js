@@ -1,4 +1,4 @@
-boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stateParams, $sce) {
+boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stateParams, $sce, $window) {
   // vars
   $scope.product = null;
   // functions
@@ -19,6 +19,7 @@ boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stat
         return $rootScope.products[i];
     }
   }
+  // Save local storage
   $scope.setStorage = function(){
     sessionStorage.setItem("selected_product", JSON.stringify($scope.product));
   }
@@ -31,10 +32,12 @@ boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stat
         $rootScope.products = r.covers;
         $scope.product = $scope.getProductById($stateParams.id);
         $scope.setStorage();
+        console.log($scope.product);
       }
     });
   else{
     $scope.product = $scope.getProductById($stateParams.id);
     $scope.setStorage();
+    console.log($scope.product);
   }
 });

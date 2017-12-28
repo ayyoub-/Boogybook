@@ -1,22 +1,19 @@
 <link rel="stylesheet" href="css/detail.css">
 <div class="details-produit">
     <div class="produit-img">
-        <div class="price">14,95 €</div>
-        <img src="img/detail-produit-img.jpg" alt="">
+        <div class="price">{{product.price}} €</div>
+        <img src="img/products/{{product.id_product}}.jpg" alt="">
     </div>
     <div class="container">
         <button class="btn-details" ng-click="showDetails()">DETAILS</button>
-        <button class="btn-creer">Je crée mon Boogybook</button>
+        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Je crée mon {{product.name}}</button>
     </div>
-
 </div>
 <div class="details-popup">
     <div class="container">
-        <div class="go-back" ng-click="goBack()">Revenir</div>
+        <div class="go-back" ng-click="goBack()">Retour</div>
         <div class="details-popup-inner">
             <div class="product-title">{{product.name}}</div>
-            <div class="product-description" ng-bind-html="product.description">
-            </div>
             <div class="product-description" ng-bind-html="product.description_short">
             </div>
             <div class="fiche-title">
@@ -47,7 +44,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn-creer">Je crée mon Boogybook</button>
+            <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Je crée mon {{product.name}}</button>
         </div>
     </div>
 

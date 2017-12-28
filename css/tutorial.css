@@ -1,0 +1,107 @@
+.tutorial-intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999;
+    top: 0;
+    left: 0;
+}
+
+.slide {
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide-1 {
+    position: absolute;
+    background-color: #a6c10c;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-2 {
+    position: absolute;
+    background-color: #3cc8df;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-3 {
+    position: absolute;
+    background-color: #dd0060;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-4 {
+    position: absolute;
+    background-color: #de4011;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-5 {
+    position: absolute;
+    background-color: #f0a700;
+    width: 100%;
+    height: 100%;
+}
+
+.tutorial-footer {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #ffffff;
+}
+
+.btn {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border: 0;
+    background-color: transparent;
+    color: #ffffff;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-width: 100px;
+    height: 50px;
+}
+
+.btn-skip {
+    left: 0;
+}
+
+.btn-next {
+    right: 0;
+}
+
+.slider-indicators {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: absolute;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slider-indicators li {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    float: left;
+    margin-left: 10px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.slider-indicators li.active {
+    background-color: #114249;
+}

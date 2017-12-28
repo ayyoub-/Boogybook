@@ -13,6 +13,7 @@ boogybookApp.controller("MyAccountCtrl", function(PSAPI, $scope) {
     }).then(function(r) {
       console.log(r);
       $scope.userInfos.ordersHistory = r.orders;
+      console.log(r.orders.length);
     });
   }
   $scope.setStorage = function() {
