@@ -2,6 +2,19 @@
     display: none;
 }
 
+.go-back-front {
+    cursor: pointer;
+    background-image: url(../img/blue-arrow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center left;
+    color: #3cc8df;
+    font-size: 14px;
+    margin-top: 22px;
+    text-transform: uppercase;
+    padding-left: 25px;
+}
+
 .details-popup-inner {
     overflow: auto;
     height: 80vh;

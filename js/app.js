@@ -52,7 +52,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
         $('.overlay').fadeToggle();
         $('.menu-toggle').toggleClass('active');
         $('.side-menu').toggleClass('active');
-        $('.btn-home').toggleClass('active');
+        $('.btn-hm').toggleClass('active');
     });
     // Routes
     var homeState = {

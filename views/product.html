@@ -1,13 +1,21 @@
 <link rel="stylesheet" href="css/detail.css">
+
+<div class="container">
+    <div class="go-back-front" ui-sref="home">Retour</div>
+</div>
 <div class="details-produit">
+
     <div class="produit-img">
         <div class="price">{{product.price}} €</div>
         <img src="img/products/{{product.id_product}}.jpg" alt="">
     </div>
     <div class="container">
         <button class="btn-details" ng-click="showDetails()">DETAILS</button>
-        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Je crée</button>
+        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Crée</button>
+        <div class="clearfix"></div>
+
     </div>
+
 </div>
 <div class="details-popup">
     <div class="container">

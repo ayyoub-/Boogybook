@@ -233,7 +233,7 @@ header.sticky {
     display: none;
 }
 
-.btn-home {
+.btn-hm {
     display: block;
     width: 40px;
     height: 40px;
@@ -249,11 +249,11 @@ header.sticky {
     cursor: pointer;
 }
 
-.btn-home.active {
+.btn-hm.active {
     display: none;
 }
 
-.btn-home img {
+.btn-hm img {
     max-width: 100%;
 }
 
