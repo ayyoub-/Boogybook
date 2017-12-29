@@ -155,7 +155,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, $stateParams
     }, 'full').then(function(res) {
       $scope.userInfos.addresses = res;
       if (window.cordova)
-        window.open('https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + ($scope.cart.id) + '&idc=' + $scope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $scope.userInfos.addresses[$scope.selectedAddress].id, '_blank', 'location=no');
+        cordova.InAppBrowser.open('https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + ($scope.cart.id) + '&idc=' + $scope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $scope.userInfos.addresses[$scope.selectedAddress].id, '_blank', 'location=yes');
       else {
         window.location.href = 'https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + $scope.cart.id + '&idc=' + $scope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $scope.userInfos.addresses[$scope.selectedAddress].id;
       }
