@@ -213,7 +213,7 @@
 .upload-progress.active {
   display: block;
 }
-.upload-progress .counter {
+.upload-progress .counter-img {
     color: #ffffff;
     position: absolute;
     top: 50%;
@@ -225,7 +225,7 @@
     font-size: 20px;
 }
 
-.upload-progress .counter img {
+.upload-progress .counter-img img {
     width: 21%;
 }
 .coupon-code-block {

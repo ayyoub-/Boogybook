@@ -20,7 +20,7 @@
 <html>
 
 <head>
-  <!--
+    <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
         Some notes:
@@ -29,26 +29,29 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-  <meta charset="UTF-8">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/easydropdown.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/home.css">
-  <script type="text/javascript" src="js/lib/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="js/lib/angular.min.js"></script>
-  <script type="text/javascript" src="js/lib/angular-route.js"></script>
-  <script type="text/javascript" src="js/lib/angular-translate.min.js"></script>
-  <script type="text/javascript" src="js/lib/angular-ui-router.js"></script>
-  <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
-  <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/lib/jquery.easydropdown.js"></script>
-  <script type="text/javascript" src="js/lib/sweetalert2.all.js"></script>
-  <title>Boogybook</title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+    <link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/easydropdown.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/home.css">
+    <script type="text/javascript" src="js/lib/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route.js"></script>
+    <script type="text/javascript" src="js/lib/angular-translate.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular-ui-router.js"></script>
+    <script type="text/javascript" src="js/lib/angular-stripe-checkout.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.easydropdown.js"></script>
+    <script type="text/javascript" src="js/lib/sweetalert2.all.js"></script>
+    <title>Boogybook</title>
 </head>
 
 <body ng-app="boogybookApp">
@@ -57,8 +60,8 @@
             <div class="container">
                 <button class="menu-toggle"><img src="img/menu.svg" alt="Menu Toggle"></button>
                 <div class="logo" ui-sref="home"><img src="img/logo.svg" alt="" width="91" height="44"></div>
-                <button class="btn-help" ui-sref="tutorial">
-                    <img src="img/information.svg" alt="">
+                <button class="btn-hm" ui-sref="home">
+                    <img src="img/home.svg" alt="">
                 </button>
             </div>
         </header>
@@ -70,47 +73,47 @@
                 <li id="mon-compte"><a ui-sref="myAccount">Mon compte</a></li>
                 <li id="panier"><a ui-sref="cart_recap">Panier</a></li>
             </ul>
-      <ul class="menu-list bottom">
-        <li id="faq"><a ui-sref="faq">FAQ</a></li>
-        <li id="contact"><a ui-sref="contact">Contact</a></li>
-      </ul>
+            <ul class="menu-list bottom">
+                <li id="faq"><a ui-sref="faq">FAQ</a></li>
+                <li id="contact"><a ui-sref="contact">Contact</a></li>
+            </ul>
 
-      <div class="langue-select-box">
-        <select name="langue-select" id="langue-select" class="dropdown">
+            <div class="langue-select-box">
+                <select name="langue-select" id="langue-select" class="dropdown">
                     <option value="fr">Français</option>
                     <option value="eng">English</option>
                     <option value="spa">Spanish</option>
                 </select>
-      </div>
-    </nav>
-    <div ui-view id="main-view">
-      <div class="products-list">
-        <div data-ng-repeat="(key, product) in products" class="single-product" ui-sref="product({id:product.id_product})" style="background-image:url(img/products/{{product.id_product}}.jpg);">
-          <div class="price">{{product.price}} €</div>
+            </div>
+        </nav>
+        <div ui-view id="main-view">
+            <div class="products-list">
+                <div data-ng-repeat="(key, product) in products" class="single-product" ui-sref="product({id:product.id_product})" style="background-image:url(img/products/{{product.id_product}}.jpg);">
+                    <div class="price">{{product.price}} €</div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <button class="shopping-cart" ui-sref="cart_recap">
+        <button class="shopping-cart" ui-sref="cart_recap">
             <img src="img/shopping-bag.svg" alt="">
             <div class="counter">
-              {{cart.products.length}}
+              0
             </div>
         </button>
-    <div class="overlay"></div>
-  </div>
-  <script type="text/javascript" src="js/lib/cordova.js"></script>
-  <script type="text/javascript" src="js/lib/cropper.min.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
-  <script type="text/javascript" src="js/app.js"></script>
-  <script type="text/javascript" src="js/services/BoogybookApi.js"></script>
-  <script type="text/javascript" src="js/controllers/ProductCtrl.js"></script>
-  <script type="text/javascript" src="js/controllers/CartCtrl.js"></script>
-  <script type="text/javascript" src="js/controllers/MyAccountCtrl.js"></script>
-  <script type="text/javascript" src="js/controllers/ContactCtrl.js"></script>
-  <script type="text/javascript" src="js/controllers/FaqCtrl.js"></script>
-  <script type="text/javascript" src="js/controllers/ToolCtrl.js"></script>
-  <script type="text/javascript" src="js/global.js"></script>
-  <script type="text/javascript" src="js/detail.js"></script>
+        <div class="overlay"></div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/lib/cropper.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/services/BoogybookApi.js"></script>
+    <script type="text/javascript" src="js/controllers/ProductCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/CartCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/MyAccountCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/ContactCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/FaqCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/ToolCtrl.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="js/detail.js"></script>
 </body>
 
 </html>

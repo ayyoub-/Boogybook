@@ -7,6 +7,12 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     limitBaby: 30,
     limitBabyXL: 60,
     limitPrime: 30,
+    classicPrice: 14.103774,
+    notePrice: 12.216981,
+    primePrice: 12.216981,
+    duoPrice: 14.103774,
+    babyPrice: 12.216981,
+    babyXlPrice: 14.103774,
     total: 0,
     cart: 0,
     type: 'Classic',
@@ -83,6 +89,9 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     sessionStorage.setItem("myLibrary", JSON.stringify($scope.tool.myLibrary));
     sessionStorage.setItem("myLibraryNote", JSON.stringify($scope.tool.myLibraryNote));
     sessionStorage.setItem("myLibraryDuo", JSON.stringify($scope.tool.myLibraryDuo));
+    sessionStorage.setItem("myLibraryBaby", JSON.stringify($scope.tool.myLibraryBaby));
+    sessionStorage.setItem("myLibraryBabyXL", JSON.stringify($scope.tool.myLibraryBabyXL));
+    sessionStorage.setItem("myLibraryPrime", JSON.stringify($scope.tool.myLibraryPrime));
   }
   // Get local Storage
   $scope.getStorage = function() {
@@ -101,6 +110,18 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     if (typeof sessionStorage.getItem("myLibraryDuo") != undefined && sessionStorage.getItem("myLibraryDuo") != null) {
       $scope.tool.myLibraryDuo = JSON.parse(sessionStorage.getItem("myLibraryDuo"));
       $scope.tool.sizeDuo = $scope.tool.myLibraryDuo.length;
+    }
+    if (typeof sessionStorage.getItem("myLibraryPrime") != undefined && sessionStorage.getItem("myLibraryPrime") != null) {
+      $scope.tool.myLibraryPrime = JSON.parse(sessionStorage.getItem("myLibraryPrime"));
+      $scope.tool.sizePrime = $scope.tool.myLibraryPrime.length;
+    }
+    if (typeof sessionStorage.getItem("myLibraryBaby") != undefined && sessionStorage.getItem("myLibraryBaby") != null) {
+      $scope.tool.myLibraryBaby = JSON.parse(sessionStorage.getItem("myLibraryBaby"));
+      $scope.tool.sizeBaby = $scope.tool.myLibraryBaby.length;
+    }
+    if (typeof sessionStorage.getItem("myLibraryBabyXL") != undefined && sessionStorage.getItem("myLibraryBabyXL") != null) {
+      $scope.tool.myLibraryBabyXL = JSON.parse(sessionStorage.getItem("myLibraryBabyXL"));
+      $scope.tool.sizeBabyXL = $scope.tool.myLibraryBabyXL.length;
     }
   }
   // get url parameters
@@ -688,6 +709,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Add product to cart
   $scope.submitBoogybook = function() {
+    $(".upload-progress-creation").addClass("active");
     var ratioImagesArray = new Array();
     var imageUidsArray = new Array();
     var countArray = new Array();
@@ -701,11 +723,12 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     $http({
       url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
       method: "POST",
-      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart,
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&price='+$scope.config.classicPrice,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }).success(function(data, status, headers, config) {
+      $(".upload-progress-creation").removeClass("active");
       if (data.OK) {
         $state.go('cart_recap', {}, {
           location: 'replace'
@@ -714,6 +737,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     }).error(function(data, status, headers, config) {});
   }
   $scope.submitNotebook = function() {
+    $(".upload-progress-creation").addClass("active");
     var ratioImagesArray = new Array();
     var imageUidsArray = new Array();
     var countArray = new Array();
@@ -727,11 +751,12 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     $http({
       url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
       method: "POST",
-      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=NoteBook',
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=NoteBook'+ '&price='+$scope.config.notePrice,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }).success(function(data, status, headers, config) {
+      $(".upload-progress-creation").removeClass("active");
       if (data.OK) {
         $state.go('cart_recap', {}, {
           location: 'replace'
@@ -740,6 +765,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     }).error(function(data, status, headers, config) {});
   }
   $scope.submitBoogyDuo = function() {
+    $(".upload-progress-creation").addClass("active");
     var ratioImagesArray = new Array();
     var imageUidsArray = new Array();
     var countArray = new Array();
@@ -753,11 +779,96 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     $http({
       url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
       method: "POST",
-      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=BoogyDuo',
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=BoogyDuo'+ '&price='+$scope.config.duoPrice,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }).success(function(data, status, headers, config) {
+      $(".upload-progress-creation").removeClass("active");
+      if (data.OK) {
+        $state.go('cart_recap', {}, {
+          location: 'replace'
+        });
+      }
+    }).error(function(data, status, headers, config) {});
+  }
+  $scope.submitBoogyBabyXL = function() {
+    $(".upload-progress-creation").addClass("active");
+    var ratioImagesArray = new Array();
+    var imageUidsArray = new Array();
+    var countArray = new Array();
+    var cropImageArray = new Array();
+    for (var i = 0; i < $scope.tool.myLibraryBabyXL.length; i++) {
+      ratioImagesArray.push($scope.tool.myLibraryBabyXL[i].server_link);
+      imageUidsArray.push($scope.tool.myLibraryBabyXL[i].uid);
+      cropImageArray.push($scope.tool.myLibraryBabyXL[i].cropObject);
+      countArray.push(1);
+    }
+    $http({
+      url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
+      method: "POST",
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=BoogyBabyXL'+ '&price='+$scope.config.babyXlPrice,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).success(function(data, status, headers, config) {
+      $(".upload-progress-creation").removeClass("active");
+      if (data.OK) {
+        $state.go('cart_recap', {}, {
+          location: 'replace'
+        });
+      }
+    }).error(function(data, status, headers, config) {});
+  }
+  $scope.submitBoogyBaby = function() {
+    $(".upload-progress-creation").addClass("active");
+    var ratioImagesArray = new Array();
+    var imageUidsArray = new Array();
+    var countArray = new Array();
+    var cropImageArray = new Array();
+    for (var i = 0; i < $scope.tool.myLibraryBaby.length; i++) {
+      ratioImagesArray.push($scope.tool.myLibraryBaby[i].server_link);
+      imageUidsArray.push($scope.tool.myLibraryBaby[i].uid);
+      cropImageArray.push($scope.tool.myLibraryBaby[i].cropObject);
+      countArray.push(1);
+    }
+    $http({
+      url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
+      method: "POST",
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=BoogyBaby'+ '&price='+$scope.config.babyPrice,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).success(function(data, status, headers, config) {
+      $(".upload-progress-creation").removeClass("active");
+      if (data.OK) {
+        $state.go('cart_recap', {}, {
+          location: 'replace'
+        });
+      }
+    }).error(function(data, status, headers, config) {});
+  }
+  $scope.submitBoogyPrime = function() {
+    $(".upload-progress-creation").addClass("active");
+    var ratioImagesArray = new Array();
+    var imageUidsArray = new Array();
+    var countArray = new Array();
+    var cropImageArray = new Array();
+    for (var i = 0; i < $scope.tool.myLibraryPrime.length; i++) {
+      ratioImagesArray.push($scope.tool.myLibraryPrime[i].server_link);
+      imageUidsArray.push($scope.tool.myLibraryPrime[i].uid);
+      cropImageArray.push($scope.tool.myLibraryPrime[i].cropObject);
+      countArray.push(1);
+    }
+    $http({
+      url: 'http://www.boogybook.com/api/remote_exec?rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ?url=remote_exec&rfunc=addNewCustomerProduct&ws_key=WJV16DU4WGZB5Z7VXMKP5NV85UMC8YPZ',
+      method: "POST",
+      data: 'cropImageArray=' + JSON.stringify(cropImageArray) + '&ratioImagesArray=' + JSON.stringify(ratioImagesArray) + '&imageUidsArray=' + imageUidsArray + '&cart=' + $scope.config.cart + '&type=BoogyPrime'+ '&price='+$scope.config.primePrice,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).success(function(data, status, headers, config) {
+      $(".upload-progress-creation").removeClass("active");
       if (data.OK) {
         $state.go('cart_recap', {}, {
           location: 'replace'

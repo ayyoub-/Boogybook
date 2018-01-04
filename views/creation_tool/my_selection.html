@@ -30,7 +30,7 @@
     </div>
   </div>
   <!-- BoogyPrime & Not Empty Library -->
-  <div class="container" ng-if="tool.size > 0 && config.type == 'BoogyPrime'">
+  <div class="container" ng-if="tool.sizePrime > 0 && config.type == 'BoogyPrime'">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">Retour</button>
       <div class="selected-img">
@@ -44,7 +44,7 @@
     </div>
     <div class="creation-tool-body">
       <ul class="list-img">
-        <li class="single-img" ng-repeat="(index, item) in tool.myLibraryPrime track by $index" id="{{item.uid}}-{{index}}">
+        <li class="single-img-prime" ng-repeat="(index, item) in tool.myLibraryPrime track by $index" id="{{item.uid}}-{{index}}">
           <img ng-if="item.cropUrl != ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.cropUrl}}" alt="">
           <img ng-if="item.cropUrl == ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.ratio_link}}" alt="">
           <div class="control-block">
@@ -73,7 +73,7 @@
     </div>
     <div class="creation-tool-body">
       <ul class="list-img">
-        <li class="single-img" ng-repeat="(index, item) in tool.myLibraryBaby track by $index" id="{{item.uid}}-{{index}}">
+        <li class="single-img-prime" ng-repeat="(index, item) in tool.myLibraryBaby track by $index" id="{{item.uid}}-{{index}}">
           <img ng-if="item.cropUrl != ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.cropUrl}}" alt="">
           <img ng-if="item.cropUrl == ''" ng-class='{effect1:item.effect==1,effect2:item.effect==2,effect3:item.effect==3,effect4:item.effect==4}' src="{{item.ratio_link}}" alt="">
           <div class="control-block">
@@ -93,7 +93,7 @@
       <button class="btn-retour" ng-click="backToDetails()">Retour</button>
       <div class="selected-img">
         <div class="text">Images séléctionnées</div>
-        <div class="numbers">{{tool.sizeBaby}} / {{config.limitBaby}}</div>
+        <div class="numbers">{{tool.sizeBabyXL}} / {{config.limitBabyXL}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
         <button ng-if="tool.sizeBabyXL < config.limitBabyXL" type="submit" class="btn-continuer" ng-click="submitBoogyBabyXL()" disabled>Continuer</button>
@@ -299,7 +299,37 @@
 </div>
 
 <div class="creation-tool-nav">
-  <ul>
+  <ul ng-if="tool.size > 0 && config.type == 'Classic'">
+    <li>Mon Album</li>
+    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>Importer des photos depuis Facebook</li>
+    <li>Importer des photos depuis Instagram</li>
+  </ul>
+  <ul ng-if="tool.sizeNote > 0 && config.type == 'BoogyNote'">
+    <li>Mon Album</li>
+    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>Importer des photos depuis Facebook</li>
+    <li>Importer des photos depuis Instagram</li>
+  </ul>
+  <ul ng-if="tool.sizeDuo > 0 && config.type == 'BoogyDuo'">
+    <li>Mon Album</li>
+    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>Importer des photos depuis Facebook</li>
+    <li>Importer des photos depuis Instagram</li>
+  </ul>
+  <ul ng-if="tool.sizePrime > 0 && config.type == 'BoogyPrime'">
+    <li>Mon Album</li>
+    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>Importer des photos depuis Facebook</li>
+    <li>Importer des photos depuis Instagram</li>
+  </ul>
+  <ul ng-if="tool.sizeBaby > 0 && config.type == 'BoogyBaby'">
+    <li>Mon Album</li>
+    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>Importer des photos depuis Facebook</li>
+    <li>Importer des photos depuis Instagram</li>
+  </ul>
+  <ul ng-if="tool.sizeBabyXL > 0 && config.type == 'BoogyBabyXL'">
     <li>Mon Album</li>
     <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
     <li>Importer des photos depuis Facebook</li>
@@ -338,3 +368,12 @@
                 <span id="loadingProgress">0</span>% en cours...</span>
   </div>
 </div>
+
+<div class="upload-progress-creation">
+    <div class="counter-img">
+      <img src="img/loading.gif" alt=""><br/>
+      <br/> Merci de patienter
+    </div>
+  </div>
+
+

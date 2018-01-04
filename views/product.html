@@ -1,13 +1,21 @@
 <link rel="stylesheet" href="css/detail.css">
+
+<div class="container">
+    <div class="go-back-front" ui-sref="home">Retour</div>
+</div>
 <div class="details-produit">
+
     <div class="produit-img">
         <div class="price">{{product.price}} €</div>
         <img src="img/products/{{product.id_product}}.jpg" alt="">
     </div>
     <div class="container">
         <button class="btn-details" ng-click="showDetails()">DETAILS</button>
-        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Je crée mon {{product.name}}</button>
+        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Créer</button>
+        <div class="clearfix"></div>
+
     </div>
+
 </div>
 <div class="details-popup">
     <div class="container">
@@ -20,23 +28,23 @@
                 Fiche technique
             </div>
             <div class="fiche-description">
-                <p><b>Dimensions de chaque feuille :</b> {{product.features[1].value}} x {{product.features[0].value}} cm : un format qui tient dans la poche</p>
-                <p><b>Aspect brillant :</b> vos photos sont magnifiées <br /></p>
-                <p><b>Microperforation sur chaque feuille :</b> idéale pour offrir, encadrer ou magnétiser sur le frigo !</p>
+                <p><b>Dimensions de chaque page :</b> {{product.features[1].value}} x {{product.features[0].value}} : un format qui tient dans la poche</p>
+                <p><b>Aspect brillant :</b> vos photos sont plus belles! <br /></p>
+                <p>Chaque photo est détachable pour offrir, encadrer ou décorer votre intérieur.</p>
             </div>
             <table class="table-data-sheet">
                 <tbody>
                     <tr class="odd">
                         <td>Longueur</td>
-                        <td>{{product.features[1].value}} cm</td>
+                        <td>{{product.features[1].value}}</td>
                     </tr>
                     <tr class="even">
                         <td>Largeur</td>
-                        <td>{{product.features[0].value}} cm</td>
+                        <td>{{product.features[0].value}}</td>
                     </tr>
                     <tr class="odd">
                         <td>Poids</td>
-                        <td>{{product.features[2].value}} g</td>
+                        <td>{{product.features[2].value}}</td>
                     </tr>
                     <tr class="even">
                         <td>Composition</td>
@@ -44,7 +52,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Je crée mon {{product.name}}</button>
+            <button class="btn-creer-detail" ui-sref="mySelection({'type':product.name})">Je crée</button>
         </div>
     </div>
 

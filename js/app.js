@@ -1,4 +1,4 @@
-angular.module('fsCordova', ['pascalprecht.translate'])
+angular.module('fsCordova', ['pascalprecht.translate', 'stripe.checkout'])
   .service('CordovaService', ['$document', '$q',
     function($document, $q) {
 
@@ -22,9 +22,12 @@ angular.module('fsCordova', ['pascalprecht.translate'])
   ]);
 
 
-var boogybookApp = angular.module('boogybookApp', ['fsCordova', 'ngSanitize', 'ngRoute', 'ui.router']);
+var boogybookApp = angular.module('boogybookApp', ['fsCordova', 'ngSanitize', 'ngRoute', 'ui.router', 'stripe.checkout']);
 
-boogybookApp.config(function($routeProvider, $locationProvider, $translateProvider, $stateProvider) {
+boogybookApp.config(function($routeProvider, $locationProvider, $translateProvider, $stateProvider, StripeCheckoutProvider) {
+  StripeCheckoutProvider.defaults({
+    key: "pk_live_WkGcczYR27uMdxAgpPLMOr36"
+  });
   // Translation config
   $translateProvider.translations('en', {
     TITLE: 'Hello',
@@ -52,7 +55,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     $('.overlay').fadeToggle();
     $('.menu-toggle').toggleClass('active');
     $('.side-menu').toggleClass('active');
-    $('.btn-help').toggleClass('active');
+    $('.btn-hm').toggleClass('active');
   });
   // Routes
   var homeState = {
@@ -71,7 +74,12 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     name: 'cart_recap',
     url: '/cart_recap',
     templateUrl: 'views/cart/cart_recap.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
+
   }
   var cartLoginState = {
     name: 'cart_login',
@@ -218,19 +226,35 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   $stateProvider.state(faqState);
   $stateProvider.state(addressUpdateState);
 });
-
-boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state) {
+boogybookApp.run(function($log, StripeCheckout) {
+    StripeCheckout.defaults({
+      opened: function() {
+        $log.debug("Stripe Checkout opened");
+      },
+      closed: function() {
+        $log.debug("Stripe Checkout closed");
+      }
+    });
+});
+boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state, StripeCheckout) {
   // Products list
   $scope.products = new Array();
   $rootScope.products = new Array();
   $scope.userInfos = null;
   $scope.cart = null;
   $scope.globalCategory = 24;
+  $scope.cartSize = 0;
   // Functions
   // Set session storage
   $scope.setStorage = function() {
     sessionStorage.setItem("products", JSON.stringify($scope.products));
     sessionStorage.setItem("cart", JSON.stringify($scope.cart));
+  }
+  $scope.goHome = function(){
+    $state.go('home', {}, {
+      location: 'replace',
+      reload: true
+    });
   }
   $scope.cleanStorage = function() {
     var i = sessionStorage.length;
@@ -309,7 +333,24 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
       }
     });
   }
+  // Get cart size
+  $scope.getCartSize = function(cart){
+    PSAPI.PSExecute('getCartSize', {
+      'cart': cart,
+    }).then(function(r) {
+      if (r.OK) {
+        $scope.cartSize = r.size;
+        $('.counter').html($scope.cartSize);
+      }
+    });
+  }
   $scope.getStorage();
+  if(typeof $scope.cart != 'undefined' && $scope.cart != null){
+    $scope.getCartSize($scope.cart.id);
+  }
+  else {
+    $scope.cartSize = 0;
+  }
   // Check Internet connexion
   $rootScope.online = navigator.onLine;
   if (!$rootScope.online)
