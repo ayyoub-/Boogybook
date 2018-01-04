@@ -684,7 +684,7 @@ input[type=checkbox]:checked+label::after {
 
 .shipping-adresse {
   position: relative;
-  width: 47.85%;
+  width: 47.5%;
   height: 288px;
   border: 1px solid #ececec;
   float: left;

@@ -6,7 +6,7 @@
     <div class="controls">
       <button class="btn-retour" ng-click="backToSelection(config.type)">Retour</button>
     </div>
-    <div class="creation-tool-body crop-tool">
+    <div class="creation-tool-body crop-tool" style="height:100%;">
       <div class="container">
         <div class="img-container">
           <img ng-if="config.type == 'Classic'" id="image" style="display: none;" src="{{tool.myLibrary[tool.cropIndex].server_link}}" alt="Picture">

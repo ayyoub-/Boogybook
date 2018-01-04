@@ -80,7 +80,7 @@
 }
 
 .creation-tool-nav ul li:nth-child(1) {
-    background: #2ecc71 url(../img/ma-selection-active.png);
+    background: #A7CD46 url(../img/ma-selection-active.png);
     background-size: 64px 47px;
     background-position: center;
     background-repeat: no-repeat;
@@ -89,7 +89,7 @@
 
 .creation-tool-nav ul li.active:nth-child(1),
 .creation-tool-nav ul li:nth-child(1):hover {
-    background: #2ecc71 url(../img/ma-selection-active.png);
+    background: #A7CD46 url(../img/ma-selection-active.png);
     background-size: 64px 47px;
     background-position: center;
     background-repeat: no-repeat;
@@ -97,7 +97,7 @@
 }
 
 .creation-tool-nav ul li:nth-child(2) {
-    background: #e74c3c url(../img/vider-ma-biblio-active.png);
+    background: #dd0060 url(../img/vider-ma-biblio-active.png);
     background-size: 127px 47px;
     /*  background-size: 90%; */
     background-position: center;
@@ -106,7 +106,7 @@
 
 .creation-tool-nav ul li.active:nth-child(2),
 .creation-tool-nav ul li:nth-child(2):hover {
-    background: #e74c3c url(../img/vider-ma-biblio-active.png);
+    background: #dd0060 url(../img/vider-ma-biblio-active.png);
     background-size: 127px 47px;
     /* background-size: 90%; */
     background-position: center;
