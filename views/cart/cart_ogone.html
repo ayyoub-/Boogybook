@@ -2,7 +2,7 @@
 <script src="js/cart.js"></script>
 <div class="cart-block">
   <div class="container">
-    <div class="go-back" ui-sref="cart_recap">Continuer mes achats</div>
+    <div class="go-back" ui-sref="cart_recap">{{ 'Continue_mes_achats' | translate }}</div>
     <div class="cart-inner-block">
       <div class="cart-steps-block">
         <div class="cart-steps">
@@ -13,7 +13,7 @@
           <div class="step active">5</div>
           <div class="clearfix"></div>
         </div>
-        <div class="cart-step-text">05. PAIEMENT</div>
+        <div class="cart-step-text">05. {{ 'PAIEMENT' | translate }}</div>
       </div>
       <div class="cart-items-block">
         <div class="cart-item" ng-repeat="(index, item) in cart.products">
@@ -25,10 +25,10 @@
               <div class="cart-item-name">{{item.name}}</div>
             </div>
             <div class="bottom">
-              <div class="cart-item-price"><b>Prix :</b> {{item.price_with_reduction}} €</div>
-              <div class="cart-item-shipping"><b>Frais de port :</b> {{cart.total_shipping}}€</div>
+              <div class="cart-item-price"><b>{{ 'Prix' | translate }} :</b> {{item.price_with_reduction}} €</div>
+              <div class="cart-item-shipping"><b>{{ 'Frais_de_port' | translate }} :</b> {{cart.total_shipping}}€</div>
               <div class="cart-item-quantity">
-                <b>Quantité :</b><br />
+                <b>{{ 'Quantite' | translate }} :</b><br />
                 <div class="qte-box">
                   <div ng-if="item.quantity > 1" class="btn-remove" ng-click="addQuantity(index, -1)">-</div>
                   <input type="text" class="qte-input" name="qte-input" value="{{item.quantity}}">
@@ -44,13 +44,13 @@
       </div>
       <hr class="seperator">
       <div class="total-block">
-        <div class="total-txt">TOTAL :</div>
+        <div class="total-txt">{{ 'TOTAL' | translate }} :</div>
         <div class="total-price">{{cart.total_price}} €</div>
         <div class="clearfix"></div>
       </div>
 
       <div class="btn-commander" ng-click="doCheckout()">
-        Payez par carte bancaire
+        {{ 'Payez_par_carte_bancaire' | translate }}
       </div>
       <div class="ingenico-logo">
         <img src="img/stripe-logo.png" alt="">
@@ -61,7 +61,7 @@
 <div class="upload-progress" ng-show="!cartLoaded">
   <div class="counter-img">
     <img src="img/loading.gif" alt=""><br/>
-    <br/> Merci de patienter
+    <br/> {{ 'Payez_par_carte_bancaire' | translate }}
   </div>
 </div>
 

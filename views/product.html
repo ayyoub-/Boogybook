@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/detail.css">
 
 <div class="container">
-    <div class="go-back-front" ui-sref="home">Retour</div>
+    <div class="go-back-front" ui-sref="home">{{ 'RETOUR' | translate }}</div>
 </div>
 <div class="details-produit">
 
@@ -10,8 +10,8 @@
         <img src="img/products/{{product.id_product}}.jpg" alt="">
     </div>
     <div class="container">
-        <button class="btn-details" ng-click="showDetails()">DETAILS</button>
-        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">Créer</button>
+        <button class="btn-details" ng-click="showDetails()">{{ 'DETAILS' | translate }}</button>
+        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">{{ 'CREER' | translate }}</button>
         <div class="clearfix"></div>
 
     </div>
@@ -19,40 +19,40 @@
 </div>
 <div class="details-popup">
     <div class="container">
-        <div class="go-back" ng-click="goBack()">Retour</div>
+        <div class="go-back" ng-click="goBack()">{{ 'RETOUR' | translate }}</div>
         <div class="details-popup-inner">
             <div class="product-title">{{product.name}}</div>
             <div class="product-description" ng-bind-html="product.description_short">
             </div>
             <div class="fiche-title">
-                Fiche technique
+                {{ 'FICHE_TECHNIQUE' | translate }}
             </div>
             <div class="fiche-description">
-                <p><b>Dimensions de chaque page :</b> {{product.features[1].value}} x {{product.features[0].value}} : un format qui tient dans la poche</p>
+                <p><b>{{ 'DIMENSIONS_DE_CHAQUE_PAGE' | translate }} :</b> {{product.features[1].value}} x {{product.features[0].value}} : un format qui tient dans la poche</p>
                 <p><b>Aspect brillant :</b> vos photos sont plus belles! <br /></p>
                 <p>Chaque photo est détachable pour offrir, encadrer ou décorer votre intérieur.</p>
             </div>
             <table class="table-data-sheet">
                 <tbody>
                     <tr class="odd">
-                        <td>Longueur</td>
+                        <td>{{ 'LONGEUR' | translate }}</td>
                         <td>{{product.features[1].value}}</td>
                     </tr>
                     <tr class="even">
-                        <td>Largeur</td>
+                        <td>{{ 'LARGEUR' | translate }}</td>
                         <td>{{product.features[0].value}}</td>
                     </tr>
                     <tr class="odd">
-                        <td>Poids</td>
+                        <td>{{ 'POIDS' | translate }}</td>
                         <td>{{product.features[2].value}}</td>
                     </tr>
                     <tr class="even">
-                        <td>Composition</td>
+                        <td>{{ 'COMPOSITION' | translate }}</td>
                         <td>{{product.features[3].value}}</td>
                     </tr>
                 </tbody>
             </table>
-            <button class="btn-creer-detail" ui-sref="mySelection({'type':product.name})">Je crée</button>
+            <button class="btn-creer-detail" ui-sref="mySelection({'type':product.name})">{{ 'JE_CREE' | translate }}</button>
         </div>
     </div>
 

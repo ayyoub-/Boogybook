@@ -70,19 +70,19 @@
                 <img src="img/logo.svg" alt="" ui-sref="home" width="91" height="44">
             </div>
             <ul class="menu-list">
-                <li id="mon-compte"><a ui-sref="myAccount">Mon compte</a></li>
-                <li id="panier"><a ui-sref="cart_recap">Panier</a></li>
+                <li id="mon-compte"><a ui-sref="myAccount">{{ 'MY_ACCOUNT' | translate }}</a></li>
+                <li id="panier"><a ui-sref="cart_recap">{{ 'CART' | translate }}</a></li>
             </ul>
             <ul class="menu-list bottom">
                 <li id="faq"><a ui-sref="faq">FAQ</a></li>
-                <li id="contact"><a ui-sref="contact">Contact</a></li>
+                <li id="contact"><a ui-sref="contact">{{ 'CONTACT' | translate }}</a></li>
             </ul>
 
             <div class="langue-select-box">
-                <select name="langue-select" id="langue-select" class="dropdown">
+                <select name="langue-select" id="langue-select" class="dropdown" data-toggle:"collapse" ng-change="updateLangue()" ng-model="selectedLang">
                     <option value="fr">Français</option>
-                    <option value="eng">English</option>
-                    <option value="spa">Spanish</option>
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
                 </select>
             </div>
         </nav>

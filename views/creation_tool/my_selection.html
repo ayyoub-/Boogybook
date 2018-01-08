@@ -3,14 +3,14 @@
   <!-- Boogybook Classic & Not Empty Library -->
   <div class="container" ng-if="tool.size > 0 && config.type == 'Classic'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div ng-if="config.type == 'Classic'" class="numbers">{{tool.size}} / {{config.limit}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
-        <button ng-if="tool.size < config.limit" type="submit" class="btn-continuer" ng-click="submitBoogybook()" disabled>Continuer</button>
-        <button ng-if="tool.size == config.limit" class="btn-continuer" ng-click="submitBoogybook()">Continuer</button>
+        <button ng-if="tool.size < config.limit" type="submit" class="btn-continuer" ng-click="submitBoogybook()" disabled>{{ 'Continuer' | translate }}</button>
+        <button ng-if="tool.size == config.limit" class="btn-continuer" ng-click="submitBoogybook()">{{ 'Continuer' | translate }}</button>
       </form>
     </div>
     <div class="creation-tool-body">
@@ -32,14 +32,14 @@
   <!-- BoogyPrime & Not Empty Library -->
   <div class="container" ng-if="tool.sizePrime > 0 && config.type == 'BoogyPrime'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizePrime}} / {{config.limitPrime}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
-        <button ng-if="tool.sizePrime < config.limitPrime" type="submit" class="btn-continuer" ng-click="submitBoogyPrime()" disabled>Continuer</button>
-        <button ng-if="tool.sizePrime == config.limitPrime" class="btn-continuer" ng-click="submitBoogyPrime()">Continuer</button>
+        <button ng-if="tool.sizePrime < config.limitPrime" type="submit" class="btn-continuer" ng-click="submitBoogyPrime()" disabled>{{ 'Continuer' | translate }}</button>
+        <button ng-if="tool.sizePrime == config.limitPrime" class="btn-continuer" ng-click="submitBoogyPrime()">{{ 'Continuer' | translate }}</button>
       </form>
     </div>
     <div class="creation-tool-body">
@@ -61,14 +61,14 @@
   <!-- BoogyBaby & Not Empty Library -->
   <div class="container" ng-if="tool.sizeBaby > 0 && config.type == 'BoogyBaby'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizeBaby}} / {{config.limitBaby}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
-        <button ng-if="tool.sizeBaby < config.limitBaby" type="submit" class="btn-continuer" ng-click="submitBoogyBaby()" disabled>Continuer</button>
-        <button ng-if="tool.sizeBaby == config.limitBaby" class="btn-continuer" ng-click="submitBoogyBaby()">Continuer</button>
+        <button ng-if="tool.sizeBaby < config.limitBaby" type="submit" class="btn-continuer" ng-click="submitBoogyBaby()" disabled>{{ 'Continuer' | translate }}</button>
+        <button ng-if="tool.sizeBaby == config.limitBaby" class="btn-continuer" ng-click="submitBoogyBaby()">{{ 'Continuer' | translate }}</button>
       </form>
     </div>
     <div class="creation-tool-body">
@@ -90,14 +90,14 @@
   <!-- BoogyBabyXL & Not Empty Library -->
   <div class="container" ng-if="tool.sizeBabyXL > 0 && config.type == 'BoogyBaby XL'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizeBabyXL}} / {{config.limitBabyXL}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
-        <button ng-if="tool.sizeBabyXL < config.limitBabyXL" type="submit" class="btn-continuer" ng-click="submitBoogyBabyXL()" disabled>Continuer</button>
-        <button ng-if="tool.sizeBabyXL == config.limitBabyXL" class="btn-continuer" ng-click="submitBoogyBabyXL()">Continuer</button>
+        <button ng-if="tool.sizeBabyXL < config.limitBabyXL" type="submit" class="btn-continuer" ng-click="submitBoogyBabyXL()" disabled>{{ 'Continuer' | translate }}</button>
+        <button ng-if="tool.sizeBabyXL == config.limitBabyXL" class="btn-continuer" ng-click="submitBoogyBabyXL()">{{ 'Continuer' | translate }}</button>
       </form>
     </div>
     <div class="creation-tool-body">
@@ -119,14 +119,14 @@
   <!-- BoogyDuo Classic & Not Empty Library -->
   <div class="container" ng-if="tool.sizeDuo > 0 && config.type == 'BoogyDuo'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizeDuo}} / {{config.limitDuo}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
-        <button ng-if="tool.sizeDuo < config.limitDuo" type="submit" class="btn-continuer" ng-click="submitBoogyDuo()" disabled>Continuer</button>
-        <button ng-if="tool.sizeDuo == config.limitDuo" class="btn-continuer" ng-click="submitBoogyDuo()">Continuer</button>
+        <button ng-if="tool.sizeDuo < config.limitDuo" type="submit" class="btn-continuer" ng-click="submitBoogyDuo()" disabled>{{ 'Continuer' | translate }}</button>
+        <button ng-if="tool.sizeDuo == config.limitDuo" class="btn-continuer" ng-click="submitBoogyDuo()">{{ 'Continuer' | translate }}</button>
       </form>
     </div>
     <div class="creation-tool-body">
@@ -148,14 +148,14 @@
   <!-- Notebook & Not Empty Library -->
   <div class="container" ng-if="tool.sizeNote > 0 && config.type == 'BoogyNote'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div ng-if="config.type == 'BoogyNote'" class="numbers">{{tool.sizeNote}} / {{config.limitNote}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
-        <button ng-if="tool.sizeNote < config.limitNote" type="submit" class="btn-continuer" ng-click="submitNotebook()" disabled>Continuer</button>
-        <button ng-if="tool.sizeNote == config.limitNote" class="btn-continuer" ng-click="submitNotebook()">Continuer</button>
+        <button ng-if="tool.sizeNote < config.limitNote" type="submit" class="btn-continuer" ng-click="submitNotebook()" disabled>{{ 'Continuer' | translate }}</button>
+        <button ng-if="tool.sizeNote == config.limitNote" class="btn-continuer" ng-click="submitNotebook()">{{ 'Continuer' | translate }}</button>
       </form>
     </div>
     <div class="creation-tool-body">
@@ -178,19 +178,19 @@
   <!-- BoogyPrime Classic & Empty Library -->
   <div class="container" ng-if="tool.sizePrime == 0 && config.type == 'BoogyPrime'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizePrime}} / {{config.limitPrime}}</div>
       </div>
-      <button ng-if="tool.sizePrime < config.limitPrime" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.sizePrime == config.limitPrime" class="btn-continuer">Continuer</button>
+      <button ng-if="tool.sizePrime < config.limitPrime" class="btn-continuer" disabled>{{ 'Continuer' | translate }}</button>
+      <button ng-if="tool.sizePrime == config.limitPrime" class="btn-continuer">{{ 'Continuer' | translate }}</button>
     </div>
     <div class="creation-tool-body">
       <div class="upload-btn-wrapper">
-        <button ng-if="tool.sizePrime < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limitPrime - tool.sizePrime}}/{{config.limitPrime}})</span></button>
+        <button ng-if="tool.sizePrime < 60" class="btn-upload" ng-click="triggerInputFile()"><span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitPrime - tool.sizePrime}}/{{config.limitPrime}})</span></button>
         <button ng-if="tool.sizePrime == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                        <span>télécharger depuis mobile<br />({{config.limitPrime - tool.sizePrime}}/{{config.limitPrime}})</span></button>
+                        <span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitPrime - tool.sizePrime}}/{{config.limitPrime}})</span></button>
         <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
       </div>
     </div>
@@ -198,19 +198,19 @@
   <!-- BoogyBaby Classic & Empty Library -->
   <div class="container" ng-if="tool.sizeBaby == 0 && config.type == 'BoogyBaby'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizeBaby}} / {{config.limitBaby}}</div>
       </div>
-      <button ng-if="tool.sizeBaby < config.limitBaby" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.sizeBaby == config.limitBaby" class="btn-continuer">Continuer</button>
+      <button ng-if="tool.sizeBaby < config.limitBaby" class="btn-continuer" disabled>{{ 'Continuer' | translate }}</button>
+      <button ng-if="tool.sizeBaby == config.limitBaby" class="btn-continuer">{{ 'Continuer' | translate }}</button>
     </div>
     <div class="creation-tool-body">
       <div class="upload-btn-wrapper">
-        <button ng-if="tool.sizeBaby < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limitBaby - tool.sizeBaby}}/{{config.limitBaby}})</span></button>
+        <button ng-if="tool.sizeBaby < 60" class="btn-upload" ng-click="triggerInputFile()"><span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitBaby - tool.sizeBaby}}/{{config.limitBaby}})</span></button>
         <button ng-if="tool.sizeBaby == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                        <span>télécharger depuis mobile<br />({{config.limitBaby - tool.sizeBaby}}/{{config.limitBaby}})</span></button>
+                        <span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitBaby - tool.sizeBaby}}/{{config.limitBaby}})</span></button>
         <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
       </div>
     </div>
@@ -218,19 +218,19 @@
   <!-- BoogyBabyXL Classic & Empty Library -->
   <div class="container" ng-if="tool.sizeBabyXL == 0 && config.type == 'BoogyBaby XL'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizeBabyXL}} / {{config.limitBabyXL}}</div>
       </div>
-      <button ng-if="tool.sizeBabyXL < config.limitBabyXL" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.sizeBabyXL == config.limitBabyXL" class="btn-continuer">Continuer</button>
+      <button ng-if="tool.sizeBabyXL < config.limitBabyXL" class="btn-continuer" disabled>{{ 'Continuer' | translate }}</button>
+      <button ng-if="tool.sizeBabyXL == config.limitBabyXL" class="btn-continuer">{{ 'Continuer' | translate }}</button>
     </div>
     <div class="creation-tool-body">
       <div class="upload-btn-wrapper">
-        <button ng-if="tool.sizeBabyXL < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limitBabyXL - tool.sizeBabyXL}}/{{config.limitBabyXL}})</span></button>
+        <button ng-if="tool.sizeBabyXL < 60" class="btn-upload" ng-click="triggerInputFile()"><span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitBabyXL - tool.sizeBabyXL}}/{{config.limitBabyXL}})</span></button>
         <button ng-if="tool.sizeBabyXL == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                        <span>télécharger depuis mobile<br />({{config.limitBabyXL - tool.sizeBabyXL}}/{{config.limitBabyXL}})</span></button>
+                        <span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitBabyXL - tool.sizeBabyXL}}/{{config.limitBabyXL}})</span></button>
         <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
       </div>
     </div>
@@ -238,19 +238,19 @@
   <!-- Boogybook Classic & Empty Library -->
   <div class="container" ng-if="tool.size == 0 && config.type == 'Classic'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.size}} / {{config.limit}}</div>
       </div>
-      <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.size == config.limit" class="btn-continuer">Continuer</button>
+      <button ng-if="tool.size < config.limit" class="btn-continuer" disabled>{{ 'Continuer' | translate }}</button>
+      <button ng-if="tool.size == config.limit" class="btn-continuer">{{ 'Continuer' | translate }}</button>
     </div>
     <div class="creation-tool-body">
       <div class="upload-btn-wrapper">
-        <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+        <button ng-if="tool.size < 60" class="btn-upload" ng-click="triggerInputFile()"><span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
         <button ng-if="tool.size == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                        <span>télécharger depuis mobile<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
+                        <span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limit - tool.size}}/{{config.limit}})</span></button>
         <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
       </div>
     </div>
@@ -258,19 +258,19 @@
   <!-- Notebook Classic & Empty Library -->
   <div class="container" ng-if="tool.sizeNote == 0 && config.type == 'BoogyNote'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
         <div class="numbers">{{tool.sizeNote}} / {{config.limitNote}}</div>
       </div>
-      <button ng-if="tool.sizeNote < config.limitNote" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.sizeNote == config.limitNote" class="btn-continuer">Continuer</button>
+      <button ng-if="tool.sizeNote < config.limitNote" class="btn-continuer" disabled>{{ 'Continuer' | translate }}</button>
+      <button ng-if="tool.sizeNote == config.limitNote" class="btn-continuer">{{ 'Continuer' | translate }}</button>
     </div>
     <div class="creation-tool-body">
       <div class="upload-btn-wrapper">
-        <button ng-if="tool.sizeNote < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limitNote - tool.sizeNote}}/{{config.limitNote}})</span></button>
+        <button ng-if="tool.sizeNote < 60" class="btn-upload" ng-click="triggerInputFile()"><span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitNote - tool.sizeNote}}/{{config.limitNote}})</span></button>
         <button ng-if="tool.sizeNote == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                        <span>télécharger depuis mobile<br />({{config.limitNote - tool.sizeNote}}/{{config.limitNote}})</span></button>
+                        <span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitNote - tool.sizeNote}}/{{config.limitNote}})</span></button>
         <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
       </div>
     </div>
@@ -279,19 +279,19 @@
   <!-- BoogyDuo & Empty Library -->
   <div class="container" ng-if="tool.sizeDuo == 0 && config.type == 'BoogyDuo'">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToDetails()">Retour</button>
+      <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
-        <div class="text">Images séléctionnées</div>
+        <div class="text">{{ 'Images_selectionnees' | translate }}</div>
         <div class="numbers">{{tool.sizeDuo}} / {{config.limitDuo}}</div>
       </div>
-      <button ng-if="tool.sizeDuo < config.limitNote" class="btn-continuer" disabled>Continuer</button>
-      <button ng-if="tool.sizeDuo == config.limitNote" class="btn-continuer">Continuer</button>
+      <button ng-if="tool.sizeDuo < config.limitNote" class="btn-continuer" disabled>{{ 'Continuer' | translate }}</button>
+      <button ng-if="tool.sizeDuo == config.limitNote" class="btn-continuer">{{ 'Continuer' | translate }}</button>
     </div>
     <div class="creation-tool-body">
       <div class="upload-btn-wrapper">
-        <button ng-if="tool.sizeDuo < 60" class="btn-upload" ng-click="triggerInputFile()"><span>télécharger depuis mobile<br />({{config.limitDuo - tool.sizeDuo}}/{{config.limitDuo}})</span></button>
+        <button ng-if="tool.sizeDuo < 60" class="btn-upload" ng-click="triggerInputFile()"><span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitDuo - tool.sizeDuo}}/{{config.limitDuo}})</span></button>
         <button ng-if="tool.sizeDuo == 60" class="btn-upload" ng-click="triggerInputFile()" disabled>
-                        <span>télécharger depuis mobile<br />({{config.limitDuo - tool.sizeDuo}}/{{config.limitDuo}})</span></button>
+                        <span>{{ 'telecharger_depuis_mobile' | translate }}<br />({{config.limitDuo - tool.sizeDuo}}/{{config.limitDuo}})</span></button>
         <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
       </div>
     </div>
@@ -300,38 +300,38 @@
 
 <div class="creation-tool-nav">
   <ul ng-if="tool.size > 0 && config.type == 'Classic'">
-    <li>Mon Album</li>
-    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>{{ 'Mon_Album' | translate }}</li>
+    <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
   <ul ng-if="tool.sizeNote > 0 && config.type == 'BoogyNote'">
-    <li>Mon Album</li>
-    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>{{ 'Mon_Album' | translate }}</li>
+    <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
   <ul ng-if="tool.sizeDuo > 0 && config.type == 'BoogyDuo'">
-    <li>Mon Album</li>
-    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>{{ 'Mon_Album' | translate }}</li>
+    <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
   <ul ng-if="tool.sizePrime > 0 && config.type == 'BoogyPrime'">
-    <li>Mon Album</li>
-    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>{{ 'Mon_Album' | translate }}</li>
+    <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
   <ul ng-if="tool.sizeBaby > 0 && config.type == 'BoogyBaby'">
-    <li>Mon Album</li>
-    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>{{ 'Mon_Album' | translate }}</li>
+    <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
   <ul ng-if="tool.sizeBabyXL > 0 && config.type == 'BoogyBabyXL'">
-    <li>Mon Album</li>
-    <li ng-click="cleanStorage(config.type)">Vider ma biblio</li>
+    <li>{{ 'Mon_Album' | translate }}</li>
+    <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
@@ -363,16 +363,16 @@
 <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />
 <div class="upload-progress">
   <div class="counter">
-    Merci de patienter<br/>
+    {{ 'Merci_de_patienter' | translate }}<br/>
     <span>
-                <span id="loadingProgress">0</span>% en cours...</span>
+                <span id="loadingProgress">0</span>% {{ 'en_cours' | translate }}...</span>
   </div>
 </div>
 
 <div class="upload-progress-creation">
     <div class="counter-img">
       <img src="img/loading.gif" alt=""><br/>
-      <br/> Merci de patienter
+      <br/> {{ 'Merci_de_patienter' | translate }}
     </div>
   </div>
 

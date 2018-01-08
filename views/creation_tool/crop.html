@@ -4,7 +4,7 @@
 <div class="creation-tool-block">
   <div class="container">
     <div class="controls">
-      <button class="btn-retour" ng-click="backToSelection(config.type)">Retour</button>
+      <button class="btn-retour" ng-click="backToSelection(config.type)">{{ 'RETOUR' | translate }}</button>
     </div>
     <div class="creation-tool-body crop-tool" style="height:100%;">
       <div class="container">
@@ -59,8 +59,8 @@
     </div>
   <div class="creation-tool-nav" style="display:none;">
     <ul>
-      <li class="active">Mon Album</li>
-      <li>Ajouter des photos</li>
+      <li class="active">{{ 'Mon_Album' | translate }}</li>
+      <li>{{ 'Ajouter_des_photos' | translate }}</li>
       <li>Importer des photos depuis Facebook</li>
       <li>Importer des photos depuis Instagram</li>
     </ul>

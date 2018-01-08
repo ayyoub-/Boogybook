@@ -1,20 +1,20 @@
 <link rel="stylesheet" href="css/my-account.css">
 <div class="mon-compte-block">
     <div class="container">
-        <div class="go-back" ui-sref="home">ACCUEIL</div>
+        <div class="go-back" ui-sref="home">{{ 'ACCUEIL' | translate }}</div>
         <div class="page-title">
-            Mon compte
+            {{ 'MY_ACCOUNT' | translate }}
         </div>
         <div class="page-description">
-            Historique de vos commandes :
+            {{ 'Historique_de_vos_commandes' | translate }} :
         </div>
         <table style="width: 100%;" cellspacing="0" cellpadding="0" class="table-data-sheet">
             <tbody>
                 <tr>
-                    <td>Référence</td>
-                    <td>Date</td>
-                    <td>Prix total</td>
-                    <td>État</td>
+                    <td>{{ 'Reference' | translate }}</td>
+                    <td>{{ 'Date' | translate }}</td>
+                    <td>{{ 'Prix_total' | translate }}</td>
+                    <td>{{ 'etat' | translate }}</td>
                 </tr>
                 <tr ng-repeat="item in userInfos.ordersHistory">
                     <td> {{item.reference}}
@@ -23,10 +23,10 @@
                     <td> {{item.date_add}} </td>
                     <td> {{item.total_paid}} € </td>
                     <td>
-                        <div ng-if="item.current_state == 18" class="info">	en cours d'impression</div>
-                        <div ng-if="item.current_state == 3" class="info">En cours de préparation</div>
-                        <div ng-if="item.current_state == 6" class="error">Canceled</div>
-                        <div ng-if="item.current_state == 2" class="success">Paiement accepté</div>
+                        <div ng-if="item.current_state == 18" class="info">	{{ 'en_cours_impression' | translate }}</div>
+                        <div ng-if="item.current_state == 3" class="info">{{ 'En_cours_de_preparation' | translate }}</div>
+                        <div ng-if="item.current_state == 6" class="error">{{ 'Canceled' | translate }}</div>
+                        <div ng-if="item.current_state == 2" class="success">{{ 'Paiement_accepte' | translate }}</div>
                     </td>
                 </tr>
             </tbody>

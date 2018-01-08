@@ -11,7 +11,7 @@
           <div class="step">5</div>
           <div class="clearfix"></div>
         </div>
-        <div class="cart-step-text">01. Récapitulatif</div>
+        <div class="cart-step-text">01. {{ 'Recapitulatif' | translate }}</div>
       </div>
       <div class="cart-items-block">
         <div class="cart-item" ng-repeat="(index, item) in cart.products">
@@ -24,10 +24,10 @@
               <!-- <div class="cart-item-reference">Référence : {{item.reference}}</div> -->
             </div>
             <div class="bottom">
-              <div class="cart-item-price"><b>Prix :</b> {{item.price_with_reduction}} €</div>
-              <div class="cart-item-shipping"><b>Frais de port :</b> {{cart.total_shipping}}€</div>
+              <div class="cart-item-price"><b>{{ 'Prix' | translate }} :</b> {{item.price_with_reduction}} €</div>
+              <div class="cart-item-shipping"><b>{{ 'Frais_de_port' | translate }} :</b> {{cart.total_shipping}}€</div>
               <div class="cart-item-quantity">
-                <b>Quantité :</b><br />
+                <b>{{ 'Quantite' | translate }} :</b><br />
                 <div class="qte-box">
                   <div ng-if="item.quantity > 1" class="btn-remove" ng-click="addQuantity(index, -1)">-</div>
                   <input type="text" class="qte-input" name="qte-input" value="{{item.quantity}}">
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="coupon-code-block">
-        <div class="title">Bons de réduction :</div>
+        <div class="title">{{ 'Bons_de_reduction' | translate }} :</div>
         <div class="coupon-code-input">
           <input type="text" ng-model="voucher" id="coupon-code" class="coupon-code">
           <button type="button" ng-click="addVoucher()" class="btn-validate">OK</button>
@@ -51,19 +51,19 @@
         <ul class="promo-codes-list" ng-if="usedCartRule">
           <li ng-click="removeVoucher()">{{usedCartRule.code}}</li>
         </ul>
-        <p ng-if="voucherError" style="color:red">Voucher Error</p>
+        <p ng-if="voucherError" style="color:red">{{ 'Voucher_Error' | translate }}</p>
         <div class="clearfix"></div>
       </div>
       <div class="total-block">
-        <div class="total-txt">TOTAL :</div>
+        <div class="total-txt">{{ 'TOTAL' | translate }} :</div>
         <div class="total-price">{{cart.total_price}} €</div>
         <div class="clearfix"></div>
       </div>
       <div ng-if="!connected" class="btn-commander" ui-sref="cart_login">
-        Commander
+        {{ 'Commander' | translate }}
       </div>
       <div ng-if="connected" class="btn-commander" ui-sref="cart_select_address">
-        Commander
+        {{ 'Commander' | translate }}
       </div>
     </div>
   </div>
@@ -72,13 +72,13 @@
     <div class="empty-cart">
       <img src="img/empty-cart-1.png" alt="">
       <br>
-      Votre panier est vide
+      {{ 'Votre_panier_estvide' | translate }}
     </div>
   </div>
 </div>
 <div class="upload-progress" ng-show="!cartLoaded">
   <div class="counter-img">
     <img src="img/loading.gif" alt=""><br/>
-    <br/> Merci de patienter
+    <br/> {{ 'Merci_de_patienter' | translate }}
   </div>
 </div>

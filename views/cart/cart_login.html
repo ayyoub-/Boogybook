@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/cart.css">
 <div class="cart-block">
     <div class="container">
-        <div ui-sref="cart_recap" class="go-back">Continuer mes achats</div>
+        <div ui-sref="cart_recap" class="go-back">{{ 'RETOUR' | translate }}</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
                 <div class="cart-steps">
@@ -12,7 +12,7 @@
                     <div class="step">5</div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="cart-step-text">02. Connexion</div>
+                <div class="cart-step-text">02. {{ 'Connexion' | translate }}</div>
             </div>
             <div class="login-block">
                 <div class="form-group">
@@ -21,9 +21,9 @@
                 <div class="form-group">
                     <input type="password" name="password" id="password" class="input-txt" placeholder="Mot de passe" ng-model="userInfos.password">
                 </div>
-                <button class="btn-connexion" ng-click="login()">CONNEXION</button>
+                <button class="btn-connexion" ng-click="login()">{{ 'Connexion' | translate }}</button>
                 <!-- <a href="#" class="forgot-link">Mot de passe oublié ?</a> -->
-                <a ui-sref="cart_add_address" class="create-link">Créez votre compte</a>
+                <a ui-sref="cart_add_address" class="create-link">{{ 'Creez_votre_compte' | translate }}</a>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
     <div class="creation-tool-block">
         <div class="container">
           <div class="controls">
-            <button class="btn-retour" ng-click="backToSelection('BoogyNote')">Retour</button>
+            <button class="btn-retour" ng-click="backToSelection('BoogyNote')">{{ 'RETOUR' | translate }}</button>
           </div>
 
             <div class="creation-tool-body crop-tool text-tool">
@@ -52,9 +52,9 @@
         </div>
         <div class="crop-tool-nav">
             <ul>
-                <li ui-sref="note-crop-tool({'index':tool.cropIndex, 'type': config.type})">Recadrage</li>
-                <li class="active">Texte</li>
-                <li ui-sref="note-filter-tool({'index':tool.cropIndex, 'type': config.type})">Filtres</li>
+                <li ui-sref="note-crop-tool({'index':tool.cropIndex, 'type': config.type})">{{ 'Recadrage' | translate }}</li>
+                <li class="active">{{ 'Texte' | translate }}</li>
+                <li ui-sref="note-filter-tool({'index':tool.cropIndex, 'type': config.type})">{{ 'filtres' | translate }}</li>
             </ul>
         </div>
 

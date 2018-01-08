@@ -451,17 +451,17 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     $scope.getAddresses();
   // test add address
   $scope.newAddress = {
-    lastname: 'Ayyoub',
-    firstname: 'Ayyoub',
-    address1: 'Casa',
-    address2: 'Casa',
-    postcode: '12345',
-    company: 'ShareConseil',
+    lastname: '',
+    firstname: '',
+    address1: '',
+    address2: '',
+    postcode: '',
+    company: '',
     id_country: [],
-    city: 'Casa',
-    phone: '0988776655',
-    phone_mobile: '0988776655',
-    alias: 'ayyoub'
+    city: '',
+    phone: '',
+    phone_mobile: '',
+    alias: ''
   }
   if ($scope.countries == null)
     $scope.getCountries();
