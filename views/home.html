@@ -1,5 +1,6 @@
 <div class="products-list">
-    <div data-ng-repeat="(key, product) in products" class="single-product" ui-sref="product({id:product.id_product})" style="background-image:url(img/products/{{product.id_product}}.jpg);">
+    <div data-ng-repeat="(key, product) in products" class="single-product" ui-sref="product({id:product.id_product})" >
+        <img src="img/products/{{product.id_product}}.jpg" alt="" class="product-img">
         <div class="price">{{product.price}} €</div>
     </div>
 </div>

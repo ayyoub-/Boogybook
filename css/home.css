@@ -6,7 +6,7 @@
 
 .single-product{
     position: relative;
-    height: 340px;
+    height: auto;
     width: 100%;
     background-color: #ececec;
     box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
@@ -31,6 +31,10 @@
     bottom: 30px;
 }
 
+.single-product img{
+    display: block;
+    width: 100%;
+}
 @media only screen and (min-width : 768px) and (max-width : 1024px) {
     .single-product{
         height: 320px;
