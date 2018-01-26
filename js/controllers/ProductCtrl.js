@@ -40,4 +40,5 @@ boogybookApp.controller("ProductCtrl", function(PSAPI, $scope, $rootScope, $stat
     $scope.setStorage();
     console.log($scope.product);
   }
+  console.log($rootScope);
 });

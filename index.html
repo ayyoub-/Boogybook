@@ -33,11 +33,12 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi"
+    />
     <link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/easydropdown.css">
+    <!-- <link rel="stylesheet" href="css/easydropdown.css"> -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/home.css">
     <script type="text/javascript" src="js/lib/jquery-3.2.1.min.js"></script>
@@ -49,7 +50,9 @@
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/lib/jquery.easydropdown.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <!-- <script type="text/javascript" src="js/lib/jquery.easydropdown.js"></script> -->
     <script type="text/javascript" src="js/lib/sweetalert2.all.js"></script>
     <title>Boogybook</title>
 </head>
@@ -58,8 +61,12 @@
     <div ng-controller="indexCtrl">
         <header>
             <div class="container">
-                <button class="menu-toggle"><img src="img/menu.svg" alt="Menu Toggle"></button>
-                <div class="logo" ui-sref="home"><img src="img/logo.svg" alt="" width="91" height="44"></div>
+                <button class="menu-toggle">
+                    <img src="img/menu.svg" alt="Menu Toggle">
+                </button>
+                <div class="logo" ui-sref="home">
+                    <img src="img/logo.svg" alt="" width="91" height="44">
+                </div>
                 <button class="btn-hm" ui-sref="home">
                     <img src="img/home.svg" alt="">
                 </button>
@@ -70,16 +77,24 @@
                 <img src="img/logo.svg" alt="" ui-sref="home" width="91" height="44">
             </div>
             <ul class="menu-list">
-                <li id="mon-compte"><a ui-sref="myAccount">{{ 'MY_ACCOUNT' | translate }}</a></li>
-                <li id="panier"><a ui-sref="cart_recap">{{ 'CART' | translate }}</a></li>
+                <li id="mon-compte">
+                    <a ui-sref="myAccount">{{ 'MY_ACCOUNT' | translate }}</a>
+                </li>
+                <li id="panier">
+                    <a ui-sref="cart_recap">{{ 'CART' | translate }}</a>
+                </li>
             </ul>
             <ul class="menu-list bottom">
-                <li id="faq"><a ui-sref="faq">FAQ</a></li>
-                <li id="contact"><a ui-sref="contact">{{ 'CONTACT' | translate }}</a></li>
+                <li id="faq">
+                    <a ui-sref="faq">FAQ</a>
+                </li>
+                <li id="contact">
+                    <a href="#" onclick="window.open('https://www.boogybook.com/fr/contact', '_system');">{{ 'CONTACT' | translate }}</a>
+                </li>
             </ul>
 
-            <div class="langue-select-box">
-                <select name="langue-select" id="langue-select" class="dropdown" data-toggle:"collapse" ng-change="updateLangue()" ng-model="selectedLang">
+            <div class="langue-select-box" style="width:100%;">
+                <select name="langue-select" id="langue-select" class="custom-select" style="width:100%;" data-toggle:"collapse" ng-change="updateLangue()" ng-model="selectedLang">
                     <option value="fr">Français</option>
                     <option value="en">English</option>
                     <option value="es">Spanish</option>
@@ -97,12 +112,13 @@
         <button class="shopping-cart" ui-sref="cart_recap">
             <img src="img/shopping-bag.svg" alt="">
             <div class="counter">
-              0
+                0
             </div>
         </button>
         <div class="overlay"></div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="ng-cordova.min.js"></script>
     <script type="text/javascript" src="js/lib/cropper.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/app.js"></script>

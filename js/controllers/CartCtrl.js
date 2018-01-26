@@ -1,17 +1,13 @@
-boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeCheckout, $stateParams) {
+boogybookApp.controller("CartCtrl", function (PSAPI, $scope, $state, StripeCheckout, $stateParams, $rootScope) {
   // Vars
   $scope.cart = null;
-  $scope.userInfos = {
-    email: '',
-    password: '',
-    ordersHistory: null
-  };
   $scope.connected = false;
   $scope.newAccount = {
-    gender: '',
+    gender: 'm',
     first_name: '',
     last_name: '',
     password: '',
+    confirm_password: '',
     email: '',
     date: ''
   };
@@ -27,13 +23,11 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
   $scope.countries = null;
   $scope.selectedAddress = 0;
   $scope.cartLoaded = false;
+  $scope.addresses = null;
   // functions
   // get local storage
-  $scope.getStorage = function() {
-    if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null) {
-      $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
-    }
-    if (typeof $scope.userInfos.addresses == 'undefined' || $scope.userInfos.addresses.length == 0)
+  $scope.getStorage = function () {
+    if (typeof $rootScope.userInfos != 'undefined')
       $scope.getAddresses();
     if (typeof sessionStorage.getItem("countries") != 'undefined' && sessionStorage.getItem("countries") != null)
       $scope.countries = JSON.parse(sessionStorage.getItem("countries"));
@@ -43,34 +37,34 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
       $scope.usedCartRule = JSON.parse(sessionStorage.getItem("cartRules"));
   }
   // Save and update local storage
-  $scope.setStorage = function() {
-    sessionStorage.setItem("userInfos", JSON.stringify($scope.userInfos));
+  $scope.setStorage = function () {
+    sessionStorage.setItem("userInfos", JSON.stringify($rootScope.userInfos));
     sessionStorage.setItem("countries", JSON.stringify($scope.countries));
     sessionStorage.setItem("cart", JSON.stringify($scope.cart));
     sessionStorage.setItem("cartRules", JSON.stringify($scope.usedCartRule));
   }
   // Update product quantity
-  $scope.addQuantity = function(index, quantity) {
+  $scope.addQuantity = function (index, quantity) {
     $(".upload-progress").addClass("active");
     PSAPI.PSExecute('updateProductCartQuantity', {
       'product': $scope.cart.products[index].id_product,
       'cart': $scope.cart.id,
       'qty': quantity,
       'currentqty': $scope.cart.products[index].quantity,
-    }).then(function(r) {
+    }).then(function (r) {
       if (r.OK)
         $scope.getCartDetails();
     });
   }
   // Get customer orders
-  $scope.getCustomerOrder = function(userInfos) {
+  $scope.getCustomerOrder = function (userInfos) {
     PSAPI.PSExecute('getOrders', {
       'authInfos': userInfos
-    }).then(function(r) {
-      $scope.userInfos.ordersHistory = r.orders;
+    }).then(function (r) {
+      $rootScope.userInfos.ordersHistory = r.orders;
     });
   }
-  $scope.removeProductFromCart = function(index) {
+  $scope.removeProductFromCart = function (index) {
     swal({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -85,7 +79,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
         PSAPI.PSExecute('removeProductFromCart', {
           'product': $scope.cart.products[index].id_product,
           'cart': $scope.cart.id,
-        }).then(function(r) {
+        }).then(function (r) {
           if (r.OK)
             $scope.getCartDetails();
         });
@@ -94,55 +88,69 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
 
   }
   // Get countries
-  $scope.getCountries = function() {
+  $scope.getCountries = function () {
     PSAPI.get('countries', {
       'active': 1
-    }, 'full').then(function(res) {
+    }, 'full').then(function (res) {
       var r = [];
       for (p = 0; p < res.length; p++) {
         r.push(res[p]);
       }
       $scope.countries = r;
       $scope.setStorage();
-    }, function(res) {
+    }, function (res) {
       console.log('errors countries');
     });
   }
   // login
-  $scope.login = function() {
+  $scope.login = function () {
     console.log($("#email").val());
     console.log($("#password").val());
-    $scope.userInfos.email = $("#email").val();
-    $scope.userInfos.password = $("#password").val();
-    console.log($scope.userInfos);
+    $rootScope.userInfos = {
+      email: '',
+      password: '',
+      ordersHistory: null
+    };
+    $rootScope.userInfos.email = $("#email").val();
+    $rootScope.userInfos.password = $("#password").val();
+    console.log($rootScope.userInfos);
     PSAPI.get('auth', {
-      'email': $scope.userInfos.email,
-      'passwd': $scope.userInfos.password,
+      'email': $rootScope.userInfos.email,
+      'passwd': $rootScope.userInfos.password,
       'active': 1
-    }, 'full', 0).then(function(res) {
-      if(typeof res.errors == "undefined"){
+    }, 'full', 0).then(function (res) {
+      if (typeof res.errors == "undefined") {
         $scope.userInfos = res;
-        $scope.setStorage();
-        $scope.getCustomerOrder($scope.userInfos);
-        $state.go('cart_select_address', {}, {
-          location: 'replace'
-        });
+        $rootScope.userInfos = res;
+        console.log($rootScope.userInfos);
+        // $scope.getCustomerOrder($rootScope.userInfos);
+        if (typeof $stateParams.type != 'undefined') {
+          if ($stateParams.type == 1)
+            $state.go('cart_select_address', {}, {
+              location: 'replace'
+            });
+          if ($stateParams.type == 0)
+            $state.go('myAccount', {}, {
+              location: 'replace'
+            });
+        }
       }
-      else{
+      else {
         swal(
           'Oops...',
           'Identifiant ou mot de passe incorrect!',
           'error'
         )
       }
-    }, function(err) {
+    }, function (err) {
       console.log(err);
     });
   }
   // Create Order
-  $scope.createNewOrder = function() {
+  $scope.createNewOrder = function () {
     if ($scope.cart.total_price == 0) {
       $scope.selectedAddress = parseInt($("#selectedAddress").val());
+      $(".upload-progress").addClass("active");
       PSAPI.PSExecute('makeOrder', {
         'address': $scope.selectedAddress,
         'cart': $scope.cart.id,
@@ -150,8 +158,9 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
         'total_products_wt': $scope.cart.total_products_wt,
         'total_shipping': $scope.cart.total_shipping,
         'total_shipping_tax_exc': $scope.cart.total_shipping_tax_exc,
-        'id_customer': $scope.userInfos.id,
-      }).then(function(r) {
+        'id_customer': $rootScope.userInfos.id,
+      }).then(function (r) {
+        $(".upload-progress").removeClass("active");
         $state.go('successorder', {}, {
           location: 'replace'
         });
@@ -162,32 +171,33 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
       });
     }
   }
-  $scope.ogoneProcess = function() {
+  $scope.ogoneProcess = function () {
     PSAPI.get('addresses', {
-      'id_customer': $scope.userInfos.id,
+      'id_customer': $rootScope.userInfos.id,
       'deleted': '0'
-    }, 'full').then(function(res) {
-      $scope.userInfos.addresses = res;
+    }, 'full').then(function (res) {
+      $rootScope.userInfos.addresses = res;
       if (window.cordova)
-        cordova.InAppBrowser.open('https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + ($scope.cart.id) + '&idc=' + $scope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $scope.userInfos.addresses[$scope.selectedAddress].id, '_blank', 'location=yes');
+        cordova.InAppBrowser.open('https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + ($scope.cart.id) + '&idc=' + $rootScope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $rootScope.userInfos.addresses[$scope.selectedAddress].id, '_blank', 'location=yes');
       else {
-        window.location.href = 'https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + $scope.cart.id + '&idc=' + $scope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $scope.userInfos.addresses[$scope.selectedAddress].id;
+        window.location.href = 'https://boogybook.com/ogone-orders/ogone-order-mobile.php?idcart=' + $scope.cart.id + '&idc=' + $rootScope.userInfos.id + '&amount=' + $scope.cart.total_products + '&selectedAddress=' + $rootScope.userInfos.addresses[$scope.selectedAddress].id;
       }
-    }, function(res) {});
+    }, function (res) { });
   }
   // Add voucher
-  $scope.addVoucher = function() {
+  $scope.addVoucher = function () {
     $(".upload-progress").addClass("active");
     $scope.voucher = $("#coupon-code").val();
     PSAPI.PSExecute('addVoucherToCart', {
       'voucher': $scope.voucher,
       'cart': $scope.cart.id,
-    }).then(function(r) {
+    }).then(function (r) {
       if (r.OK && r.label != null) {
         $scope.getCartDetails();
         $scope.voucherError = false;
         $scope.usedCartRule = r.cartrule;
         $scope.setStorage();
+        $(".upload-progress").removeClass("active");
       } else {
         $scope.voucherError = true;
         $(".upload-progress").removeClass("active");
@@ -195,13 +205,13 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     });
   }
   // Remove Voucher
-  $scope.removeVoucher = function() {
+  $scope.removeVoucher = function () {
     $(".upload-progress").addClass("active");
     $scope.voucher = $("#coupon-code").val();
     PSAPI.PSExecute('removeVoucherToCart', {
       'voucher': 'WYSIWYGD',
       'cart': $scope.cart.id,
-    }).then(function(r) {
+    }).then(function (r) {
       if (r.OK && r.label != null) {
         $scope.getCartDetails();
         $scope.voucherError = false;
@@ -214,7 +224,9 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     });
   }
   // Add new Account
-  $scope.addAccount = function() {
+  $scope.addAccount = function () {
+    $(".upload-progress").addClass("active");
+    console.log($scope.newAccount);
     PSAPI.PSExecute('addNewCustomer', {
       'gender': $scope.newAccount.gender,
       'first_name': $scope.newAccount.first_name,
@@ -222,37 +234,54 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
       'email': $scope.newAccount.email,
       'password': $scope.newAccount.password,
       'date': $scope.newAccount.date,
-    }).then(function(r) {
-      console.log(r);
-      if (r.OK)
-        $state.go('cart_add_address', {}, {
-          location: 'replace'
-        });
+    }).then(function (r) {
+      $rootScope.userInfos.email = $scope.newAccount.email;
+      $rootScope.userInfos.password = $scope.newAccount.password;
+      PSAPI.get('auth', {
+        'email': $rootScope.userInfos.email,
+        'passwd': $rootScope.userInfos.password,
+        'active': 1
+      }, 'full', 0).then(function (res) {
+        $(".upload-progress").addClass("active");
+        if (typeof res.errors == "undefined") {
+          $rootScope.userInfos = res;
+          $scope.setStorage();
+          $scope.getCustomerOrder($rootScope.userInfos);
+          $state.go('cart_add_address', {}, {
+            location: 'replace'
+          });
+        }
+      }, function (err) {
+        $(".upload-progress").addClass("active");
+        console.log(err);
+      });
     });
   }
   // Add new address
-  $scope.addAddress = function() {
+  $scope.addAddress = function () {
     PSAPI.PSExecute('addNewAddress', {
-      'id_customer': $scope.userInfos.id,
+      'id_customer': $rootScope.userInfos.id,
       'lastname': $scope.newAddress.lastname,
       'firstname': $scope.newAddress.firstname,
       'address1': $scope.newAddress.address1,
       'address2': $scope.newAddress.address2,
       'postcode': $scope.newAddress.postcode,
-      'id_country': $scope.newAddress.id_country,
+      'id_country': parseInt($('.countries').find(":selected").val()),
       'city': $scope.newAddress.city,
       'phone': $scope.newAddress.phone,
       'alias': $scope.newAddress.alias
-    }).then(function(r) {
+    }).then(function (r) {
       if (r.OK) {
-        alert("OK");
+        $state.go('cart_select_address', {}, {
+          location: 'replace'
+        });
       }
     });
   }
   // Update Existing address
-  $scope.updateAddress = function() {
+  $scope.updateAddress = function () {
     PSAPI.PSExecute('addNewAddress', {
-      'id_customer': $scope.userInfos.id,
+      'id_customer': $rootScope.userInfos.id,
       'lastname': $scope.newAddress.lastname,
       'firstname': $scope.newAddress.firstname,
       'address1': $scope.newAddress.address1,
@@ -262,42 +291,64 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
       'city': $scope.newAddress.city,
       'phone': $scope.newAddress.phone,
       'alias': $scope.newAddress.alias
-    }).then(function(r) {
+    }).then(function (r) {
       if (r.OK) {
-        alert("OK");
+        $state.go('cart_select_address', {}, {
+          location: 'replace'
+        });
       }
     });
   }
   // Get customer addresses
-  $scope.getAddresses = function() {
+  $scope.getAddresses = function () {
     $(".upload-progress").addClass("active");
-    if (typeof $scope.userInfos.id != undefined)
+    if (typeof $rootScope.userInfos != 'undefined')
       PSAPI.get('addresses', {
-        'id_customer': $scope.userInfos.id,
+        'id_customer': $rootScope.userInfos.id,
         'deleted': '0'
-      }, 'full').then(function(res) {
-        $scope.userInfos.addresses = res;
-        console.log($scope.userInfos.addresses);
+      }, 'full').then(function (res) {
+        $rootScope.userInfos.addresses = res;
+        console.log($rootScope.userInfos.addresses);
+        $scope.addresses =  $rootScope.userInfos.addresses;
         $scope.setStorage();
         $(".upload-progress").removeClass("active");
-      }, function(res) {
-        $scope.userInfos.addresses = [];
+      }, function (res) {
+        $rootScope.userInfos.addresses = [];
         $(".upload-progress").removeClass("active");
       });
   }
   // Check add account form and send request
-  $scope.addAccountSubmitForm = function(isValid) {
+  $scope.addAccountSubmitForm = function (isValid) {
     // check to make sure the form is completely valid
     console.log(isValid);
     if (isValid) {
-      $scope.addAccount();
+      // check if account exist
+      PSAPI.PSExecute('checkUserEmail', {
+        'email': $scope.newAccount.email
+      }).then(function (res) {
+        if (res.OK)
+          $scope.addAccount();
+        else {
+          swal(
+            'Oops...',
+            'Ce compte existe déjà',
+            'error'
+          )
+        }
+      });
+    } else {
+      swal(
+        'Oops...',
+        'Merci de vérifier votre formulaire',
+        'error'
+      )
     }
   };
   // Check add address form and send
-  $scope.addAddressSubmitForm = function(isValid) {
+  $scope.addAddressSubmitForm = function (isValid) {
     // check to make sure the form is completely valid
     console.log(isValid);
-    if (isValid) {
+    if (isValid && $scope.newAddress.id_country != 0) {
       console.log($scope.newAddress);
       $scope.addAddress();
     } else {
@@ -308,12 +359,12 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
       )
     }
   };
-  $scope.backToAddresses = function() {
+  $scope.backToAddresses = function () {
     $state.go('cart_select_address', {}, {
       location: 'replace'
     });
   }
-  $scope.updateAddressSubmitForm = function(isValid) {
+  $scope.updateAddressSubmitForm = function (isValid) {
     // check to make sure the form is completely valid
     console.log(isValid);
     if (isValid) {
@@ -328,19 +379,19 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     }
   };
   // Get product images
-  $scope.getProductImage = function(id_p) {
+  $scope.getProductImage = function (id_p) {
     PSAPI.PSExecute('getProductImage', {
       'id_product': id_p
-    }).then(function(res) {
+    }).then(function (res) {
       if (res.OK)
         $scope.productsLinks.push(res.link);
     });
   }
   // Get Address by ID
-  $scope.getAddressById = function(id) {
-    console.log($scope.userInfos.addresses);
+  $scope.getAddressById = function (id) {
+    console.log($rootScope.userInfos.addresses);
     console.log(id);
-    $scope.userInfos.addresses.forEach(elem => {
+    $rootScope.userInfos.addresses.forEach(elem => {
       console.log(parseInt(id));
       console.log(elem.id);
       if (elem.id == parseInt(id))
@@ -348,17 +399,17 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     });
   }
   // Get cart details
-  $scope.getCartDetails = function() {
+  $scope.getCartDetails = function () {
     params = {};
     // check if user is connected
-    if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null) {
-      //params.authInfos = $scope.userInfos;
+    if (typeof ($rootScope.userInfos) != 'undefined' && $rootScope.userInfos != null) {
+      //params.authInfos = $rootScope.userInfos;
       //params.authInfos.addresses = [];
     }
     // check if he has an old existing card
-    if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
+    if (typeof ($scope.cart) != 'undefined' && $scope.cart != null)
       params.id_cart = $scope.cart.id;
-    PSAPI.PSExecute('getCartId', params).then(function(res) {
+    PSAPI.PSExecute('getCartId', params).then(function (res) {
       if (typeof res.id != 'undefined') {
         id_cart = res.id;
         $scope.cart = res;
@@ -372,44 +423,45 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     });
   }
   // MAIN PROCESS
-                        // Test strip
-                        // alert("OK");
-                        // cordova.plugins.stripe.setPublishableKey('sk_test_59MIJxCtnlDauLE9yQvMw439');
-                        // var card = {
-                        // number: '4242424242424242', // 16-digit credit card number
-                        // expMonth: 12, // expiry month
-                        // expYear: 2020, // expiry year
-                        // cvc: '220', // CVC / CCV
-                        // name: 'John Smith', // card holder name (optional)
-                        // address_line1: '123 Some Street', // address line 1 (optional)
-                        // address_line2: 'Suite #220', // address line 2 (optional)
-                        // address_city: 'Toronto', // city (optional)
-                        // address_state: 'Ontario', // state/province (optional)
-                        // address_country: 'Canada', // country (optional)
-                        // postal_code: 'L5L5L5', // Postal Code / Zip Code (optional)
-                        // currency: 'CAD' // Three-letter ISO currency code (optional)
-                        // };
-                        // //  console.log(cordova);
-                        // function onSuccess(tokenId) {
-                        // console.log('Got card token!', tokenId);
-                        // }
-                        
-                        // function onError(errorMessage) {
-                        // console.log('Error getting card token', errorMessage);
-                        // }
-                        
-                        // cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
-                        // alert("Done");
+  // Test strip
+  // alert("OK");
+  // cordova.plugins.stripe.setPublishableKey('sk_test_59MIJxCtnlDauLE9yQvMw439');
+  // var card = {
+  // number: '4242424242424242', // 16-digit credit card number
+  // expMonth: 12, // expiry month
+  // expYear: 2020, // expiry year
+  // cvc: '220', // CVC / CCV
+  // name: 'John Smith', // card holder name (optional)
+  // address_line1: '123 Some Street', // address line 1 (optional)
+  // address_line2: 'Suite #220', // address line 2 (optional)
+  // address_city: 'Toronto', // city (optional)
+  // address_state: 'Ontario', // state/province (optional)
+  // address_country: 'Canada', // country (optional)
+  // postal_code: 'L5L5L5', // Postal Code / Zip Code (optional)
+  // currency: 'CAD' // Three-letter ISO currency code (optional)
+  // };
+  // //  console.log(cordova);
+  // function onSuccess(tokenId) {
+  // console.log('Got card token!', tokenId);
+  // }
+
+  // function onError(errorMessage) {
+  // console.log('Error getting card token', errorMessage);
+  // }
+
+  // cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
+  // alert("Done");
+  console.log($scope.cart);
   var handler = StripeCheckout.configure({
-    name: "Custom Example",
-    token: function(token, args) {
+    name: "Boogybook",
+    token: function (token, args) {
       console.log("Got stripe token: " + token.id);
     }
   });
-  $scope.doCheckout = function(token, args) {
+  $scope.doCheckout = function (token, args) {
     var options = {
       description: "Boogybook",
-      amount: $scope.cart.total_price*100
+      amount: $scope.cart.total_price * 100
     };
     // The default handler API is enhanced by having open()
     // return a promise. This promise can be used in lieu of or
@@ -418,7 +470,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     //
     // The rejection callback doesn't work in IE6-7.
     handler.open(options)
-      .then(function(result) {
+      .then(function (result) {
         // alert("Got Stripe token: " + result[0].id);
         $(".upload-progress").addClass("active");
         PSAPI.PSExecute('makeOrder', {
@@ -428,14 +480,14 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
           'total_products_wt': $scope.cart.total_products_wt,
           'total_shipping': $scope.cart.total_shipping,
           'total_shipping_tax_exc': $scope.cart.total_shipping_tax_exc,
-          'id_customer': $scope.userInfos.id,
-        }).then(function(r) {
+          'id_customer': $rootScope.userInfos.id,
+        }).then(function (r) {
           $(".upload-progress").removeClass("active");
           $state.go('successorder', {}, {
             location: 'replace'
           });
         });
-      },function() {
+      }, function () {
         // alert("Stripe Checkout closed without making a sale :(");
       });
   };
@@ -443,12 +495,11 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
   if ($state.$current.self.name == 'cart_recap')
     $(".upload-progress").addClass("active");
   $scope.getStorage();
-  console.log($scope.userInfos.addresses);
+  console.log($rootScope);
   $scope.getCartDetails();
-  if (typeof $scope.userInfos.id != 'undefined')
+  if (typeof $rootScope.userInfos != 'undefined')
     $scope.connected = true;
-  if (typeof $scope.userInfos.addresses == 'undefined')
-    $scope.getAddresses();
+  $scope.getAddresses();
   // test add address
   $scope.newAddress = {
     lastname: '',
@@ -457,7 +508,7 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
     address2: '',
     postcode: '',
     company: '',
-    id_country: [],
+    id_country: 0,
     city: '',
     phone: '',
     phone_mobile: '',
@@ -469,17 +520,28 @@ boogybookApp.controller("CartCtrl", function(PSAPI, $scope, $state, StripeChecko
   if (typeof $stateParams.id_address != 'undefined') {
     $(".upload-progress").addClass("active");
     PSAPI.get('addresses', {
-      'id_customer': $scope.userInfos.id,
+      'id_customer': $rootScope.userInfos.id,
       'deleted': '0'
-    }, 'full').then(function(res) {
-      $scope.userInfos.addresses = res;
+    }, 'full').then(function (res) {
+      $rootScope.userInfos.addresses = res;
       $scope.getAddressById($stateParams.id_address);
       console.log($scope.addressUpdate);
       $(".upload-progress").removeClass("active");
-    }, function(res) {});
+    }, function (res) { });
 
   }
 
   // $scope.removeVoucher();
-  //console.log($scope.userInfos.addresses);
+  //console.log($rootScope.userInfos.addresses);
 });
+
+
+
+function iqTest(numbers) {
+  indexOdd = cptOdd = 0;
+  indexEven = cptEven = 0;
+  numbers.split(" ").forEach(function (element, index) {
+    (parseInt(element) % 2 == 0) ? (indexEven = index, cptEven++) : (indexEven = index, cptEven++);
+  });
+  return (cptEven == 1) ? indexEven : indexEven;
+}

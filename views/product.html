@@ -11,7 +11,7 @@
     </div>
     <div class="container">
         <button class="btn-details" ng-click="showDetails()">{{ 'DETAILS' | translate }}</button>
-        <button class="btn-creer" ui-sref="mySelection({'type':product.name})">{{ 'CREER' | translate }}</button>
+        <button class="btn-creer" ui-sref="mySelection({'type':product.id_product})">{{ 'CREER' | translate }}</button>
         <div class="clearfix"></div>
 
     </div>
@@ -28,8 +28,13 @@
                 {{ 'FICHE_TECHNIQUE' | translate }}
             </div>
             <div class="fiche-description">
-                <p><b>{{ 'DIMENSIONS_DE_CHAQUE_PAGE' | translate }} :</b> {{product.features[1].value}} x {{product.features[0].value}} : un format qui tient dans la poche</p>
-                <p><b>Aspect brillant :</b> vos photos sont plus belles! <br /></p>
+                <p>
+                    <b>{{ 'DIMENSIONS_DE_CHAQUE_PAGE' | translate }} :</b> {{product.features[1].value}} x {{product.features[0].value}}
+                    : un format qui tient dans la poche</p>
+                <p>
+                    <b>Aspect brillant :</b> vos photos sont plus belles!
+                    <br />
+                </p>
                 <p>Chaque photo est détachable pour offrir, encadrer ou décorer votre intérieur.</p>
             </div>
             <table class="table-data-sheet">
@@ -52,7 +57,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn-creer-detail" ui-sref="mySelection({'type':product.name})">{{ 'JE_CREE' | translate }}</button>
+            <button class="btn-creer-detail" ui-sref="mySelection({'type':product.id_product})">{{ 'CREER' | translate }}</button>
         </div>
     </div>
 

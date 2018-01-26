@@ -59,7 +59,7 @@
         <div class="total-price">{{cart.total_price}} €</div>
         <div class="clearfix"></div>
       </div>
-      <div ng-if="!connected" class="btn-commander" ui-sref="cart_login">
+      <div ng-if="!connected" class="btn-commander" ui-sref="cart_login({'type':1})">
         {{ 'Commander' | translate }}
       </div>
       <div ng-if="connected" class="btn-commander" ui-sref="cart_select_address">

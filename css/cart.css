@@ -516,6 +516,7 @@
   height: 60px;
   background-color: #ececec;
   font-weight: bold;
+  -webkit-appearance: none;
 }
 
 .civilite {

@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="css/cart.css">
+</script>
 <div class="cart-block">
     <div class="container">
-        <div ui-sref="cart_recap">{{ 'RETOUR' | translate }}</div>
+        <div ui-sref="cart_recap" class="go-back">{{ 'RETOUR' | translate }}</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
                 <div class="cart-steps">
@@ -17,7 +18,7 @@
             <div class="inscription-block">
                 <form name="add_account" id="inscription-form" ng-submit="addAccountSubmitForm(add_account.$valid)" novalidate>
                     <div class="form-group2 civilite">
-                        <label for="">Titre</label>
+                        <label for="">{{ 'TITLE' | translate }}</label>
                         <div class="clearfix"></div>
                         <div class="radio" id="homme">
                             <input id="radio-1" name="radio" type="radio" value="m" ng-model="newAccount.gender" required>
@@ -29,24 +30,34 @@
                         </div>
                     </div>
                     <div class="form-group2 nom">
-                        <input type="text" name="last_name" ng-model="newAccount.last_name" ng-minlength="3" ng-maxlength="15" class="input-text2 lettersonly" placeholder="Nom" required>
-                        <!-- <p ng-show="add_account.last_name.$invalid && !add_account.last_name.$pristine" class="help-block">Votre nom est obligatoire.</p> -->
+                        <input type="text" name="last_name" ng-model="newAccount.last_name" ng-minlength="3" ng-maxlength="15" class="input-text2 lettersonly"
+                            placeholder="{{ 'Nom' | translate }}" required>
+                        <p style="color: red;" ng-show="add_account.last_name.$invalid && !add_account.last_name.$pristine" class="help-block">{{ 'Votre_nom_est_invalide' | translate }}</p>
                     </div>
                     <div class="form-group2 prenom">
-                        <input type="text" class="input-text2 lettersonly" ng-minlength="3" name="first_name" ng-maxlength="15" ng-model="newAccount.first_name" placeholder="Prenom" required>
-                        <!-- <p ng-show="add_account.first_name.$invalid && !add_account.first_name.$pristine" class="help-block">Votre prénom est obligatoire.</p> -->
+                        <input type="text" class="input-text2 lettersonly" ng-minlength="3" name="first_name" ng-maxlength="15" ng-model="newAccount.first_name"
+                            placeholder="{{ 'prenom' | translate }}" required>
+                        <p style="color: red;" ng-show="add_account.first_name.$invalid && !add_account.first_name.$pristine" class="help-block">{{ 'Votre_prenom_est_invalide' | translate }}</p>
                     </div>
                     <div class="form-group2 email">
-                        <input type="email" ng-pattern="pattern.email" class="input-text2" name="email" ng-model="newAccount.email" placeholder="Adresse e-mail" required>
-                        <!-- <p ng-show="add_account.email.$invalid && !add_account.email.$pristine" class="help-block">Votre adresse email est obligatoire.</p> -->
+                        <input type="email" ng-pattern="pattern.email" class="input-text2" name="email" ng-model="newAccount.email" placeholder="{{ 'EMAIL' | translate }}"
+                            required>
+                        <p style="color: red;" ng-show="add_account.email.$invalid && !add_account.email.$pristine" class="help-block">{{ 'Votre_email_est_invalide' | translate }}.</p>
                     </div>
                     <div class="form-group2 password">
-                        <input type="password" class="input-text2" ng-model="newAccount.password" name="password" placeholder="Mot de passe" required>
-                        <!-- <p ng-show="add_account.password.$invalid && !add_account.password.$pristine" class="help-block">Un mot de passe est obligatoire.</p> -->
+                        <input type="password" id="password" class="input-text2" ng-model="newAccount.password" name="password" placeholder="{{ 'PASSWORD' | translate }}"
+                            required>
+                        <p style="color: red;" ng-show="add_account.password.$invalid && !add_account.password.$pristine" class="help-block">{{ 'Votre_password_est_invalide' | translate }}</p>
+                    </div>
+                    <div class="form-group2 confirm_password">
+                        <input type="password" pw-check='password' class="input-text2" ng-model="newAccount.confirm_password" name="confirm_password" placeholder="{{ 'PASSWORD' | translate }}"
+                            required>
+                        <p style="color: red;" ng-show="add_account.confirm_password.$invalid && !add_account.confirm_password.$pristine" class="help-block">{{ 'Votre_password_est_invalide' | translate }}</p>
                     </div>
                     <div class="form-group2 date-naissance">
-                        <input type="date" name="date" class="input-text2 numbersonly" ng-model="newAccount.date" placeholder="Date de naissance" required>
-                        <!-- <p ng-show="add_account.date.$invalid && !add_account.date.$pristine" class="help-block">Votre date de naissance est obligatoire.</p> -->
+                        <input type="text" onfocus="(this.type='date')" name="date" id="date_naissance" class="input-text2 numbersonly" ng-model="newAccount.date"
+                            placeholder="{{ 'DATE_NAISSANCE' | translate }}" required>
+                        <p style="color: red;" ng-show="add_account.date.$invalid && !add_account.date.$pristine" class="help-block">{{ 'Votre_date_naissance_est_invalide' | translate }}</p>
                     </div>
                     <div class="form-group2 newsletter-checkbox">
                         <input id="newsletter" type="checkbox" name="newsletter" value="newsletter">
@@ -55,12 +66,18 @@
 
                     <div class="form-group2 offres-checkbox">
                         <input id="offres" type="checkbox" name="offres" value="offres">
-                        <label for="offres">{{ 'Recevez_les_offres_speciales_de_nos_partenaires' | translate }}  </label>
+                        <label for="offres">{{ 'Recevez_les_offres_speciales_de_nos_partenaires' | translate }} </label>
                         <div class="clearfix"></div>
                     </div>
-                    <button type="submit" ng-if="!add_account.$invalid" class="btn-inscription">S'inscrire</button>
+                    <button type="submit" class="btn-inscription">S'inscrire</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<div class="upload-progress" ng-show="!cartLoaded">
+    <div class="counter-img">
+      <img src="img/loading.gif" alt=""><br/>
+      <br/> {{ 'Merci_de_patienter' | translate }}
+    </div>
+  </div>

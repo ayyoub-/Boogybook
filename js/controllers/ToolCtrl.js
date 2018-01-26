@@ -1,4 +1,4 @@
-boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $stateParams, $window, PSAPI, $http) {
+boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $stateParams, $window, PSAPI, $http, $cordovaCamera, $cordovaImagePicker) {
   // Vars
   $scope.config = {
     limit: 60,
@@ -15,7 +15,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     babyXlPrice: 14.103774,
     total: 0,
     cart: 0,
-    type: 'Classic',
+    type: 8,
     mobile: false,
     crop_photo_url: '',
     source: 'computer',
@@ -95,8 +95,8 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Get local Storage
   $scope.getStorage = function() {
-    if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null)
-      $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
+    // if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null)
+    //   $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
     if (typeof sessionStorage.getItem("cart") != 'undefined' && sessionStorage.getItem("cart") != null)
       $scope.cart = JSON.parse(sessionStorage.getItem("cart"));
     if (typeof sessionStorage.getItem("myLibrary") != undefined && sessionStorage.getItem("myLibrary") != null) {
@@ -211,7 +211,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   Check the length of ajax upload result
    */
   $scope.checkDataAjaxLength = function(type) {
-    if (type == 'Classic') {
+    if (type == 8) {
       var len = document.getElementById('images').files.length;
       if (len > ($scope.config.limit - $scope.tool.size)) {
         $scope.errors.upload_limit.enable = true;
@@ -220,7 +220,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         $scope.errors.upload_limit.enable = false;
         return len;
       }
-    } else if (type == 'BoogyDuo') {
+    } else if (type == 15133) {
       var len = document.getElementById('images').files.length;
       if (len > ($scope.config.limitDuo - $scope.tool.sizeDuo)) {
         $scope.errors.upload_limit.enable = true;
@@ -230,7 +230,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         return len;
       }
     }
-    else if (type == 'BoogyPrime') {
+    else if (type == 15135) {
       var len = document.getElementById('images').files.length;
       if (len > ($scope.config.limitPrime - $scope.tool.sizePrime)) {
         $scope.errors.upload_limit.enable = true;
@@ -240,7 +240,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         return len;
       }
     }
-    else if (type == 'BoogyBaby') {
+    else if (type == 15137) {
       var len = document.getElementById('images').files.length;
       if (len > ($scope.config.limitBaby - $scope.tool.sizeBaby)) {
         $scope.errors.upload_limit.enable = true;
@@ -250,7 +250,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         return len;
       }
     }
-    else if (type == 'BoogyBaby XL') {
+    else if (type == 15138) {
       var len = document.getElementById('images').files.length;
       if (len > ($scope.config.limitBabyXL - $scope.tool.sizeBabyXL)) {
         $scope.errors.upload_limit.enable = true;
@@ -318,7 +318,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Get first empty item
   $scope.getFirstEmptyItem = function(type) {
-    if (type == 'Classic') {
+    if (type == 8) {
       for (var i = 0; i < $scope.config.limit; i++) {
         if (typeof $scope.tool.myLibrary[i] == "undefined")
           return i;
@@ -326,7 +326,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           return i;
       }
     }
-    else if (type == 'BoogyPrime') {
+    else if (type == 15135) {
       for (var i = 0; i < $scope.config.limitPrime; i++) {
         if (typeof $scope.tool.myLibraryPrime[i] == "undefined")
           return i;
@@ -334,7 +334,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           return i;
       }
     }
-    else if (type == 'BoogyBaby') {
+    else if (type == 15137) {
       for (var i = 0; i < $scope.config.limitBaby; i++) {
         if (typeof $scope.tool.myLibraryBaby[i] == "undefined")
           return i;
@@ -342,14 +342,14 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           return i;
       }
     }
-    else if (type == 'BoogyBaby XL') {
+    else if (type == 15138) {
       for (var i = 0; i < $scope.config.limitBabyXL; i++) {
         if (typeof $scope.tool.myLibraryBabyXL[i] == "undefined")
           return i;
         else if (typeof $scope.tool.myLibraryBabyXL[i].uid == "undefined")
           return i;
       }
-    } else if (type == 'BoogyDuo') {
+    } else if (type == 15133) {
       for (var i = 0; i < $scope.config.limitDuo; i++) {
         if (typeof $scope.tool.myLibraryDuo[i] == "undefined")
           return i;
@@ -399,23 +399,23 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     /*
      Add element to library
      */
-    if (type == 'Classic') {
+    if (type == 8) {
       $scope.tool.myLibrary[from] = item;
       $scope.tool.size++;
     }
-    else if (type == 'BoogyPrime') {
+    else if (type == 15135) {
       $scope.tool.myLibraryPrime[from] = item;
       $scope.tool.sizePrime++;
     }
-    else if (type == 'BoogyBaby') {
+    else if (type == 15137) {
       $scope.tool.myLibraryBaby[from] = item;
       $scope.tool.sizeBaby++;
     }
-    else if (type == 'BoogyBaby XL') {
+    else if (type == 15138) {
       $scope.tool.myLibraryBabyXL[from] = item;
       $scope.tool.sizeBabyXL++;
     }
-    else if (type == 'BoogyDuo') {
+    else if (type == 15133) {
       $scope.tool.myLibraryDuo[from] = item;
       $scope.tool.myLibraryDuo[from + 1] = item;
       $scope.tool.sizeDuo++;
@@ -428,7 +428,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Duplicate item
   $scope.duplicateItem = function(index, type) {
-    if (type == 'Classic') {
+    if (type == 8) {
       if (typeof $scope.tool.myLibrary[index + 1] == "undefined") {
         var item = new Object();
         item = $scope.tool.myLibrary[index];
@@ -444,7 +444,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         $scope.tool.size++;
       }
     }
-    else if (type == 'BoogyPrime') {
+    else if (type == 15135) {
       if (typeof $scope.tool.myLibraryPrime[index + 1] == "undefined") {
         var item = new Object();
         item = $scope.tool.myLibraryPrime[index];
@@ -460,7 +460,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         $scope.tool.sizePrime++;
       }
     }
-    else if (type == 'BoogyBaby') {
+    else if (type == 15137) {
       if (typeof $scope.tool.myLibraryBaby[index + 1] == "undefined") {
         var item = new Object();
         item = $scope.tool.myLibraryBaby[index];
@@ -476,7 +476,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         $scope.tool.sizeBaby++;
       }
     }
-    else if (type == 'BoogyBaby XL') {
+    else if (type == 15138) {
       if (typeof $scope.tool.myLibraryBabyXL[index + 1] == "undefined") {
         var item = new Object();
         item = $scope.tool.myLibraryBabyXL[index];
@@ -491,7 +491,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         }
         $scope.tool.sizeBabyXL++;
       }
-    } else if (type == 'BoogyDuo') {
+    } else if (type == 15133) {
       if (typeof $scope.tool.myLibraryDuo[index + 1] == "undefined") {
         var item = new Object();
         item = $scope.tool.myLibraryDuo[index];
@@ -532,31 +532,31 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Delete item
   $scope.deleteItem = function(index, type) {
-    if (type == 'Classic') {
+    if (type == 8) {
       var item = new Object();
       item.index = index;
       $scope.tool.myLibrary.splice(index, 1);
       $scope.tool.size--;
     }
-    else if (type == 'BoogyPrime') {
+    else if (type == 15135) {
       var item = new Object();
       item.index = index;
       $scope.tool.myLibraryPrime.splice(index, 1);
       $scope.tool.sizePrime--;
     }
-    else if (type == 'BoogyBaby') {
+    else if (type == 15137) {
       var item = new Object();
       item.index = index;
       $scope.tool.myLibraryBaby.splice(index, 1);
       $scope.tool.sizeBaby--;
     }
-    else if (type == 'BoogyBaby XL') {
+    else if (type == 15138) {
       var item = new Object();
       item.index = index;
       $scope.tool.myLibraryBabyXL.splice(index, 1);
       $scope.tool.sizeBabyXL--;
     }
-    else if (type == 'BoogyDuo') {
+    else if (type == 15133) {
       var indexs = $scope.getElementById($scope.tool.myLibraryDuo[index].uis, $scope.tool.myLibraryDuo);
       indexs.reverse();
       var i = 0;
@@ -580,7 +580,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Edit picture
   $scope.editItem = function(index, type) {
-    if ($scope.config.type == "BoogyNote") {
+    if ($scope.config.type == 10) {
       $state.go('note-crop-tool', {
         "index": index,
         "type": type
@@ -653,7 +653,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Clear local storage
   $scope.cleanStorage = function(type) {
-    if (type == 'Classic') {
+    if (type == 8) {
       var i = sessionStorage.length;
       while (i--) {
         var key = sessionStorage.key(i);
@@ -662,7 +662,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       $scope.tool.myLibrary = new Array();
       $scope.tool.size = 0;
     }
-    else if (type == 'BoogyPrime') {
+    else if (type == 15135) {
       var i = sessionStorage.length;
       while (i--) {
         var key = sessionStorage.key(i);
@@ -671,7 +671,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       $scope.tool.myLibraryPrime = new Array();
       $scope.tool.sizePrime = 0;
     }
-    else if (type == 'BoogyBaby') {
+    else if (type == 15137) {
       var i = sessionStorage.length;
       while (i--) {
         var key = sessionStorage.key(i);
@@ -680,7 +680,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       $scope.tool.myLibraryBaby = new Array();
       $scope.tool.sizeBaby = 0;
     }
-    else if (type == 'BoogyBaby XL') {
+    else if (type == 15138) {
       var i = sessionStorage.length;
       while (i--) {
         var key = sessionStorage.key(i);
@@ -689,7 +689,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
       $scope.tool.myLibraryBabyXL = new Array();
       $scope.tool.sizeBabyXL = 0;
     }
-    if (type == 'BoogyDuo') {
+    if (type == 15133) {
       var i = sessionStorage.length;
       while (i--) {
         var key = sessionStorage.key(i);
@@ -878,7 +878,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
   }
   // Save croped picture
   $scope.saveCrop = function() {
-    if ($scope.config.type == 'Classic') {
+    if ($scope.config.type == 8) {
       $.ajax({
         url: "https://boogybook.com/web_medias/preview_refonte.php",
         type: 'post',
@@ -910,7 +910,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         }
       });
     }
-    if ($scope.config.type == 'BoogyPrime') {
+    if ($scope.config.type == 15135) {
       $.ajax({
         url: "https://boogybook.com/web_medias/preview_refonte.php",
         type: 'post',
@@ -942,7 +942,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         }
       });
     }
-    if ($scope.config.type == 'BoogyBaby') {
+    if ($scope.config.type == 15137) {
       $.ajax({
         url: "https://boogybook.com/web_medias/preview_refonte.php",
         type: 'post',
@@ -974,7 +974,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
         }
       });
     }
-    if ($scope.config.type == 'BoogyBaby XL') {
+    if ($scope.config.type == 15138) {
       $.ajax({
         url: "https://boogybook.com/web_medias/preview_refonte.php",
         type: 'post',
@@ -1005,7 +1005,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           console.error("Error");
         }
       });
-    } else if ($scope.config.type == 'BoogyDuo') {
+    } else if ($scope.config.type == 15133) {
       $.ajax({
         url: "https://boogybook.com/web_medias/preview_refonte.php",
         type: 'post',
@@ -1088,7 +1088,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
      */
     $scope.cropDetails.cropper.rotate($scope.cropDetails.rotateParam);
     $scope.cropDetails.rotateParam = 0;
-    if ($scope.config.type == 'BoogyNote') {
+    if ($scope.config.type == 10) {
       $scope.tool.myLibraryNote[$scope.tool.cropIndex].effect = 0;
       $('.cropper-view-box img').css("-webkit-filter", "none");
     }
@@ -1125,7 +1125,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
      */
     if (typeof $stateParams.index != 'undefined' && ($state.$current.self.name == 'edit' || $state.$current.self.name == 'note-crop-tool' || $state.$current.self.name == 'note-filter-tool' || $state.$current.self.name == 'note-text-tool')) {
       var image = document.getElementById('image');
-      if ($scope.config.type == 'BoogyNote') {
+      if ($scope.config.type == 10) {
         $scope.cropDetails.cropper = new Cropper(image, {
           aspectRatio: 9 / 9,
           autoCropArea: 1,
@@ -1145,7 +1145,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           crop: function(e) {}
         });
       }
-      else if ($scope.config.type == 'BoogyPrime') {
+      else if ($scope.config.type == 15135) {
         $scope.cropDetails.cropper = new Cropper(image, {
           aspectRatio: 9 / 9,
           autoCropArea: 1,
@@ -1165,7 +1165,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           crop: function(e) {}
         });
       }
-      else if ($scope.config.type == 'BoogyBaby') {
+      else if ($scope.config.type == 15137) {
         $scope.cropDetails.cropper = new Cropper(image, {
           aspectRatio: 9 / 9,
           autoCropArea: 1,
@@ -1185,7 +1185,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           crop: function(e) {}
         });
       }
-      else if ($scope.config.type == 'BoogyBaby XL') {
+      else if ($scope.config.type == 15138) {
         $scope.cropDetails.cropper = new Cropper(image, {
           aspectRatio: 9 / 9,
           autoCropArea: 1,
@@ -1204,7 +1204,7 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
           minContainerHeight: 350,
           crop: function(e) {}
         });
-      } else if ($scope.config.type == 'BoogyDuo') {
+      } else if ($scope.config.type == 15133) {
         $scope.cropDetails.cropper = new Cropper(image, {
           aspectRatio: 12 / 8,
           autoCropArea: 1,
@@ -1261,19 +1261,20 @@ boogybookApp.controller("ToolCtrl", function($scope, $anchorScroll, $state, $sta
     $scope.tool.cropIndex = -1;
     $scope.tool.anchorScrollIndex = 0;
   }
-  if ($stateParams.type == "BoogyNote") {
-    $scope.config.type = 'BoogyNote';
-  } else if ($stateParams.type == "BoogyDuo") {
-    $scope.config.type = 'BoogyDuo';
+  console.log(parseInt($stateParams.type));
+  if (parseInt(parseInt($stateParams.type)) == 10) {
+    $scope.config.type = 10;
+  } else if (parseInt($stateParams.type) == 15133) {
+    $scope.config.type = 15133;
   }
-  else if ($stateParams.type == "BoogyBaby XL") {
-    $scope.config.type = 'BoogyBaby XL';
+  else if (parseInt($stateParams.type) == 15138) {
+    $scope.config.type = 15138;
   }
-  else if ($stateParams.type == "BoogyBaby") {
-    $scope.config.type = 'BoogyBaby';
+  else if (parseInt($stateParams.type) == 15137) {
+    $scope.config.type = 15137;
   }
-  else if ($stateParams.type == "BoogyPrime") {
-    $scope.config.type = 'BoogyPrime';
+  else if (parseInt($stateParams.type) == 15135) {
+    $scope.config.type = 15135;
   }
   console.log($scope.config);
   console.log($scope.tool);

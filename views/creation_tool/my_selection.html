@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="css/creation-tool.css">
 <div class="creation-tool-block">
   <!-- Boogybook Classic & Not Empty Library -->
-  <div class="container" ng-if="tool.size > 0 && config.type == 'Classic'">
+  <div class="container" ng-if="tool.size > 0 && config.type == 8">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
         <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
-        <div ng-if="config.type == 'Classic'" class="numbers">{{tool.size}} / {{config.limit}}</div>
+        <div ng-if="config.type == 8" class="numbers">{{tool.size}} / {{config.limit}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
         <button ng-if="tool.size < config.limit" type="submit" class="btn-continuer" ng-click="submitBoogybook()" disabled>{{ 'Continuer' | translate }}</button>
@@ -30,7 +30,7 @@
     </div>
   </div>
   <!-- BoogyPrime & Not Empty Library -->
-  <div class="container" ng-if="tool.sizePrime > 0 && config.type == 'BoogyPrime'">
+  <div class="container" ng-if="tool.sizePrime > 0 && config.type == 15135">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -59,7 +59,7 @@
     </div>
   </div>
   <!-- BoogyBaby & Not Empty Library -->
-  <div class="container" ng-if="tool.sizeBaby > 0 && config.type == 'BoogyBaby'">
+  <div class="container" ng-if="tool.sizeBaby > 0 && config.type == 15137">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -88,7 +88,7 @@
     </div>
   </div>
   <!-- BoogyBabyXL & Not Empty Library -->
-  <div class="container" ng-if="tool.sizeBabyXL > 0 && config.type == 'BoogyBaby XL'">
+  <div class="container" ng-if="tool.sizeBabyXL > 0 && config.type == 15138">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -117,7 +117,7 @@
     </div>
   </div>
   <!-- BoogyDuo Classic & Not Empty Library -->
-  <div class="container" ng-if="tool.sizeDuo > 0 && config.type == 'BoogyDuo'">
+  <div class="container" ng-if="tool.sizeDuo > 0 && config.type == 15133">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -146,12 +146,12 @@
     </div>
   </div>
   <!-- Notebook & Not Empty Library -->
-  <div class="container" ng-if="tool.sizeNote > 0 && config.type == 'BoogyNote'">
+  <div class="container" ng-if="tool.sizeNote > 0 && config.type == 10">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
         <div class="text">{{ 'Images_selectionnees' | translate }}</button></div>
-        <div ng-if="config.type == 'BoogyNote'" class="numbers">{{tool.sizeNote}} / {{config.limitNote}}</div>
+        <div ng-if="config.type == 10" class="numbers">{{tool.sizeNote}} / {{config.limitNote}}</div>
       </div>
       <form method="post" id="myForm" enctype="multipart/form-data">
         <button ng-if="tool.sizeNote < config.limitNote" type="submit" class="btn-continuer" ng-click="submitNotebook()" disabled>{{ 'Continuer' | translate }}</button>
@@ -176,7 +176,7 @@
     </div>
   </div>
   <!-- BoogyPrime Classic & Empty Library -->
-  <div class="container" ng-if="tool.sizePrime == 0 && config.type == 'BoogyPrime'">
+  <div class="container" ng-if="tool.sizePrime == 0 && config.type == 15135">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -196,7 +196,7 @@
     </div>
   </div>
   <!-- BoogyBaby Classic & Empty Library -->
-  <div class="container" ng-if="tool.sizeBaby == 0 && config.type == 'BoogyBaby'">
+  <div class="container" ng-if="tool.sizeBaby == 0 && config.type == 15137">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -216,7 +216,7 @@
     </div>
   </div>
   <!-- BoogyBabyXL Classic & Empty Library -->
-  <div class="container" ng-if="tool.sizeBabyXL == 0 && config.type == 'BoogyBaby XL'">
+  <div class="container" ng-if="tool.sizeBabyXL == 0 && config.type == 15138">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -236,7 +236,7 @@
     </div>
   </div>
   <!-- Boogybook Classic & Empty Library -->
-  <div class="container" ng-if="tool.size == 0 && config.type == 'Classic'">
+  <div class="container" ng-if="tool.size == 0 && config.type == 8">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -256,7 +256,7 @@
     </div>
   </div>
   <!-- Notebook Classic & Empty Library -->
-  <div class="container" ng-if="tool.sizeNote == 0 && config.type == 'BoogyNote'">
+  <div class="container" ng-if="tool.sizeNote == 0 && config.type == 10">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -277,7 +277,7 @@
   </div>
 
   <!-- BoogyDuo & Empty Library -->
-  <div class="container" ng-if="tool.sizeDuo == 0 && config.type == 'BoogyDuo'">
+  <div class="container" ng-if="tool.sizeDuo == 0 && config.type == 15133">
     <div class="controls">
       <button class="btn-retour" ng-click="backToDetails()">{{ 'RETOUR' | translate }}</button>
       <div class="selected-img">
@@ -299,31 +299,31 @@
 </div>
 
 <div class="creation-tool-nav">
-  <ul ng-if="tool.size > 0 && config.type == 'Classic'">
+  <ul ng-if="tool.size > 0 && config.type == 8">
     <li>{{ 'Mon_Album' | translate }}</li>
     <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
-  <ul ng-if="tool.sizeNote > 0 && config.type == 'BoogyNote'">
+  <ul ng-if="tool.sizeNote > 0 && config.type == 10">
     <li>{{ 'Mon_Album' | translate }}</li>
     <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
-  <ul ng-if="tool.sizeDuo > 0 && config.type == 'BoogyDuo'">
+  <ul ng-if="tool.sizeDuo > 0 && config.type == 15133">
     <li>{{ 'Mon_Album' | translate }}</li>
     <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
-  <ul ng-if="tool.sizePrime > 0 && config.type == 'BoogyPrime'">
+  <ul ng-if="tool.sizePrime > 0 && config.type == 15135">
     <li>{{ 'Mon_Album' | translate }}</li>
     <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
     <li>Importer des photos depuis Instagram</li>
   </ul>
-  <ul ng-if="tool.sizeBaby > 0 && config.type == 'BoogyBaby'">
+  <ul ng-if="tool.sizeBaby > 0 && config.type == 15137">
     <li>{{ 'Mon_Album' | translate }}</li>
     <li ng-click="cleanStorage(config.type)">{{ 'Vider_ma_biblio' | translate }}</li>
     <li>Importer des photos depuis Facebook</li>
@@ -337,27 +337,27 @@
   </ul>
 </div>
 <!-- Boogybook Classic & Add Picture -->
-<button ng-if="tool.size < 60 && tool.size > 0 && config.type == 'Classic'" class="bnt-add-picture" ng-click="triggerInputFile()">
+<button ng-if="tool.size < 60 && tool.size > 0 && config.type == 8" class="bnt-add-picture" ng-click="triggerInputFile()">
         <img src="img/add-picture.svg" alt="">
     </button>
 <!-- BoogyBaby Classic & Add Picture -->
-<button ng-if="tool.sizeBaby < 30 && tool.sizeBaby > 0 && config.type == 'BoogyBaby'" class="bnt-add-picture" ng-click="triggerInputFile()">
+<button ng-if="tool.sizeBaby < 30 && tool.sizeBaby > 0 && config.type == 15137" class="bnt-add-picture" ng-click="triggerInputFile()">
             <img src="img/add-picture.svg" alt="">
         </button>
 <!-- Boogybook Classic & Add Picture -->
-<button ng-if="tool.sizeBabyXL< 60 && tool.sizeBabyXL > 0 && config.type == 'BoogyBaby XL'" class="bnt-add-picture" ng-click="triggerInputFile()">
+<button ng-if="tool.sizeBabyXL< 60 && tool.sizeBabyXL > 0 && config.type == 15138" class="bnt-add-picture" ng-click="triggerInputFile()">
                 <img src="img/add-picture.svg" alt="">
             </button>
 <!-- Notebook & Add Picture -->
-<button ng-if="tool.sizeNote < 30 && tool.sizeNote > 0 && config.type == 'BoogyNote'" class="bnt-add-picture" ng-click="triggerInputFile()">
+<button ng-if="tool.sizeNote < 30 && tool.sizeNote > 0 && config.type == 10" class="bnt-add-picture" ng-click="triggerInputFile()">
         <img src="img/add-picture.svg" alt="">
     </button>
 <!-- BoogyDuo & Add Picture -->
-<button ng-if="tool.sizeDuo < 60 && tool.sizeDuo > 0 && config.type == 'BoogyDuo'" class="bnt-add-picture" ng-click="triggerInputFile()">
+<button ng-if="tool.sizeDuo < 60 && tool.sizeDuo > 0 && config.type == 15133" class="bnt-add-picture" ng-click="triggerInputFile()">
             <img src="img/add-picture.svg" alt="">
         </button>
 <!-- BoogyPrime & Add Picture -->
-<button ng-if="tool.sizePrime < 30 && tool.sizePrime > 0 && config.type == 'BoogyPrime'" class="bnt-add-picture" ng-click="triggerInputFile()">
+<button ng-if="tool.sizePrime < 30 && tool.sizePrime > 0 && config.type == 15135" class="bnt-add-picture" ng-click="triggerInputFile()">
                     <img src="img/add-picture.svg" alt="">
                 </button>
 <input type="file" style="display:none;" multiple accept="image/*" name[]="images" id="images" onchange="angular.element(this).scope().loadLocalImages(this)" />

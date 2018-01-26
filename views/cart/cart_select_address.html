@@ -14,13 +14,13 @@
                 </div>
                 <div class="cart-step-text">03. {{ 'Vos_adresses' | translate }}</div>
             </div>
-            <div class="select-adress-block">
+            <div class="select-adress-block" ng-if="addresses.length > 0">
                 <div class="adress-select-txt">
                     {{ 'Choisissez_une_adresse_de_livraison' | translate }} :
                 </div>
                 <div class="select-adress">
                     <select name="selectedAddress" id="selectedAddress" class="dropdown">
-                        <option ng-repeat="item in userInfos.addresses" value="{{item.id}}">{{item.address1}}</option>
+                        <option ng-repeat="item in addresses" value="{{item.id}}">{{item.address1}}</option>
                     </select>
                 </div>
 
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="current-addresses">
-                    <div class="shipping-adresse" ng-repeat="item in userInfos.addresses">
+                    <div class="shipping-adresse" ng-repeat="item in addresses">
                         <div class="title">
                             {{ 'Adresse_de_livraison' | translate }}
                         </div>
@@ -55,14 +55,17 @@
                     {{ 'Commander' | translate }}
                 </div>
             </div>
-
+            <div class="select-adress-block" ng-if="addresses.length == 0">
+                <button class="add-adress" ui-sref="cart_add_address">{{ 'Ajouter_une_nouvelle_adresse' | translate }}</button>
+            </div>
 
         </div>
     </div>
 </div>
 <div class="upload-progress" ng-show="!cartLoaded">
-        <div class="counter-img">
-          <img src="img/loading.gif" alt=""><br/>
-          <br/> {{ 'Merci_de_patienter' | translate }}
-        </div>
-      </div>
+    <div class="counter-img">
+        <img src="img/loading.gif" alt="">
+        <br/>
+        <br/> {{ 'Merci_de_patienter' | translate }}
+    </div>
+</div>

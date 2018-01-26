@@ -16,22 +16,21 @@
                     <td>{{ 'Prix_total' | translate }}</td>
                     <td>{{ 'etat' | translate }}</td>
                 </tr>
-                <tr ng-repeat="item in userInfos.ordersHistory">
+                <tr ng-repeat="item in orders">
                     <td> {{item.reference}}
                         <!-- <div class="reference">KJ27402</div> -->
                     </td>
                     <td> {{item.date_add}} </td>
                     <td> {{item.total_paid}} € </td>
                     <td>
-                        <div ng-if="item.current_state == 18" class="info">	{{ 'en_cours_impression' | translate }}</div>
-                        <div ng-if="item.current_state == 3" class="info">{{ 'En_cours_de_preparation' | translate }}</div>
+                        <div ng-if="item.current_state == 18" class="preparation">	{{ 'en_cours_impression' | translate }}</div>
+                        <div ng-if="item.current_state == 3" class="preparation">{{ 'En_cours_de_preparation' | translate }}</div>
                         <div ng-if="item.current_state == 6" class="error">{{ 'Canceled' | translate }}</div>
                         <div ng-if="item.current_state == 2" class="success">{{ 'Paiement_accepte' | translate }}</div>
                     </td>
                 </tr>
             </tbody>
         </table>
-
     </div>
 
 </div>

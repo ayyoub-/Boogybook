@@ -3,7 +3,7 @@
 <script src="js/lib/jquery.easydropdown.js"></script>
 <div class="cart-block">
     <div class="container">
-        <div class="go-back" ng-click="backToAddresses()">{{ 'RETOUR' | translate }}</div>
+        <div class="go-back" ui-sref="cart_recap">{{ 'RETOUR' | translate }}</div>
         <div class="cart-inner-block">
             <div class="cart-steps-block">
 
@@ -12,54 +12,66 @@
             <div class="inscription-block">
                 <form id="add_address" name="add_address" ng-submit="addAddressSubmitForm(add_address.$valid)" novalidate>
                     <div class="form-group2 nom">
-                        <input type="text" class="input-text2 lettersonly" ng-minlength="3" ng-maxlength="15" ng-model="newAddress.lastname" name="last_name" placeholder="Nom" required>
-                        <!-- <p ng-show="add_address.last_name.$invalid && !add_address.last_name.$pristine" class="help-block">Votre nom est invalide.</p> -->
+                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="last_name" ng-model="newAddress.lastname"
+                            placeholder="{{ 'Nom' | translate }}*" required>
+                        <p style="color: red;" ng-show="add_address.last_name.$invalid && !add_address.last_name.$pristine" class="help-block">{{ 'Votre_nom_est_invalide' | translate }}.</p>
                     </div>
                     <div class="form-group2 prenom">
-                        <input type="text" class="input-text2 lettersonly" ng-minlength="3" ng-maxlength="15" ng-model="newAddress.firstname" name="first_name" placeholder="Prenom" required>
-                        <!-- <p ng-show="add_address.first_name.$invalid && !add_address.first_name.$pristine" class="help-block">Votre prénom est invalide.</p> -->
+                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="first_name" ng-model="newAddress.firstname"
+                            placeholder="{{ 'Prenom' | translate }}*" required>
+                        <p style="color: red;" ng-show="add_address.first_name.$invalid && !add_address.first_name.$pristine" class="help-block">{{ 'Votre_prenom_est_invalide' | translate }}.</p>
                     </div>
                     <div class="form-group2 societe">
-                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="company" ng-model="newAddress.company" placeholder="Societé" required>
-                        <!-- <p ng-show="add_address.company.$invalid && !add_address.company.$pristine" class="help-block">Le nom de la société est invalide.</p> -->
+                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="company" ng-model="newAddress.company" placeholder="{{ 'company' | translate }}">
                     </div>
                     <div class="form-group2 adresse">
-                        <input type="text" class="input-text2" name="address" ng-minlength="5" ng-maxlength="15" ng-model="newAddress.address1" placeholder="Adresse" required>
-                        <!-- <p ng-show="add_address.address.$invalid && !add_address.address.$pristine" class="help-block">Votre addresse invalide.</p> -->
+                        <input type="text" class="input-text2" name="address" ng-minlength="5" ng-maxlength="150" ng-model="newAddress.address1" placeholder="{{ 'address' | translate }}*"
+                            required>
+                        <p style="color: red;" ng-show="add_address.address.$invalid && !add_address.address.$pristine" class="help-block">{{ 'Votre_address_est_invalide' | translate }}.</p>
                     </div>
                     <div class="form-group2 adresse2">
-                        <input type="text" class="input-text2" ng-minlength="5" ng-maxlength="15" ng-model="newAddress.address2" placeholder="Adresse (2)">
+                        <input type="text" class="input-text2" ng-model="newAddress.address2" placeholder="{{ 'address_2' | translate }}">
                     </div>
                     <div class="form-group2 codepostal">
-                        <input type="text" class="input-text2" ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/" name="postcode" ng-model="newAddress.postcode" placeholder="Code postal" required>
-                        <!-- <p ng-show="add_address.postcode.$invalid && !add_address.postcode.$pristine" class="help-block">Votre addresse invalide.</p> -->
+                        <input type="text" class="input-text2" ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/" name="postcode" ng-model="newAddress.postcode"
+                            placeholder="{{ 'Postal_cod' | translate }}*" required>
+                        <p style="color: red;" ng-show="add_address.postcode.$invalid && !add_address.postcode.$pristine" class="help-block">{{ 'Votre_postal_est_invalide' | translate }}.</p>
                     </div>
                     <div class="form-group2 ville">
-                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="city" ng-model="newAddress.city" placeholder="Ville" required>
-                        <p ng-show="add_address.city.$invalid && !add_address.city.$pristine" class="help-block">Votre ville invalide.</p>
+                        <input type="text" class="input-text2" ng-minlength="3" ng-maxlength="15" name="city" ng-model="newAddress.city" placeholder="{{ 'city' | translate }}*"
+                            required>
+                        <p style="color: red;" ng-show="add_address.city.$invalid && !add_address.city.$pristine" class="help-block">{{ 'Votre_city_est_invalide' | translate }}.</p>
                     </div>
                     <div class="form-group2 pays">
-                        <select name="langue-select" id="langue-select" class="dropdown" ng-model="newAddress.id_country">
-                          <option value="" class="label">Pays</option>
-                <option value="{{item.id}}" ng-repeat="item in countries">{{item.name[0].value}}</option>
-            </select>
+                        <select name="langue-select" id="langue-select" class="custom-select countries" ng-model="newAddress.id_country">
+                            <option value="0" class="label">Pays*</option>
+                            <option value="{{item.id}}" ng-repeat="item in countries">{{item.name[0].value}}</option>
+                        </select>
                     </div>
                     <div class="form-group2 telephone-fixe">
-                        <input type="text" class="input-text2" ng-model="newAddress.phone_mobile" placeholder="Téléphone fixe" required>
+                        <input type="number" minlength="9" maxlength="15" class="input-text2" ng-model="newAddress.phone_mobile" placeholder="Téléphone fixe">
                     </div>
                     <div class="form-group2 telephone-mobile">
-                        <input type="text" class="input-text2" ng-model="newAddress.phone" placeholder="Téléphone mobile" required>
+                        <input type="number" name="mobile_number" ng-minlength="9" ng-maxlength="15" class="input-text2" ng-model="newAddress.phone"
+                            placeholder="Téléphone mobile*" required>
+                        <p style="color: red;" ng-show="add_address.mobile_number.$invalid && !add_address.mobile_number.$pristine" class="help-block">{{ 'Votre_mobile_est_invalide' | translate }}.</p>
                     </div>
-                    <br /><br />
+                    <br />
+                    <br />
                     <div class="form-group2 adresse-name">
                         <label for="">{{ 'Donnez_un_titre_a_cette_adresse_pour_la_retrouver_plus_facilement' | translate }}</label>
-                        <input type="text" class="input-text2" ng-model="newAddress.alias" placeholder="Mon adresse" required>
+                        <input type="text" class="input-text2" name="alias" ng-model="newAddress.alias" placeholder="{{ 'TITLE' | translate }}*" required>
+                        <p style="color: red;" ng-show="add_address.alias.$invalid && !add_address.alias.$pristine" class="help-block">{{ 'Votre_alias_est_invalide' | translate }}.</p>
                     </div>
                     <button type="submit" class="btn-save">{{ 'Enregister' | translate }}</button>
                 </form>
             </div>
-
-
         </div>
     </div>
 </div>
+<div class="upload-progress" ng-show="!cartLoaded">
+    <div class="counter-img">
+      <img src="img/loading.gif" alt=""><br/>
+      <br/> {{ 'Merci_de_patienter' | translate }}
+    </div>
+  </div>

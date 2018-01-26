@@ -1,6 +1,6 @@
 angular.module('fsCordova', ['pascalprecht.translate', 'stripe.checkout'])
   .service('CordovaService', ['$document', '$q',
-    function($document, $q) {
+    function ($document, $q) {
 
       var d = $q.defer(),
         resolved = false;
@@ -8,12 +8,12 @@ angular.module('fsCordova', ['pascalprecht.translate', 'stripe.checkout'])
       var self = this;
       this.ready = d.promise;
 
-      document.addEventListener('deviceready', function() {
+      document.addEventListener('deviceready', function () {
         resolved = true;
         d.resolve(window.cordova);
       });
 
-      setTimeout(function() {
+      setTimeout(function () {
         if (!resolved) {
           if (window.cordova) d.resolve(window.cordova);
         }
@@ -22,9 +22,25 @@ angular.module('fsCordova', ['pascalprecht.translate', 'stripe.checkout'])
   ]);
 
 
-var boogybookApp = angular.module('boogybookApp', ['fsCordova', 'ngSanitize', 'ngRoute', 'ui.router', 'stripe.checkout']);
+var boogybookApp = angular.module('boogybookApp', ['fsCordova', 'ngSanitize', 'ngRoute', 'ui.router', 'stripe.checkout', 'ngCordova']);
 
-boogybookApp.config(function($routeProvider, $locationProvider, $translateProvider, $stateProvider, StripeCheckoutProvider) {
+
+boogybookApp.directive('pwCheck', [function () {
+  return {
+    require: 'ngModel',
+    link: function (scope, elem, attrs, ctrl) {
+      var firstPassword = '#' + attrs.pwCheck;
+      elem.add(firstPassword).on('keyup', function () {
+        scope.$apply(function () {
+          var v = elem.val() === $(firstPassword).val();
+          ctrl.$setValidity('pwmatch', v);
+        });
+      });
+    }
+  }
+}]);
+
+boogybookApp.config(function ($routeProvider, $locationProvider, $translateProvider, $stateProvider, StripeCheckoutProvider) {
   StripeCheckoutProvider.defaults({
     key: "pk_live_WkGcczYR27uMdxAgpPLMOr36"
   });
@@ -32,9 +48,11 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   // $translateProvider.useUrlLoader('http://live.boogybook.com/module/boogybook/translations');
   $translateProvider.translations('fr', {
     DETAILS: 'Détails',
-    CREER: 'Crée',
+    CREER: 'Créer',
     ACCOUNT: 'Mon compte',
+    DATE_NAISSANCE: 'Date de naissance',
     CART: 'Panier',
+    TITLE: 'Titre',
     CONTACT: 'Contact',
     RETOUR: 'Retour',
     FICHE_TECHNIQUE: 'Fiche Technique',
@@ -43,6 +61,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     LARGEUR: 'Largeur',
     POIDS: 'Poids',
     COMPOSITION: 'Compositions',
+    Postal_cod: 'Code postal',
     JE_CREE: 'Je créer',
     ACCUEIL: 'Accueil',
     MY_ACCOUNT: 'Mon compte',
@@ -85,8 +104,9 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     sinscrire: "S'inscrire",
     MODIFIER_VOTRE_ADRESSE: 'Modifier votre adresse',
     company: 'Société',
-    address: 'adresse1',
-    address2: 'adresse2',
+    address: 'Adresse1',
+    address2: 'Adresse 2',
+    address_2: "Adresse 2",
     city: 'Ville',
     telephone_fixe: 'Téléphone Fixe',
     telephone_mobile: 'Téléphone mobile',
@@ -115,12 +135,25 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     AJOUTER_UNE_NOUVELLE_ADRESSE: 'AJOUTER UNE NOUVELLE ADRESSE',
     Donnez_un_titre_a_cette_adresse_pour_la_retrouver_plus_facilement: 'Donnez un titre à cette adresse pour la retrouver plus facilement',
     Enregister: ' Enregister',
+    Votre_nom_est_invalide: "Votre nom est invalide",
+    Votre_prenom_est_invalide: "Votre prénom est invalide",
+    Votre_email_est_invalide: "Votre adresse email est invalide",
+    Votre_password_est_invalide: "Votre mot de passe est invalide",
+    Votre_date_naissance_est_invalide: "Votre date de naissance est invalide",
+    Votre_address_est_invalide: "Votre adresse est invalide",
+    Votre_postal_est_invalide: "Votre code postale est invalide",
+    Votre_city_est_invalide: "Votre ville est invalide",
+    Votre_mobile_est_invalide: "Votre numéro de téléphone est invalide",
+    Votre_alias_est_invalide: "Votre alias est invalide",
   });
   $translateProvider.translations("en", {
     DETAILS: "DETAILS",
     CREER: "CREATE",
     ACCOUNT: "english",
+    TITLE: 'Title',
     CART: "CART",
+    Postal_cod: 'Postal code',
+    DATE_NAISSANCE: 'Birthday',
     CONTACT: "CONTACT",
     RETOUR: "BACK",
     FICHE_TECHNIQUE: "TECHNICAL SHEET",
@@ -172,6 +205,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     MODIFIER_VOTRE_ADRESSE: "CHANGE YOUR ADDRESS",
     company: "company",
     address: "address",
+    address_2: "address 2",
     city: "city",
     telephone_fixe: "phone",
     telephone_mobile: "mobile phone",
@@ -200,14 +234,35 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     Creez_votre_compte: "Create your account",
     AJOUTER_UNE_NOUVELLE_ADRESSE: "ADD A NEW ADDRESS",
     Donnez_un_titre_a_cette_adresse_pour_la_retrouver_plus_facilement: "Give a title to this Address To find it more easily",
-    Enregister: "Save",
+    Votre_nom_est_invalide: "Your name is invalid",
+    Votre_prenom_est_invalide: "Your name is invalid",
+    Votre_email_est_invalide: "Your email is invalid",
+    Votre_password_est_invalide: "Your password is invalid",
+    Votre_date_naissance_est_invalide: "Your birthday is invalid",
+    Votre_address_est_invalide: "Your address is invalid",
+    Votre_postal_est_invalide: "Your postal code is invalid",
+    Votre_city_est_invalide: "Your city is invalid",
+    Votre_mobile_est_invalide: "Your mobile phone is invalid",
+    Votre_alias_est_invalide: "Your alias is invalid",
   });
   $translateProvider.translations("es", {
     DETAILS: "Hello",
     CREER: "crear",
     ACCOUNT: "cuenta",
+    Votre_nom_est_invalide: "Tu nombre no es válido",
+    Votre_prenom_est_invalide: "Tu nombre no es válido",
+    Votre_email_est_invalide: "Tu dirección de correo electrónico no es válida",
+    Votre_password_est_invalide: "Su contraseña no es válida",
+    Votre_date_naissance_est_invalide: "Tu fecha de nacimiento no es válida",
+    Votre_address_est_invalide: "Tu dirección no es válida",
+    Votre_postal_est_invalide: "Su código postal no es válido",
+    Votre_city_est_invalide: "Tu ciudad no es válida",
+    Votre_mobile_est_invalide: "Tu teléfono móvil no es válido",
+    Votre_alias_est_invalide: "Your alias is invalid",
+    TITLE: 'título',
     CART: "cesta",
     CONTACT: "contacto",
+    Postal_cod: 'Código postal',
     RETOUR: "volver",
     FICHE_TECHNIQUE: "ficha técnica",
     DIMENSIONS_DE_CHAQUE_PAGE: "dimensiones de cada pagina",
@@ -221,6 +276,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     Historique_de_vos_commandes: "historico de ordenes",
     Reference: "referencía",
     Date: "fecha",
+    DATE_NAISSANCE: 'fecha de nacimiento',
     Prix_total: "precio total",
     etat: "estado",
     en_cours_impression: "impresión en curso",
@@ -233,7 +289,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     Envoyer: "enviar",
     Connexion_internet_lente_ou_pas_de_connexion_internet: "conexión internet lenta o no internet",
     Veuillez_verifier_vos_parametres_Internet: "verefique por favor tu internet",
-    Images_selectionnees : "imagenes seleccionadas",
+    Images_selectionnees: "imagenes seleccionadas",
     Continuer: "continuar",
     telecharger_depuis_mobile: "descargar desde móvil",
     Mon_Album: "mi album",
@@ -258,6 +314,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     MODIFIER_VOTRE_ADRESSE: "cambiar direcciòn",
     company: "empresa",
     address: "direcciòn",
+    address_2: "direcciòn 2",
     city: "ciudad",
     telephone_fixe: "teléfono fijo",
     telephone_mobile: "móvil",
@@ -288,7 +345,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     Donnez_un_titre_a_cette_adresse_pour_la_retrouver_plus_facilement: "dar una indicación para encontrar la direcciòn fàcilmente",
     Enregister: "registrar",
   });
-  if (typeof(window.localStorage['current_lang']) != 'undefined') $translateProvider.preferredLanguage(JSON.parse(window.localStorage['current_lang']).iso_code);
+  if (typeof (window.localStorage['current_lang']) != 'undefined') $translateProvider.preferredLanguage(JSON.parse(window.localStorage['current_lang']).iso_code);
   else {
     var userLang = 'fr';
     if (!window.cordova) {
@@ -297,7 +354,7 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
     }
     $translateProvider.preferredLanguage('fr');
   }
-  $('.menu-toggle, .overlay, .menu-list li a').click(function(e) {
+  $('.menu-toggle, .overlay, .menu-list li a').click(function (e) {
     e.preventDefault();
     $('.overlay').fadeToggle();
     $('.menu-toggle').toggleClass('active');
@@ -326,49 +383,76 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
       // checkout.js isn't fetched until this is resolved.
       stripe: StripeCheckoutProvider.load
     }
-
   }
   var cartLoginState = {
     name: 'cart_login',
-    url: '/cart_login',
+    url: '/cart_login?type',
     templateUrl: 'views/cart/cart_login.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
   }
   var cartAccountState = {
     name: 'cart_add_account',
     url: '/cart_add_account',
     templateUrl: 'views/cart/cart_add_account.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
   }
   var cartSelectAddressState = {
     name: 'cart_select_address',
     url: '/cart_select_address',
     templateUrl: 'views/cart/cart_select_address.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
   }
   var cartAddressState = {
     name: 'cart_add_address',
     url: '/cart_add_address',
     templateUrl: 'views/cart/cart_add_address.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
   }
   var addressUpdateState = {
     name: 'address_update',
     url: '/address_update?id_address',
     templateUrl: 'views/cart/cart_update_address.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
   }
   var cartShippingState = {
     name: 'cart_shipping',
     url: '/cart_shipping',
     templateUrl: 'views/cart/cart_shipping.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
   }
   var cartOgoneState = {
     name: 'cart_ogone',
     url: '/cart_ogone',
     templateUrl: 'views/cart/cart_ogone.html',
-    controller: 'CartCtrl'
+    controller: 'CartCtrl',
+    resolve: {
+      // checkout.js isn't fetched until this is resolved.
+      stripe: StripeCheckoutProvider.load
+    }
   }
   var contactState = {
     name: 'contact',
@@ -473,17 +557,17 @@ boogybookApp.config(function($routeProvider, $locationProvider, $translateProvid
   $stateProvider.state(faqState);
   $stateProvider.state(addressUpdateState);
 });
-boogybookApp.run(function($log, StripeCheckout) {
-    StripeCheckout.defaults({
-      opened: function() {
-        $log.debug("Stripe Checkout opened");
-      },
-      closed: function() {
-        $log.debug("Stripe Checkout closed");
-      }
-    });
+boogybookApp.run(function ($log, StripeCheckout) {
+  StripeCheckout.defaults({
+    opened: function () {
+      $log.debug("Stripe Checkout opened");
+    },
+    closed: function () {
+      $log.debug("Stripe Checkout closed");
+    }
+  });
 });
-boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state, StripeCheckout) {
+boogybookApp.controller('indexCtrl', function (PSAPI, $scope, $filter, $window, $rootScope, CordovaService, $location, $rootScope, $translate, $http, $q, $state, StripeCheckout) {
   // Products list
   $scope.products = new Array();
   $rootScope.products = new Array();
@@ -492,28 +576,27 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
   $scope.globalCategory = 24;
   $scope.cartSize = 0;
   $scope.selectedLang = 'fr';
+  $scope.connected = false;
   // Functions
   // Set session storage
-  $scope.setStorage = function() {
+  $scope.setStorage = function () {
     sessionStorage.setItem("products", JSON.stringify($scope.products));
     sessionStorage.setItem("cart", JSON.stringify($scope.cart));
   }
-  $scope.goHome = function(){
+  $scope.goHome = function () {
     $state.go('home', {}, {
       location: 'replace',
       reload: true
     });
   }
-  $scope.cleanStorage = function() {
+  $scope.cleanStorage = function () {
     var i = sessionStorage.length;
     while (i--) {
       var key = sessionStorage.key(i);
       sessionStorage.removeItem(key);
     }
   }
-  $scope.getStorage = function() {
-    if (typeof sessionStorage.getItem("userInfos") != 'undefined' && sessionStorage.getItem("userInfos") != null)
-      $scope.userInfos = JSON.parse(sessionStorage.getItem("userInfos"));
+  $scope.getStorage = function () {
     if (typeof sessionStorage.getItem("products") != 'undefined' && sessionStorage.getItem("products") != null)
       $scope.products = JSON.parse(sessionStorage.getItem("products"));
     else
@@ -523,12 +606,12 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
     else
       $scope.getCartDetails();
   }
-  $scope.tutoPrevious = function() {
+  $scope.tutoPrevious = function () {
     $state.go('home', {}, {
       location: 'replace'
     });
   }
-  $scope.tutoNext = function() {
+  $scope.tutoNext = function () {
     var currentSlide = $('.tutorial-intro').find('.slide.active');
     var currentIndicator = $('.slider-indicators').find('li.active');
 
@@ -546,17 +629,17 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
     }
   }
   // Get cart details
-  $scope.getCartDetails = function() {
+  $scope.getCartDetails = function () {
     params = {};
     // check if user is connected
-    if (typeof($scope.userInfos) != 'undefined' && $scope.userInfos != null) {
-      params.authInfos = $scope.userInfos;
+    if (typeof ($rootScope.userInfos) != 'undefined' && $rootScope.userInfos != null) {
+      params.authInfos = $rootScope.userInfos;
       params.authInfos.addresses = [];
     }
     // check if he has an old existing card
-    if (typeof($scope.cart) != 'undefined' && $scope.cart != null)
+    if (typeof ($scope.cart) != 'undefined' && $scope.cart != null)
       params.id_cart = $scope.cart.id;
-    PSAPI.PSExecute('getCartId', params).then(function(res) {
+    PSAPI.PSExecute('getCartId', params).then(function (res) {
       if (typeof res.id != 'undefined') {
         id_cart = res.id;
         $scope.cart = res;
@@ -566,10 +649,10 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
     });
   }
   // Get products by category
-  $scope.getProducts = function() {
+  $scope.getProducts = function () {
     PSAPI.PSExecute('listBBCaseProductsByCategory', {
       'id_category': $scope.globalCategory,
-    }).then(function(r) {
+    }).then(function (r) {
       if (r.OK) {
         $scope.products = r.covers;
         var itemsSorted = $filter('orderBy')($scope.products, 'id_product');
@@ -582,20 +665,20 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
     });
   }
   // Change langue
-  $scope.updateLangue = function(){
-  console.log("OK");   
-  console.log($scope.selectedLang);
-  $translate.use($scope.selectedLang).then(function(data) {
-    // console.log('ChangeLang#Success', data);
-  }, function(error) {
-    // console.log('ChangeLang#Error', error);
-  }); 
+  $scope.updateLangue = function () {
+    console.log("OK");
+    console.log($scope.selectedLang);
+    $translate.use($scope.selectedLang).then(function (data) {
+      // console.log('ChangeLang#Success', data);
+    }, function (error) {
+      // console.log('ChangeLang#Error', error);
+    });
   }
   // Get cart size
-  $scope.getCartSize = function(cart){
+  $scope.getCartSize = function (cart) {
     PSAPI.PSExecute('getCartSize', {
       'cart': cart,
-    }).then(function(r) {
+    }).then(function (r) {
       if (r.OK) {
         $scope.cartSize = r.size;
         $('.counter').html($scope.cartSize);
@@ -603,7 +686,13 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
     });
   }
   $scope.getStorage();
-  if(typeof $scope.cart != 'undefined' && $scope.cart != null){
+  if ($rootScope.userInfos != null){
+    $scope.connected = true;
+  }
+  // alert($scope.connected);
+  console.log($rootScope);
+  console.log($scope.connected);
+  if (typeof $scope.cart != 'undefined' && $scope.cart != null) {
     $scope.getCartSize($scope.cart.id);
   }
   else {
@@ -615,8 +704,8 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
     $state.go('error', {}, {
       location: 'replace'
     });
-  $window.addEventListener("offline", function() {
-    $rootScope.$apply(function() {
+  $window.addEventListener("offline", function () {
+    $rootScope.$apply(function () {
       $rootScope.online = false;
       $state.go('error', {}, {
         location: 'replace'
@@ -624,8 +713,8 @@ boogybookApp.controller('indexCtrl', function(PSAPI, $scope, $filter, $window, $
     });
   }, false);
 
-  $window.addEventListener("online", function() {
-    $rootScope.$apply(function() {
+  $window.addEventListener("online", function () {
+    $rootScope.$apply(function () {
       $rootScope.online = true;
       $state.go('home', {}, {
         location: 'replace'
